@@ -7,5 +7,5 @@ https://lu-song.github.io/about/index.html
 https://lu-song.github.io/2024/01/19/wo-de-di-yi-pian-bo-ke/
 https://lu-song.github.io/2024/01/19/hello-world/
 https://lu-song.github.io/
-https://lu-song.github.io/tags/Gaussian/
+https://lu-song.github.io/tags/gauss/
 https://lu-song.github.io/categories/DFT/
