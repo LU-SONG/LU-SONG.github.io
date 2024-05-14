@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://lu-song.github.io/categories/index.html</loc>
+    <loc>https://lu-song.github.io/2024/05/14/how-to-use-gaussian/</loc>
     
     <lastmod>2024-05-14</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://lu-song.github.io/2024/05/14/how-to-use-gaussian/</loc>
+    <loc>https://lu-song.github.io/categories/index.html</loc>
     
     <lastmod>2024-05-14</lastmod>
     
@@ -83,5 +83,12 @@
 
   
 
+  
+  <url>
+    <loc>https://lu-song.github.io/categories/DFT/</loc>
+    <lastmod>2024-05-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
   
 </urlset>
