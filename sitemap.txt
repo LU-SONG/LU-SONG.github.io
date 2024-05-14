@@ -1,8 +1,8 @@
 https://lu-song.github.io/2024/05/14/how-to-use-gaussian/
+https://lu-song.github.io/tags/dft/index.html
 https://lu-song.github.io/2024/05/14/how-to-use-vasp/
 https://lu-song.github.io/tags/index.html
 https://lu-song.github.io/about/index.html
 https://lu-song.github.io/2024/01/19/wo-de-di-yi-pian-bo-ke/
 https://lu-song.github.io/2024/01/19/hello-world/
 https://lu-song.github.io/
-https://lu-song.github.io/source/tags/dft/
