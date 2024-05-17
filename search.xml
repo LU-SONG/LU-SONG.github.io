@@ -274,7 +274,100 @@
   <entry>
     <title>Notes of Linux</title>
     <url>/2024/05/15/notes-of-linux/</url>
-    <content><![CDATA[<p><strong><font size=6>Linux 常用命令</font></strong></p>
+    <content><![CDATA[<p><strong><font size=6>Linux 基础</font></strong><br>[toc]</p>
+<h1 id="一、Linux-常用命令"><a href="#一、Linux-常用命令" class="headerlink" title="一、Linux 常用命令"></a>一、Linux 常用命令</h1><h3 id="文件、路径操作"><a href="#文件、路径操作" class="headerlink" title="文件、路径操作"></a>文件、路径操作</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 获取当前目录</span></span><br><span class="line">current_directory=$(<span class="built_in">pwd</span>)    <span class="comment"># Linux</span></span><br><span class="line">current_directory = os.getcwd()    <span class="comment"># Python</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建文件、目录、删除、重命名</span></span><br><span class="line"><span class="built_in">touch</span> file.txt ; <span class="built_in">mkdir</span> <span class="built_in">dir</span></span><br><span class="line"><span class="built_in">rm</span> file.txt ; <span class="built_in">rm</span> -r <span class="built_in">dir</span></span><br><span class="line"><span class="built_in">mv</span> old_name new_name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看文件</span></span><br><span class="line"><span class="built_in">cat</span> file.txt</span><br><span class="line"><span class="built_in">cat</span> file.txt | grep <span class="string">&quot;keyword&quot;</span></span><br><span class="line"><span class="built_in">head</span> -n 10 file.txt ; <span class="built_in">tail</span> -n 10 file.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找，find+路径+-name+匹配文件名</span></span><br><span class="line">find . -name *.py</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找，grep+字符+文件路径，显示第一行</span></span><br><span class="line">grep LOOP OUTCAR | <span class="built_in">head</span> -n 1</span><br></pre></td></tr></table></figure>
+
+<h3 id="批量替换常用关键参数，sed-i-‘s-模式-替换-‘-file"><a href="#批量替换常用关键参数，sed-i-‘s-模式-替换-‘-file" class="headerlink" title="批量替换常用关键参数，sed -i ‘s&#x2F;模式&#x2F;替换&#x2F;‘ file"></a>批量替换常用关键参数，sed -i ‘s&#x2F;模式&#x2F;替换&#x2F;‘ file</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># sed -i 表示原地编辑不在终端输出，&#x27;.*&#x27;表示任意字符重复零次或多次，</span></span><br><span class="line"><span class="comment"># \(.*\): 捕获从行首到第一个出现的 F F F 之前的所有字符，并将其存储在第一个捕获组 \1 中。</span></span><br><span class="line">sed -i <span class="string">&#x27;s/IBRION =.*/IBRION = 2/&#x27;</span>  */INCAR</span><br><span class="line">sed -i <span class="string">&#x27;s/NCORE =.*/NCORE = 12/&#x27;</span>  */INCAR</span><br><span class="line">sed -i <span class="string">&#x27;s/^\(.*\)F   F   F\(.*\)$/\1F   F   T\2/&#x27;</span> */POSCAR</span><br></pre></td></tr></table></figure>
+
+<h3 id="文件压缩、解压"><a href="#文件压缩、解压" class="headerlink" title="文件压缩、解压"></a>文件压缩、解压</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -z: 使用 gzip 解压缩归档文件; -c/x: 打包/提取归档文件;-v: 显示详细信息，处理文件时显示文件名（可选）;-f: 指定归档文件的名称</span></span><br><span class="line">tar -zcvf file.tar.gz file.txt <span class="comment"># 压缩</span></span><br><span class="line">tar -zxvf file.tar <span class="comment">#解压缩</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># -r: 递归处理</span></span><br><span class="line">zip -r html.zip /home/html</span><br><span class="line">unzip html.zip</span><br></pre></td></tr></table></figure>
+<h3 id="磁盘管理，文件数量"><a href="#磁盘管理，文件数量" class="headerlink" title="磁盘管理，文件数量"></a>磁盘管理，文件数量</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -h：使用 KB、MB、GB 等单位输出</span></span><br><span class="line"><span class="comment"># 查看文件系统整体磁盘使用情况 </span></span><br><span class="line"><span class="built_in">df</span> -h</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看目录所占磁盘空间</span></span><br><span class="line"><span class="built_in">du</span> -h ./test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看当前目录下文件数量，wc --l 统计行数</span></span><br><span class="line"><span class="built_in">ls</span> -l | grep <span class="string">&#x27;^-r&#x27;</span> | <span class="built_in">wc</span> --l</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看当前目录下目录数量，wc --l 统计行数</span></span><br><span class="line"><span class="built_in">ls</span> -l | grep <span class="string">&#x27;^d&#x27;</span> | <span class="built_in">wc</span> --l</span><br></pre></td></tr></table></figure>
+<h3 id="文件权限操作（change-mode）"><a href="#文件权限操作（change-mode）" class="headerlink" title="文件权限操作（change mode）"></a>文件权限操作（change mode）</h3><p>Linux&#x2F;Unix 的文件调用权限分为三级 : 文件所有者（Owner）、用户组（Group）、其它用户（Other Users）<br><img src="/images/Linux_notes-image.png" alt="chmod"><br>只有文件所有者和超级用户可以修改文件或目录的权限。可以使用绝对模式（八进制数字模式），符号模式指定文件的权限。<br><img src="/images/Linux_notes-image-1.png" alt="limit"></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">chmod</span> 644 file.txt</span><br><span class="line"><span class="built_in">chmod</span> 777 file.txt   </span><br><span class="line"><span class="built_in">chmod</span> +rwx file.txt</span><br><span class="line"><span class="built_in">chown</span> user file.txt <span class="comment"># 改变文件所有者</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="获取当前目录下的所有子目录"><a href="#获取当前目录下的所有子目录" class="headerlink" title="获取当前目录下的所有子目录"></a>获取当前目录下的所有子目录</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查找所有一级子目录，-maxdepth 1 表示只查找一级子目录，! -name &#x27;.&#x27; 表示排除当前目录</span></span><br><span class="line">find . -maxdepth 1 -<span class="built_in">type</span> d ! -name <span class="string">&#x27;.&#x27;</span></span><br><span class="line"><span class="comment"># 查找所有一级子目录</span></span><br><span class="line"><span class="built_in">ls</span> -d */ </span><br></pre></td></tr></table></figure>
+
+<h3 id="读取输入内容"><a href="#读取输入内容" class="headerlink" title="读取输入内容"></a>读取输入内容</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">read</span> Value	<span class="comment">#Linux</span></span><br><span class="line">Value = input(<span class="string">&quot;&quot;</span>)  <span class="comment">#Python</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="二、Linux-目录结构"><a href="#二、Linux-目录结构" class="headerlink" title="二、Linux 目录结构"></a>二、Linux 目录结构</h2><h3 id="文件系统层次结构标准"><a href="#文件系统层次结构标准" class="headerlink" title="文件系统层次结构标准"></a>文件系统层次结构标准</h3><p>Filesystem Hierarchy Standard</p>
+<ol>
+<li><a href="https://blog.csdn.net/Ph_Nirvana/article/details/62427684">https://blog.csdn.net/Ph_Nirvana/article/details/62427684</a></li>
+<li><a href="https://blog.csdn.net/m0_38044196/article/details/72844025">https://blog.csdn.net/m0_38044196/article/details/72844025</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84%E6%A0%87%E5%87%86">文件系统层次结构标准 - 维基百科，自由的百科全书 (wikipedia.org)</a></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="center">目录</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&#x2F;</td>
+<td align="center">整个文件系统层次结构的根目录</td>
+</tr>
+<tr>
+<td align="center">&#x2F;bin&#x2F;</td>
+<td align="center">需要在单用户模式可用的可执行文件</td>
+</tr>
+<tr>
+<td align="center">&#x2F;boot&#x2F;</td>
+<td align="center">引导程序文件</td>
+</tr>
+<tr>
+<td align="center">&#x2F;dev&#x2F;</td>
+<td align="center">必要设备</td>
+</tr>
+<tr>
+<td align="center">&#x2F;etc&#x2F;</td>
+<td align="center">特定主机，系统范围内的配置文件</td>
+</tr>
+<tr>
+<td align="center">&#x2F;home&#x2F;</td>
+<td align="center">用户的家目录，包含保存的文件、个人设置等，一般为单独的分区</td>
+</tr>
+<tr>
+<td align="center">&#x2F;lib&#x2F;</td>
+<td align="center">&#x2F;bin&#x2F; 和 &#x2F;sbin&#x2F;中二进制文件必要的库文件</td>
+</tr>
+<tr>
+<td align="center">&#x2F;mnt&#x2F;</td>
+<td align="center">临时挂载的文件系统</td>
+</tr>
+<tr>
+<td align="center">&#x2F;opt&#x2F;</td>
+<td align="center">可选应用软件包</td>
+</tr>
+<tr>
+<td align="center">&#x2F;proc&#x2F;</td>
+<td align="center">虚拟文件系统，将内核与进程状态归档为文本文件。例如：uptime、 network。在Linux中，对应Procfs格式挂载</td>
+</tr>
+<tr>
+<td align="center">&#x2F;root&#x2F;</td>
+<td align="center">超级用户的家目录</td>
+</tr>
+<tr>
+<td align="center">&#x2F;sbin&#x2F;</td>
+<td align="center">必要的系统二进制文件，例如： init、 ip、 mount</td>
+</tr>
+<tr>
+<td align="center">&#x2F;tmp&#x2F;</td>
+<td align="center">临时文件(参见 &#x2F;var&#x2F;tmp)，在系统重启时目录中文件不会被保留</td>
+</tr>
+<tr>
+<td align="center">&#x2F;usr&#x2F;</td>
+<td align="center">用于存储只读用户数据的第二层次</td>
+</tr>
+<tr>
+<td align="center">&#x2F;var&#x2F;</td>
+<td align="center">变量文件——在正常运行的系统中其内容不断变化的文件，如日志，脱机文件和临时电子邮件文件。</td>
+</tr>
+</tbody></table>
+<h2 id="二、服务器管理"><a href="#二、服务器管理" class="headerlink" title="二、服务器管理"></a>二、服务器管理</h2><h3 id="PBS命令"><a href="#PBS命令" class="headerlink" title="PBS命令"></a>PBS命令</h3><h3 id="超线程"><a href="#超线程" class="headerlink" title="超线程"></a>超线程</h3><p><a href="http://sobereva.com/392">http://sobereva.com/392</a></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="https://www.runoob.com/linux">https://www.runoob.com/linux</a></li>
+</ol>
 ]]></content>
       <categories>
         <category>Linux</category>
