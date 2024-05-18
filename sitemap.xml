@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://lu-song.github.io/2024/05/14/quick-start-of-vasp/</loc>
+    
+    <lastmod>2024-05-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://lu-song.github.io/2024/05/15/notes-of-shell/</loc>
+    
+    <lastmod>2024-05-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://lu-song.github.io/2024/05/15/notes-of-linux/</loc>
     
     <lastmod>2024-05-17</lastmod>
@@ -12,15 +30,6 @@
   
   <url>
     <loc>https://lu-song.github.io/2024/01/19/hello-world/</loc>
-    
-    <lastmod>2024-05-15</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://lu-song.github.io/2024/05/14/quick-start-of-vasp/</loc>
     
     <lastmod>2024-05-15</lastmod>
     
@@ -94,7 +103,7 @@
 
   <url>
     <loc>https://lu-song.github.io/</loc>
-    <lastmod>2024-05-17</lastmod>
+    <lastmod>2024-05-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -102,35 +111,42 @@
   
   <url>
     <loc>https://lu-song.github.io/tags/gaussian/</loc>
-    <lastmod>2024-05-17</lastmod>
+    <lastmod>2024-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lu-song.github.io/tags/vasp/</loc>
-    <lastmod>2024-05-17</lastmod>
+    <lastmod>2024-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lu-song.github.io/tags/python/</loc>
-    <lastmod>2024-05-17</lastmod>
+    <lastmod>2024-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lu-song.github.io/tags/os/</loc>
-    <lastmod>2024-05-17</lastmod>
+    <lastmod>2024-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lu-song.github.io/tags/Linux/</loc>
-    <lastmod>2024-05-17</lastmod>
+    <lastmod>2024-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://lu-song.github.io/tags/Shell/</loc>
+    <lastmod>2024-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -139,21 +155,21 @@
   
   <url>
     <loc>https://lu-song.github.io/categories/DFT/</loc>
-    <lastmod>2024-05-17</lastmod>
+    <lastmod>2024-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lu-song.github.io/categories/Python/</loc>
-    <lastmod>2024-05-17</lastmod>
+    <lastmod>2024-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lu-song.github.io/categories/Linux/</loc>
-    <lastmod>2024-05-17</lastmod>
+    <lastmod>2024-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
