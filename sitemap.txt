@@ -1,5 +1,5 @@
+https://lu-song.github.io/2024/06/07/quick-start-of-cp2k/
 https://lu-song.github.io/2024/05/14/quick-start-of-vasp/
-https://lu-song.github.io/2024/06/04/quick-start-of-cp2k/
 https://lu-song.github.io/2024/06/03/bader-view-of-vasp/
 https://lu-song.github.io/2024/05/15/notes-of-shell/
 https://lu-song.github.io/2024/05/15/notes-of-linux/
@@ -19,7 +19,7 @@ https://lu-song.github.io/tags/os/
 https://lu-song.github.io/tags/Linux/
 https://lu-song.github.io/tags/Shell/
 https://lu-song.github.io/tags/bader/
-https://lu-song.github.io/tags/CP2K/
+https://lu-song.github.io/tags/cp2k/
 https://lu-song.github.io/categories/DFT/
 https://lu-song.github.io/categories/Python/
 https://lu-song.github.io/categories/Linux/

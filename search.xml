@@ -483,16 +483,74 @@
   </entry>
   <entry>
     <title>Quick Start of CP2K</title>
-    <url>/2024/06/04/quick-start-of-cp2k/</url>
-    <content><![CDATA[<h1 id="Notes-of-CP2K"><a href="#Notes-of-CP2K" class="headerlink" title="Notes of CP2K"></a>Notes of CP2K</h1><p>本教程基于 HPC of zhenggroup 集群环境</p>
-<p>参考资料 <a href="http://sobereva.com/list.html">http://sobereva.com/list.html</a></p>
-<h2 id="零、理论基础"><a href="#零、理论基础" class="headerlink" title="零、理论基础"></a>零、理论基础</h2><h4 id="泛函-基组设置"><a href="#泛函-基组设置" class="headerlink" title="泛函&#x2F;基组设置"></a>泛函&#x2F;基组设置</h4><h2 id="一、输入文件"><a href="#一、输入文件" class="headerlink" title="一、输入文件"></a>一、输入文件</h2><h3 id="input-gjf"><a href="#input-gjf" class="headerlink" title="input.gjf"></a>input.gjf</h3><h2 id="二、输出文件"><a href="#二、输出文件" class="headerlink" title="二、输出文件"></a>二、输出文件</h2><h4 id="HOMO-LUMO-gap"><a href="#HOMO-LUMO-gap" class="headerlink" title="HOMO-LUMO gap"></a>HOMO-LUMO gap</h4><h5 id="理论基础"><a href="#理论基础" class="headerlink" title="理论基础"></a>理论基础</h5><h2 id="三、结果分析"><a href="#三、结果分析" class="headerlink" title="三、结果分析"></a>三、结果分析</h2><h4 id="E-F"><a href="#E-F" class="headerlink" title="E,F"></a>E,F</h4><h5 id="Visualization"><a href="#Visualization" class="headerlink" title="Visualization"></a>Visualization</h5><h2 id="文献引用"><a href="#文献引用" class="headerlink" title="文献引用"></a>文献引用</h2><p>[1] def2-TZVP基组 <a href="https://doi.org/10.1063/1.467146">https://doi.org/10.1063/1.467146</a><br>[2] Multiwfn <a href="https://doi.org/10.1002/jcc.22885">https://doi.org/10.1002/jcc.22885</a><br>[3] 溶剂模型 <a href="https://doi.org/10.1063/1.3359469">https://doi.org/10.1063/1.3359469</a><br>[4] xtb <a href="https://doi.org/10.1021/acs.jctc.8b01176">https://doi.org/10.1021/acs.jctc.8b01176</a><br>[5] D3BJ <a href="https://doi.org/10.1002/jcc.21759">https://doi.org/10.1002/jcc.21759</a></p>
+    <url>/2024/06/07/quick-start-of-cp2k/</url>
+    <content><![CDATA[<p><strong><font size=6>Quick Start of CP2K</font></strong></p>
+<p>本教程基于 HPC of zhenggroup 集群环境</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="https://www.cp2k.org/howto">CP2K 官网</a></li>
+<li><a href="http://wiki.cheng-group.net/wiki/software_usage/cp2k/cp2k/">http://wiki.cheng-group.net/wiki/software_usage/cp2k/cp2k/</a></li>
+</ol>
+<h2 id="一、CP2K介绍"><a href="#一、CP2K介绍" class="headerlink" title="一、CP2K介绍"></a>一、CP2K介绍</h2><h3 id="关于CP2K"><a href="#关于CP2K" class="headerlink" title="关于CP2K"></a>关于CP2K</h3><ol>
+<li>CP2K是一种量子化学和固态物理第一性原理计算软件包，可以执行固态，液态，分子，和生物系统的计算模拟。</li>
+<li>CP2K是开源免费程序，使用混合高斯和平面波基组GPW和GAPW的DFT方法比平面波基组计算更<strong>快</strong>。</li>
+<li>CP2K用到好多非常新和前沿的算法<br><strong>OT(Orbital Transformation)，</strong><br>ASPC(Always stable predictor corrector)，<br>ADMM(Auxiliary Density Matrix Methods)，<br>PIMD(pathintegral Molecular Dynamics)，<br>adaptive buffered QM&#x2F;MM</li>
+<li>相关文章 <a href="https://www.cp2k.org/science">https://www.cp2k.org/science</a></li>
+<li>催化：ACS Catal. 2019, 9 (9), 7876-7887</li>
+</ol>
+<h3 id="CP2K的应用和局限"><a href="#CP2K的应用和局限" class="headerlink" title="CP2K的应用和局限"></a>CP2K的应用和局限</h3><p><strong>应用:</strong> DFT,AIMD,(QM&#x2F;MM),NEB,MD    <a href="https://www.cp2k.org/features">https://www.cp2k.org/features</a><br><strong>局限:</strong> </p>
+<ol>
+<li>对导体计算较慢，OT算法算有带隙的材料可以很快收敛。导体一般用较慢的对角化方法。</li>
+<li>磁性体系提前指定自旋多重度。</li>
+<li>K点设置</li>
+<li>高斯基组带来的基组重叠误差（Basis Set Superposition Error, BSSE），不适合计算结合能。VASP使用平面波基组不存在此问题。</li>
+<li>能量计算使用VASP更准确</li>
+</ol>
+<h2 id="二、CP2K使用"><a href="#二、CP2K使用" class="headerlink" title="二、CP2K使用"></a>二、CP2K使用</h2><h3 id="输入文件"><a href="#输入文件" class="headerlink" title="输入文件"></a>输入文件</h3><p><code>*.inp</code>,<code>(coord.inc/xyz)</code>,<code>CP2K.pbs</code></p>
+<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><p>在提交脚本<code>cp2k.pbs</code>内添加以下内容</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> /public/software/gcc-9.3.0/gcc-9.3.0_env.sh</span><br><span class="line"><span class="built_in">source</span> /public/software/intel2020u2//intel2020u2_env.sh</span><br><span class="line"><span class="built_in">export</span> OMP_NUM_THREADS=1</span><br><span class="line">mpirun  -n 48 /public/software/cp2k-8.1/exe/local/cp2k.popt  -i cp2k.inp &gt; cp2k.out</span><br></pre></td></tr></table></figure>
+<h3 id="cp2k-inp-常用参数说明"><a href="#cp2k-inp-常用参数说明" class="headerlink" title="cp2k.inp 常用参数说明"></a><code>cp2k.inp</code> 常用参数说明</h3><p>CP2K手册<a href="https://manual.cp2k.org/trunk/index.html">https://manual.cp2k.org/trunk/index.html</a><br>关键词以section和subsection的形式套娃，每一个section都是以【&amp;section_name】开头的，以【&amp;END section_name 】结尾的。(顺序随意，嵌套不能乱)每一行只写一个关键词，关键词后面写参数，大小写和空格不敏感。</p>
+<h4 id="GLOBAL通用设置"><a href="#GLOBAL通用设置" class="headerlink" title="GLOBAL通用设置"></a><code>GLOBAL</code>通用设置</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">&amp;GLOBAL</span><br><span class="line">  PROJECT cp2k                              <span class="comment"># 任务名称</span></span><br><span class="line">  RUN_TYPE GEO_OPT                          <span class="comment"># 计算类型 ENERGY,ENERGY_FORCE,GEO_OPT,CELL_OPT,VIBRATIONAL_ANALYSIS,BAND,MD,PINT</span></span><br><span class="line">  PRINT_LEVEL LOW                           <span class="comment"># 输出等级</span></span><br><span class="line">&amp;END GLOBAL</span><br></pre></td></tr></table></figure>
+<h4 id="FORCE-EVAL体系的力和能量"><a href="#FORCE-EVAL体系的力和能量" class="headerlink" title="FORCE_EVAL体系的力和能量"></a><code>FORCE_EVAL</code>体系的力和能量</h4><ol>
+<li><code>SUBSYS</code>(subsystem): coordinates, topology, molecules and cell<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">&amp;FORCE_EVAL</span><br><span class="line">  METHOD Quickstep                          <span class="comment"># 使用DFT的GPW方法进行计算原子受力</span></span><br><span class="line">  &amp;SUBSYS</span><br><span class="line">    &amp;TOPOLOGY</span><br><span class="line">      &amp;CENTER_COORDINATES                   <span class="comment"># Centering atoms in the box</span></span><br><span class="line">      &amp;END CENTER_COORDINATES</span><br><span class="line">      COORD_FILE_FORMAT xyz</span><br><span class="line">      COORD_FILE_NAME  ./coord.xyz</span><br><span class="line">    &amp;END TOPOLOGY</span><br><span class="line">    &amp;CELL                                   <span class="comment"># 晶胞大小 也可输入 `ABC 10 11 13` 代表正交晶系，单位埃</span></span><br><span class="line">      A    8.42    0.00    0.00</span><br><span class="line">      B    4.21    7.29    0.00</span><br><span class="line">      C    0.00    0.00   19.32</span><br><span class="line">      PERIODIC XYZ                          <span class="comment"># NONE,X,XY,XYZ,XZ,Y,YZ,Z  XYZ代表三个方向周期性计算</span></span><br><span class="line">    &amp;END CELL</span><br><span class="line">    &amp;KIND Au                                <span class="comment"># 元素种类</span></span><br><span class="line">      ELEMENT Au                            </span><br><span class="line">      BASIS_SET DZVP-MOLOPT-SR-GTH-q11      <span class="comment"># 基组设置(对应文件里存在的条目)</span></span><br><span class="line">      POTENTIAL GTH-PBE                     <span class="comment"># 赝势设置</span></span><br><span class="line">    &amp;END KIND</span><br><span class="line">  &amp;END SUBSYS</span><br><span class="line">  ...</span><br><span class="line">&amp;END FORCE_EVAL</span><br></pre></td></tr></table></figure>
+其他输入原子坐标方式<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 方法一：inc文件</span></span><br><span class="line">&amp;COORD  </span><br><span class="line">    @INCLUDE <span class="string">&#x27;coord.inc&#x27;</span>  <span class="comment">#xyz文件去掉前两行</span></span><br><span class="line">&amp;END COORD</span><br><span class="line"><span class="comment"># 方法二：笛卡尔坐标</span></span><br><span class="line">&amp;COORD </span><br><span class="line">C          -3.36178719   11.43419295    1.72360000</span><br><span class="line">H           3.11299203   11.00326708    1.72360000</span><br><span class="line">...</span><br><span class="line">&amp;END COORD </span><br></pre></td></tr></table></figure></li>
+<li>DFT: Parameter needed by LCAO DFT programs <strong>(Quickstep)</strong><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">&amp;FORCE_EVAL</span><br><span class="line">  &amp;DFT</span><br><span class="line">    BASIS_SET_FILE_NAME  BASIS_MOLOPT      <span class="comment"># 基组文件路径</span></span><br><span class="line">    POTENTIAL_FILE_NAME  POTENTIAL         <span class="comment"># 赝势文件路径</span></span><br><span class="line">    &amp;QS                                    <span class="comment"># Quickstep 参数</span></span><br><span class="line">      EPS_DEFAULT 1.0E-12</span><br><span class="line">    &amp;END QS                                </span><br><span class="line">    &amp;MGRID                                 <span class="comment"># 网格参数，截断能</span></span><br><span class="line">      CUTOFF 500                           <span class="comment"># https://manual.cp2k.org/trunk/methods/dft/cutoff.html</span></span><br><span class="line">      REL_CUTOFF 50</span><br><span class="line">    &amp;END MGRID</span><br><span class="line">    &amp;SCF                                   <span class="comment">################## SCF 参数 ##################</span></span><br><span class="line">      SCF_GUESS ATOMIC                     <span class="comment"># 初猜</span></span><br><span class="line">      EPS_SCF 1.0E-6                       <span class="comment"># 能量收敛精度</span></span><br><span class="line">      MAX_SCF 100                          <span class="comment"># SCF循环圈数</span></span><br><span class="line">      &amp;OT T                                <span class="comment"># 使用OT(Orbital Transformation)优化波函数</span></span><br><span class="line">      MINIMIZER CG                         <span class="comment"># 共轭梯度法(最可靠)(CG)/迭代子空间直接反演法(速度快)(DIIS)/布罗伊登法(BROYDEN) </span></span><br><span class="line">      LINESEARCH 3PNT                      <span class="comment"># 搜索算法</span></span><br><span class="line">      PRECONDITIONER FULL_SINGLE_INVERSE   <span class="comment"># 适用于大型系统；难收敛改Full All</span></span><br><span class="line">      &amp;END OT</span><br><span class="line">      &amp;DIAGONALIZATION ON                  <span class="comment"># 对角化方法，不如OT快</span></span><br><span class="line">        ALGORITHM STANDARD</span><br><span class="line">      &amp;END DIAGONALIZATION</span><br><span class="line">    &amp;END SCF                               <span class="comment">##############################################</span></span><br><span class="line">    &amp;XC                                    <span class="comment"># 交换-关联密度泛函，要与基组和赝势的选择一致。</span></span><br><span class="line">      &amp;XC_FUNCTIONAL PBE</span><br><span class="line">      &amp;END XC_FUNCTIONAL</span><br><span class="line">    &amp;END XC</span><br><span class="line">    &amp;PRINT                                 <span class="comment"># 输出参数 https://manual.cp2k.org/trunk/CP2K_INPUT/FORCE_EVAL/DFT/PRINT.html</span></span><br><span class="line">      &amp;FORCES ON                           <span class="comment"># 输出力</span></span><br><span class="line">      &amp;END FORCES</span><br><span class="line">    &amp;END PRINT</span><br><span class="line">  &amp;END DFT</span><br><span class="line">  ...</span><br><span class="line">&amp;END FORCE_EVAL</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">graph LR
+A[cp2k输入文件]-->B[GLOBAL]
+A-->C[FORCE_EVAL]
+A-->D[MOTION]
+ C-->E[SUBSYS]
+ C-->H[PRINT]
+ C-->F[DFT]
+     E-->G[CELL]
+     E-->I[COORD]
+     E-->J[TOPOLOGY]
+     E-->K[KIND]
+     F-->O[QS]
+     F-->L[SCF]
+     F-->N[MGRID]
+     F-->P[XC]
+     F-->T[PRINT]
+         L-->M[OT]
+         L-->Q[DIAGONALIZATION]</pre></li>
+</ol>
+<h3 id="结构优化"><a href="#结构优化" class="headerlink" title="结构优化"></a>结构优化</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="单点计算"><a href="#单点计算" class="headerlink" title="单点计算"></a>单点计算</h3><h4 id="Bader"><a href="#Bader" class="headerlink" title="Bader"></a>Bader</h4><h4 id="PDOS"><a href="#PDOS" class="headerlink" title="PDOS"></a>PDOS</h4><h3 id="2-2-单点计算"><a href="#2-2-单点计算" class="headerlink" title="2.2 单点计算"></a>2.2 单点计算</h3><h3 id="三、数据处理"><a href="#三、数据处理" class="headerlink" title="三、数据处理"></a>三、数据处理</h3><h3 id="3-1-脚本使用"><a href="#3-1-脚本使用" class="headerlink" title="3.1 脚本使用"></a>3.1 脚本使用</h3><h3 id="四、学习资料"><a href="#四、学习资料" class="headerlink" title="四、学习资料"></a>四、学习资料</h3><ol>
+<li>CP2K的tutorials：<br><a href="https://www.cp2k.org/exercises">https://www.cp2k.org/exercises</a><br><a href="https://www.cp2k.org/howto">https://www.cp2k.org/howto</a></li>
+<li>CP2K手册：<a href="http://manual.cp2k.org/trunk/">http://manual.cp2k.org/trunk/</a></li>
+<li>CP2K的google group：<a href="https://groups.google.com/group/cp2k">https://groups.google.com/group/cp2k</a></li>
+<li>Zevan的博客：<a href="http://kenshin325.lofter.com/tag/cp2k">http://kenshin325.lofter.com/tag/cp2k</a></li>
+<li>兰一的知乎专栏：<a href="https://zhuanlan.zhihu.com/cp2k-tutorial">https://zhuanlan.zhihu.com/cp2k-tutorial</a></li>
+<li>CP2K有用的工具： <a href="https://www.cp2k.org/tools">https://www.cp2k.org/tools</a></li>
+<li>python编写的cp2k输入文件生成器(最高支持5.1)：<br><a href="https://github.com/avishart/CP2K_Editor">https://github.com/avishart/CP2K_Editor</a></li>
+</ol>
 ]]></content>
       <categories>
         <category>DFT</category>
       </categories>
       <tags>
-        <tag>CP2K</tag>
+        <tag>cp2k</tag>
       </tags>
   </entry>
 </search>
