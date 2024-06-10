@@ -128,6 +128,13 @@
 
   
   <url>
+    <loc>https://lu-song.github.io/tags/Linux/</loc>
+    <lastmod>2024-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://lu-song.github.io/tags/vasp/</loc>
     <lastmod>2024-06-10</lastmod>
     <changefreq>weekly</changefreq>
@@ -136,13 +143,6 @@
   
   <url>
     <loc>https://lu-song.github.io/tags/bader/</loc>
-    <lastmod>2024-06-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://lu-song.github.io/tags/Linux/</loc>
     <lastmod>2024-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -163,14 +163,14 @@
   </url>
   
   <url>
-    <loc>https://lu-song.github.io/tags/os/</loc>
+    <loc>https://lu-song.github.io/tags/cp2k/</loc>
     <lastmod>2024-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://lu-song.github.io/tags/cp2k/</loc>
+    <loc>https://lu-song.github.io/tags/os/</loc>
     <lastmod>2024-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -186,14 +186,14 @@
 
   
   <url>
-    <loc>https://lu-song.github.io/categories/DFT/</loc>
+    <loc>https://lu-song.github.io/categories/Linux/</loc>
     <lastmod>2024-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://lu-song.github.io/categories/Linux/</loc>
+    <loc>https://lu-song.github.io/categories/DFT/</loc>
     <lastmod>2024-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
