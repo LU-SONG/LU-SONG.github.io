@@ -48,13 +48,13 @@ h1::before, h2::before, h3::before, h4::before, h5::before, h6::before {
     margin-top: -0.09rem;
 }
 #content-inner.layout h4::before {
-    color: #a9e000 ;
+    color: #ffbf00 ;
     margin-left: -0.3rem;
     font-size: 0.9rem;
     margin-top: -0.09rem;
 }
 #content-inner.layout h5::before {
-    color: #ffbf00 ;
+    color: #a9e000 ;
     margin-left: -0.15rem;
     font-size: 0.7rem;
     margin-top: 0.0rem;
