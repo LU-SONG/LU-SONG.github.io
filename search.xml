@@ -1,673 +1,260 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title>Notes of Linux</title>
-    <url>/2024/05/15/notes-of-linux/</url>
-    <content><![CDATA[<p><strong><font size=6>Linux 基础</font></strong></p>
-<h1 id="一、Linux-常用命令"><a href="#一、Linux-常用命令" class="headerlink" title="一、Linux 常用命令"></a>一、Linux 常用命令</h1><h3 id="文件、路径操作"><a href="#文件、路径操作" class="headerlink" title="文件、路径操作"></a>文件、路径操作</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 获取当前目录</span></span><br><span class="line">current_directory=$(<span class="built_in">pwd</span>)    <span class="comment"># Linux</span></span><br><span class="line">current_directory = os.getcwd()    <span class="comment"># Python</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建文件、目录、删除、重命名</span></span><br><span class="line"><span class="built_in">touch</span> file.txt ; <span class="built_in">mkdir</span> <span class="built_in">dir</span></span><br><span class="line"><span class="built_in">rm</span> file.txt ; <span class="built_in">rm</span> -r <span class="built_in">dir</span></span><br><span class="line"><span class="built_in">mv</span> old_name new_name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看文件</span></span><br><span class="line"><span class="built_in">cat</span> file.txt</span><br><span class="line"><span class="built_in">cat</span> file.txt | grep <span class="string">&quot;keyword&quot;</span></span><br><span class="line"><span class="built_in">head</span> -n 10 file.txt ; <span class="built_in">tail</span> -n 10 file.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找，find+路径+-name+匹配文件名</span></span><br><span class="line">find . -name *.py</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找，grep+字符+文件路径，显示第一行</span></span><br><span class="line">grep LOOP OUTCAR | <span class="built_in">head</span> -n 1</span><br></pre></td></tr></table></figure>
-
-<h3 id="批量替换常用关键参数，sed-i-‘s-模式-替换-‘-file"><a href="#批量替换常用关键参数，sed-i-‘s-模式-替换-‘-file" class="headerlink" title="批量替换常用关键参数，sed -i ‘s&#x2F;模式&#x2F;替换&#x2F;‘ file"></a>批量替换常用关键参数，sed -i ‘s&#x2F;模式&#x2F;替换&#x2F;‘ file</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># sed -i 表示原地编辑不在终端输出，&#x27;.*&#x27;表示任意字符重复零次或多次，</span></span><br><span class="line"><span class="comment"># \(.*\): 捕获从行首到第一个出现的 F F F 之前的所有字符，并将其存储在第一个捕获组 \1 中。</span></span><br><span class="line">sed -i <span class="string">&#x27;s/IBRION =.*/IBRION = 2/&#x27;</span>  */INCAR</span><br><span class="line">sed -i <span class="string">&#x27;s/NCORE =.*/NCORE = 12/&#x27;</span>  */INCAR</span><br><span class="line">sed -i <span class="string">&#x27;s/^\(.*\)F   F   F\(.*\)$/\1F   F   T\2/&#x27;</span> */POSCAR</span><br></pre></td></tr></table></figure>
-
-<h3 id="文件压缩、解压"><a href="#文件压缩、解压" class="headerlink" title="文件压缩、解压"></a>文件压缩、解压</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -z: 使用 gzip 解压缩归档文件; -c/x: 打包/提取归档文件;-v: 显示详细信息，处理文件时显示文件名（可选）;-f: 指定归档文件的名称</span></span><br><span class="line">tar -zcvf file.tar.gz file.txt <span class="comment"># 压缩</span></span><br><span class="line">tar -zxvf file.tar <span class="comment">#解压缩</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># -r: 递归处理</span></span><br><span class="line">zip -r html.zip /home/html</span><br><span class="line">unzip html.zip</span><br></pre></td></tr></table></figure>
-<h3 id="磁盘管理，文件数量"><a href="#磁盘管理，文件数量" class="headerlink" title="磁盘管理，文件数量"></a>磁盘管理，文件数量</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -h：使用 KB、MB、GB 等单位输出</span></span><br><span class="line"><span class="comment"># 查看文件系统整体磁盘使用情况 </span></span><br><span class="line"><span class="built_in">df</span> -h</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看目录所占磁盘空间</span></span><br><span class="line"><span class="built_in">du</span> -h ./test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看当前目录下文件数量，wc --l 统计行数</span></span><br><span class="line"><span class="built_in">ls</span> -l | grep <span class="string">&#x27;^-r&#x27;</span> | <span class="built_in">wc</span> --l</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看当前目录下目录数量，wc --l 统计行数</span></span><br><span class="line"><span class="built_in">ls</span> -l | grep <span class="string">&#x27;^d&#x27;</span> | <span class="built_in">wc</span> --l</span><br></pre></td></tr></table></figure>
-<h3 id="文件权限操作（change-mode）"><a href="#文件权限操作（change-mode）" class="headerlink" title="文件权限操作（change mode）"></a>文件权限操作（change mode）</h3><p>Linux&#x2F;Unix 的文件调用权限分为三级 : 文件所有者（Owner）、用户组（Group）、其它用户（Other Users）<br><img src="/images/Linux_notes-image.png" alt="chmod"><br>只有文件所有者和超级用户可以修改文件或目录的权限。可以使用绝对模式（八进制数字模式），符号模式指定文件的权限。<br><img src="/images/Linux_notes-image-1.png" alt="limit"><br>改变权限：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">chmod</span> 644 file.txt</span><br><span class="line"><span class="built_in">chmod</span> 777 file.txt   </span><br><span class="line"><span class="built_in">chmod</span> +rwx file.txt</span><br><span class="line"><span class="built_in">chown</span> user file.txt <span class="comment"># 改变文件所有者</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="获取当前目录下的所有子目录"><a href="#获取当前目录下的所有子目录" class="headerlink" title="获取当前目录下的所有子目录"></a>获取当前目录下的所有子目录</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查找所有一级子目录，-maxdepth 1 表示只查找一级子目录，! -name &#x27;.&#x27; 表示排除当前目录</span></span><br><span class="line">find . -maxdepth 1 -<span class="built_in">type</span> d ! -name <span class="string">&#x27;.&#x27;</span></span><br><span class="line"><span class="comment"># 查找所有一级子目录</span></span><br><span class="line"><span class="built_in">ls</span> -d */ </span><br></pre></td></tr></table></figure>
-
-<h3 id="读取输入内容"><a href="#读取输入内容" class="headerlink" title="读取输入内容"></a>读取输入内容</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">read</span> Value	<span class="comment">#Linux</span></span><br><span class="line">Value = input(<span class="string">&quot;&quot;</span>)  <span class="comment">#Python</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="二、Linux-目录结构"><a href="#二、Linux-目录结构" class="headerlink" title="二、Linux 目录结构"></a>二、Linux 目录结构</h2><h3 id="文件系统层次结构标准"><a href="#文件系统层次结构标准" class="headerlink" title="文件系统层次结构标准"></a>文件系统层次结构标准</h3><p>Filesystem Hierarchy Standard</p>
-<ol>
-<li><a href="https://blog.csdn.net/Ph_Nirvana/article/details/62427684">https://blog.csdn.net/Ph_Nirvana/article/details/62427684</a></li>
-<li><a href="https://blog.csdn.net/m0_38044196/article/details/72844025">https://blog.csdn.net/m0_38044196/article/details/72844025</a></li>
-<li><a href="https://zh.wikipedia.org/wiki/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84%E6%A0%87%E5%87%86">文件系统层次结构标准 - 维基百科，自由的百科全书 (wikipedia.org)</a></li>
-</ol>
-<table>
-<thead>
-<tr>
-<th align="center">目录</th>
-<th align="center">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">&#x2F;</td>
-<td align="center">整个文件系统层次结构的根目录</td>
-</tr>
-<tr>
-<td align="center">&#x2F;bin&#x2F;</td>
-<td align="center">需要在单用户模式可用的可执行文件</td>
-</tr>
-<tr>
-<td align="center">&#x2F;boot&#x2F;</td>
-<td align="center">引导程序文件</td>
-</tr>
-<tr>
-<td align="center">&#x2F;dev&#x2F;</td>
-<td align="center">必要设备</td>
-</tr>
-<tr>
-<td align="center">&#x2F;etc&#x2F;</td>
-<td align="center">特定主机，系统范围内的配置文件</td>
-</tr>
-<tr>
-<td align="center">&#x2F;home&#x2F;</td>
-<td align="center">用户的家目录，包含保存的文件、个人设置等，一般为单独的分区</td>
-</tr>
-<tr>
-<td align="center">&#x2F;lib&#x2F;</td>
-<td align="center">&#x2F;bin&#x2F; 和 &#x2F;sbin&#x2F;中二进制文件必要的库文件</td>
-</tr>
-<tr>
-<td align="center">&#x2F;mnt&#x2F;</td>
-<td align="center">临时挂载的文件系统</td>
-</tr>
-<tr>
-<td align="center">&#x2F;opt&#x2F;</td>
-<td align="center">可选应用软件包</td>
-</tr>
-<tr>
-<td align="center">&#x2F;proc&#x2F;</td>
-<td align="center">虚拟文件系统，将内核与进程状态归档为文本文件。例如：uptime、 network。在Linux中，对应Procfs格式挂载</td>
-</tr>
-<tr>
-<td align="center">&#x2F;root&#x2F;</td>
-<td align="center">超级用户的家目录</td>
-</tr>
-<tr>
-<td align="center">&#x2F;sbin&#x2F;</td>
-<td align="center">必要的系统二进制文件，例如： init、 ip、 mount</td>
-</tr>
-<tr>
-<td align="center">&#x2F;tmp&#x2F;</td>
-<td align="center">临时文件(参见 &#x2F;var&#x2F;tmp)，在系统重启时目录中文件不会被保留</td>
-</tr>
-<tr>
-<td align="center">&#x2F;usr&#x2F;</td>
-<td align="center">用于存储只读用户数据的第二层次</td>
-</tr>
-<tr>
-<td align="center">&#x2F;var&#x2F;</td>
-<td align="center">变量文件——在正常运行的系统中其内容不断变化的文件，如日志，脱机文件和临时电子邮件文件。</td>
-</tr>
-</tbody></table>
-<h2 id="二、服务器管理"><a href="#二、服务器管理" class="headerlink" title="二、服务器管理"></a>二、服务器管理</h2><h3 id="PBS命令"><a href="#PBS命令" class="headerlink" title="PBS命令"></a>PBS命令</h3><h3 id="超线程"><a href="#超线程" class="headerlink" title="超线程"></a>超线程</h3><p><a href="http://sobereva.com/392">http://sobereva.com/392</a></p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
-<li><a href="https://www.runoob.com/linux">https://www.runoob.com/linux</a></li>
-</ol>
-]]></content>
+<search> 
+  
+  
+    
+    <entry>
+      <title>Pearl</title>
+      <link href="/2024/06/28/pearl/"/>
+      <url>/2024/06/28/pearl/</url>
+      
+        <content type="html"><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉，您输入的密码错误，请检查后重新输入。" data-whm="抱歉, 当前文章不能被校验, 不过您还是可以看看解密后的内容。">  <script id="hbeData" type="hbeData" data-hmacdigest="ffb5cc736fb6e7733f9f17aa19e0f4342cf2211fc3622f04f8f901c753947ad3">9c6161198b65c0c7ed655745c399b5b3c22b49d63312cddb0a2937408d4045fef9e62b4649d6ecf6e9f8073af0e2a97754690bb8adb982f94baeb965b7d732a251cdca5db18dfaeab133b6958a2cd1448143e2f52451725bbc885ea0c90fc3065bdcb22152b47075ef109827b6bac52d7fa64ae61c7957ab85897fc304f8853bc934dea7b7f2c3c8c31a17d3cfdcaa0e1e8bb1071a3925b9d2d0040b32ee60707ebc985cef23122fc53574dd3e37a5255be3fdcec3676cffa2d9af7a8fe932a1292956dc7f14fdc2e078ee0463ed3c19af92e77856da868a6c9966a64e5a17d3</script>  <div class="hbe hbe-content">    <div class="hbe hbe-input hbe-input-default">      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-default">当前文章暂不对外可见，请输入密码后查看！</span>      </label>    </div>  </div></div><script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> private </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Quick Start of CP2K</title>
+      <link href="/2024/06/07/quick-start-of-cp2k/"/>
+      <url>/2024/06/07/quick-start-of-cp2k/</url>
+      
+        <content type="html"><![CDATA[<p><strong><font size=6>Quick Start of CP2K</font></strong></p><p>本教程基于 HPC of zhenggroup 集群环境</p><h1 id="一、CP2K介绍"><a href="#一、CP2K介绍" class="headerlink" title="一、CP2K介绍"></a>一、CP2K介绍</h1><h2 id="关于CP2K"><a href="#关于CP2K" class="headerlink" title="关于CP2K"></a>关于CP2K</h2><ol><li>CP2K是一种量子化学和固态物理第一性原理计算软件包，可以执行固态，液态，分子，和生物系统的计算模拟。</li><li>CP2K是开源免费程序，使用混合高斯和平面波基组GPW和GAPW的DFT方法比平面波基组计算更<strong>快</strong>。</li><li>CP2K用到好多非常新和前沿的算法<br><strong>OT(Orbital Transformation)，</strong><br>ASPC(Always stable predictor corrector)，<br>ADMM(Auxiliary Density Matrix Methods)，<br>PIMD(pathintegral Molecular Dynamics)，<br>adaptive buffered QM&#x2F;MM</li><li>相关文章 <a href="https://www.cp2k.org/science">https://www.cp2k.org/science</a></li><li>催化：ACS Catal. 2019, 9 (9), 7876-7887</li></ol><h2 id="CP2K的应用和局限"><a href="#CP2K的应用和局限" class="headerlink" title="CP2K的应用和局限"></a>CP2K的应用和局限</h2><p><strong>应用:</strong> DFT,AIMD,(QM&#x2F;MM),NEB,MD    <a href="https://www.cp2k.org/features">https://www.cp2k.org/features</a><br><strong>局限:</strong> 1. 对导体计算较慢，OT算法算有带隙的材料可以很快收敛。导体一般用较慢的对角化方法。<br>         2. 磁性体系提前指定自旋多重度。<br>         3. 高斯基组带来的基组重叠误差（Basis Set Superposition Error, BSSE），不适合计算结合能。VASP使用平面波基组不存在此问题。<br>         4. 能量计算使用VASP更准确</p><h1 id="二、CP2K使用"><a href="#二、CP2K使用" class="headerlink" title="二、CP2K使用"></a>二、CP2K使用</h1><h2 id="输入文件-环境准备"><a href="#输入文件-环境准备" class="headerlink" title="输入文件+环境准备"></a>输入文件+环境准备</h2><p><code>*.inp</code>,<code>(coord.inc/xyz)</code>,<code>CP2K.pbs</code></p><p>在提交脚本<code>cp2k.pbs</code>内添加以下内容</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /public/software/gcc-9.3.0/gcc-9.3.0_env.sh</span><br><span class="line"><span class="built_in">source</span> /public/software/intel2020u2//intel2020u2_env.sh</span><br><span class="line"><span class="built_in">export</span> OMP_NUM_THREADS=1</span><br><span class="line">mpirun  -n 48 /public/software/cp2k-8.1/exe/local/cp2k.popt  -i cp2k.inp &gt; cp2k.out</span><br></pre></td></tr></table></figure><h2 id="cp2k-inp-常用参数说明"><a href="#cp2k-inp-常用参数说明" class="headerlink" title="cp2k.inp 常用参数说明"></a><code>cp2k.inp</code> 常用参数说明</h2><p>CP2K手册<a href="https://manual.cp2k.org/trunk/index.html">https://manual.cp2k.org/trunk/index.html</a><br>关键词以section和subsection的形式套娃，每一个section都是以【&amp;section_name】开头的，以【&amp;END section_name 】结尾的。(顺序随意，嵌套不能乱)每一行只写一个关键词，关键词后面写参数，大小写和空格不敏感。</p><h3 id="通用参数GLOBAL"><a href="#通用参数GLOBAL" class="headerlink" title="通用参数GLOBAL"></a>通用参数<code>GLOBAL</code></h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&amp;GLOBAL</span><br><span class="line">  PROJECT cp2k                              <span class="comment"># 任务名称</span></span><br><span class="line">  RUN_TYPE GEO_OPT                          <span class="comment"># 计算类型 ENERGY,ENERGY_FORCE,GEO_OPT,CELL_OPT,VIBRATIONAL_ANALYSIS,BAND,MD,PINT</span></span><br><span class="line">  PRINT_LEVEL LOW                           <span class="comment"># 输出等级</span></span><br><span class="line">&amp;END GLOBAL</span><br></pre></td></tr></table></figure><h3 id="体系的力和能量FORCE-EVAL"><a href="#体系的力和能量FORCE-EVAL" class="headerlink" title="体系的力和能量FORCE_EVAL"></a>体系的力和能量<code>FORCE_EVAL</code></h3><ol><li><strong><code>SUBSYS</code>(subsystem): coordinates, topology, molecules and cell</strong><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&amp;FORCE_EVAL</span><br><span class="line">  METHOD Quickstep                          <span class="comment"># 使用DFT的GPW方法进行计算原子受力</span></span><br><span class="line">  &amp;SUBSYS</span><br><span class="line"><span class="comment"># --------------- Structure --------------- #</span></span><br><span class="line">    &amp;TOPOLOGY</span><br><span class="line">      &amp;CENTER_COORDINATES                   <span class="comment"># 结构放在盒子中间</span></span><br><span class="line">      &amp;END CENTER_COORDINATES</span><br><span class="line">      COORD_FILE_FORMAT xyz</span><br><span class="line">      COORD_FILE_NAME  ./coord.xyz</span><br><span class="line">    &amp;END TOPOLOGY</span><br><span class="line"><span class="comment"># ------------ Lattice vectors ------------ #</span></span><br><span class="line">    &amp;CELL                                   <span class="comment"># 也可输入 `ABC 10 11 13` 代表正交晶系，单位埃</span></span><br><span class="line">      A    8.42    0.00    0.00</span><br><span class="line">      B    4.21    7.29    0.00</span><br><span class="line">      C    0.00    0.00   19.32</span><br><span class="line">      PERIODIC XYZ                          <span class="comment"># NONE,X,XY,XYZ,XZ,Y,YZ,Z  XYZ代表三个方向周期性计算</span></span><br><span class="line">    &amp;END CELL</span><br><span class="line"><span class="comment"># ------------ Basis, Potential ----------- #</span></span><br><span class="line">    &amp;KIND Au                                <span class="comment"># 元素种类</span></span><br><span class="line">      ELEMENT Au                            </span><br><span class="line">      BASIS_SET DZVP-MOLOPT-SR-GTH-q11      <span class="comment"># 基组设置(对应文件里存在的条目)</span></span><br><span class="line">      POTENTIAL GTH-PBE                     <span class="comment"># 赝势设置</span></span><br><span class="line">    &amp;END KIND</span><br><span class="line"><span class="comment"># ----------------------------------------- #</span></span><br><span class="line">  &amp;END SUBSYS</span><br><span class="line">  ...</span><br><span class="line">&amp;END FORCE_EVAL</span><br></pre></td></tr></table></figure>其他输入原子坐标方式<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Method 1：inc --------------------------- #</span></span><br><span class="line">&amp;COORD  </span><br><span class="line">    @INCLUDE <span class="string">&#x27;coord.inc&#x27;</span>  <span class="comment">#xyz文件去掉前两行</span></span><br><span class="line">&amp;END COORD</span><br><span class="line"></span><br><span class="line"><span class="comment"># Method 2：Cartesian coordinates --------- #</span></span><br><span class="line">&amp;COORD </span><br><span class="line">C          -3.36178719   11.43419295    1.72360000</span><br><span class="line">H           3.11299203   11.00326708    1.72360000</span><br><span class="line">...</span><br><span class="line">&amp;END COORD </span><br></pre></td></tr></table></figure></li><li><strong>DFT: Parameter needed by LCAO DFT programs <strong>(Quickstep)</strong> 关于自洽循环(电子步)的计算参数</strong><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&amp;FORCE_EVAL</span><br><span class="line">  &amp;DFT</span><br><span class="line">    BASIS_SET_FILE_NAME  BASIS_MOLOPT       <span class="comment"># 基组文件路径</span></span><br><span class="line">    POTENTIAL_FILE_NAME  POTENTIAL          <span class="comment"># 赝势文件路径</span></span><br><span class="line"><span class="comment"># --------------- Quickstep --------------- #</span></span><br><span class="line">    &amp;QS                                     <span class="comment"># </span></span><br><span class="line">      EPS_DEFAULT 1.0E-12                   <span class="comment"># 高精度计算时，EPS_DEFAULT 1.0E-14</span></span><br><span class="line">    &amp;END QS                                 </span><br><span class="line"><span class="comment"># ----------------- Grid ------------------ #</span></span><br><span class="line">    &amp;MGRID                                  <span class="comment"># </span></span><br><span class="line">      NGRIDS 4                              <span class="comment"># 多重网格叠加做FFT, 值越大，算得越快，越不精确</span></span><br><span class="line">      CUTOFF 500                            <span class="comment"># 整体网格精度的最高值 https://manual.cp2k.org/trunk/methods/dft/cutoff.html，尽量&gt;800</span></span><br><span class="line">      REL_CUTOFF 50                         <span class="comment"># 控制有多少网格点落到最精细的级别</span></span><br><span class="line">    &amp;END MGRID </span><br><span class="line"><span class="comment"># ----------------- SCF ------------------- #</span></span><br><span class="line">    &amp;SCF                                    </span><br><span class="line">      SCF_GUESS ATOMIC                      <span class="comment"># 初猜/可以改成RESTART</span></span><br><span class="line">      EPS_SCF 1.0E-6                        <span class="comment"># 能量收敛精度</span></span><br><span class="line">      MAX_SCF 100                           <span class="comment"># SCF循环圈数</span></span><br><span class="line">      <span class="comment"># ------ OT, DIAGONALIZATION -------- #</span></span><br><span class="line">      &amp;OT T                                 <span class="comment"># 使用OT(Orbital Transformation)优化波函数</span></span><br><span class="line">      MINIMIZER CG                          <span class="comment"># 共轭梯度法(最可靠)(CG)/迭代子空间直接反演法(速度快)(DIIS)/布罗伊登法(BROYDEN)  </span></span><br><span class="line">      LINESEARCH 3PNT                       <span class="comment"># 搜索算法</span></span><br><span class="line">      PRECONDITIONER FULL_SINGLE_INVERSE    <span class="comment"># 适用于大型系统；难收敛改Full All</span></span><br><span class="line">      &amp;END OT </span><br><span class="line">      <span class="comment"># &amp;DIAGONALIZATION ON                 # 对角化方法，不如OT快</span></span><br><span class="line">      <span class="comment">#   ALGORITHM STANDARD </span></span><br><span class="line">      <span class="comment"># &amp;END DIAGONALIZATION </span></span><br><span class="line">      <span class="comment"># ----------------------------------- #</span></span><br><span class="line">    &amp;END SCF                                </span><br><span class="line"><span class="comment"># --- eXchange and Correlation potential -- #</span></span><br><span class="line">    &amp;XC                                     <span class="comment"># 交换-关联密度泛函，要与基组和赝势的选择一致。</span></span><br><span class="line">      &amp;XC_FUNCTIONAL PBE </span><br><span class="line">      &amp;END XC_FUNCTIONAL </span><br><span class="line">    &amp;END XC</span><br><span class="line"><span class="comment"># ----------------- Print ----------------- #</span></span><br><span class="line">    &amp;PRINT                                  <span class="comment"># 输出参数 https://manual.cp2k.org/trunk/CP2K_INPUT/FORCE_EVAL/DFT/PRINT.html </span></span><br><span class="line">      &amp;FORCES ON                            <span class="comment"># 输出力</span></span><br><span class="line">      &amp;END FORCES</span><br><span class="line">    &amp;END PRINT</span><br><span class="line"><span class="comment"># ----------------------------------------- #</span></span><br><span class="line">  &amp;END DFT</span><br><span class="line">  ...</span><br><span class="line">&amp;END FORCE_EVAL</span><br></pre></td></tr></table></figure></li><li><strong>其他常用<code>&amp;DFT</code>参数</strong></li></ol><table><thead><tr><th align="center">&amp;DFT 参数</th><th align="center">设置</th><th align="center">含义</th></tr></thead><tbody><tr><td align="center">BASIS_SET_FILE_NAME</td><td align="center">BASIS_MOLOPT, BASIS_MOLOPT_UCL</td><td align="center">基组文件，前面可加路径${DATAPATH} 需要@SET DATAPATH ….</td></tr><tr><td align="center">POTENTIAL_FILE_NAME</td><td align="center">GTH_POTENTIALS</td><td align="center">赝势文件</td></tr><tr><td align="center">UKS</td><td align="center">T</td><td align="center">开壳层</td></tr><tr><td align="center">ROK</td><td align="center">T</td><td align="center">限制性开壳层</td></tr><tr><td align="center">MULTIPLICITY</td><td align="center">整数</td><td align="center">闭壳层1，开壳层双重态2，三重态3</td></tr><tr><td align="center">WFN_RESTART_FILE_NAME</td><td align="center">.&#x2F;RESTART.wfn（波函数路径）</td><td align="center">需要同时开启<code>&amp;DFT/&amp;SCF</code>中的<code>SCF_GUESS RESTART</code></td></tr><tr><td align="center">PLUS_U_METHOD</td><td align="center">见手册</td><td align="center">DFT+U （U值在 &amp;KIND 里控制）</td></tr><tr><td align="center">SURFACE_DIPOLE_CORRECTION</td><td align="center">T</td><td align="center">表面，偶极校正 &lt;&#x3D;&gt; IDIPOL &#x3D; T</td></tr><tr><td align="center">SURF_DIP_DIR</td><td align="center">Z</td><td align="center">Z方向 &lt;&#x3D;&gt; IDIPOL &#x3D; 3</td></tr></tbody></table><ol start="4"><li><p><strong>OT和Diagonalization比较</strong><br>OT：速度快，没有高斯展宽，对于金属系统收敛性差，不支持DFT+U，以及KPOINTS<br>Dia：计算量大，要设置高斯展宽，支持DFT+U和KPOINTS</p></li><li><p><strong>PIRNT</strong><br><code>&amp;FORCE_EVAL/</code> 中添加<code>&amp;PRINT/&amp;FORCES ON/&amp;END FORCES</code>，输出力。<br><code>&amp;FORCE_EVAL/&amp;DFT/&amp;SCF</code> 中添加<code>&amp;PRINT/&amp;RESTART FILENAME =RESTART.wfn/&amp;END RESTART</code>，输出波函数。</p></li><li><p><strong>基组</strong><br>计算精度，SZV &lt; DZVP &lt; TZVP &lt; TZV2P &lt; TZV2PX<br><strong>VP(Valence Polarized同时添加极化函数)</strong><br>VASP平面波基组(PW)，不同的体系设定相同的平面波截断能（ENCUT），那么用到的基组都是一样的。<br>高斯基组计算AB体系和A体系使用的基组不一样，AB中B的部分基组也贡献于描述A原子。(基组重叠误差，基组越大，误差越小，SR相比与普通的基组，速度略有提升，BSSE误差增大)<br>AB体系算出来的能量被低估。(<strong>计算吸附能、结合能等都会偏负</strong>，E(AB) – E(A) – E(B))</p></li><li><p><strong>对角化K点设置</strong></p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&amp;FORCE_EVAL</span><br><span class="line">  &amp;DFT</span><br><span class="line"><span class="comment"># ----------------KPOINTS------------------ #</span></span><br><span class="line">    &amp;KPOINTS</span><br><span class="line">      SCHEME MONKHORST-PACK 3 3 3           </span><br><span class="line">      SYMMETRY T                            <span class="comment"># 识别晶胞对称性</span></span><br><span class="line">      VERBOSE T                             <span class="comment"># 输出</span></span><br><span class="line">      FULL_GRID T</span><br><span class="line">    &amp;END KPOINTS</span><br><span class="line"><span class="comment"># ----------------------------------------- #</span></span><br><span class="line">  &amp;END DFT</span><br><span class="line">&amp;END FORCE_EVAL</span><br></pre></td></tr></table></figure></li></ol><h3 id="原子运动参数MOTION"><a href="#原子运动参数MOTION" class="headerlink" title="原子运动参数MOTION"></a>原子运动参数<code>MOTION</code></h3><h4 id="结构和晶胞优化"><a href="#结构和晶胞优化" class="headerlink" title="结构和晶胞优化"></a>结构和晶胞优化</h4><ol><li><p><strong>几何结构优化：<code>GEO_OPT</code></strong><br><a href="https://manual.cp2k.org/trunk/methods/optimization/geometry.html">cp2k manual - geometry optimization</a><br><a href="https://manual.cp2k.org/trunk/methods/optimization/geometry.html#">ex:H2O</a><br><code>&amp;GLOBAL</code>中<code>RUN_TYPE</code>设置<code>GEO_OPT</code></p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&amp;MOTION</span><br><span class="line"><span class="comment"># ------------ Geometry Optimizer --------- #</span></span><br><span class="line">  &amp;GEO_OPT</span><br><span class="line">    MAX_ITER 400</span><br><span class="line">    OPTIMIZER BFGS                          <span class="comment"># LBFGS大体系，BFGS针中小体系，CG更为Robust</span></span><br><span class="line">    MAX_FORCE 6.0E-4</span><br><span class="line">  &amp;END GEO_OPT</span><br><span class="line"><span class="comment"># ----------------------------------------- #</span></span><br><span class="line">&amp;END MOTION</span><br></pre></td></tr></table></figure><p>输出文件：(以H2O为例) <code>H2O.out</code>, <code>H2O-pos-1.xyz</code>, <code>H2O-1.restart</code>, <code>H2O-1.restart.bak-1,2,3</code><br><code>H2O-1.restart.bak-*</code>代表计算结束前<code>*</code>次迭代结果，<code>..bak-1</code>和<code>H2O-1.restart</code>相同<br>终止后续算：使用<code>H2O-1.restart</code>作为input文件重新提交任务</p></li><li><p><strong>晶胞优化：<code>CELL_OPT</code></strong><br><a href="https://manual.cp2k.org/trunk/CP2K_INPUT/MOTION/CELL_OPT.html#cell-opt">cp2k manual - cell optimization</a><br><code>&amp;GLOBAL</code>中<code>RUN_TYPE</code>设置<code>CELL_OPT</code></p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&amp;MOTION</span><br><span class="line"><span class="comment"># -------------- Cell Optimizer ----------- #</span></span><br><span class="line">  &amp;CELL_OPT</span><br><span class="line">    MAX_ITER 400</span><br><span class="line">    OPTIMIZER CG                            <span class="comment"># LBFGS大体系，BFGS针中小体系，CG更为Robust</span></span><br><span class="line">    KEEP_ANGLES                             <span class="comment"># 固定角度</span></span><br><span class="line">    KEEP_SYMMETRY T                         <span class="comment"># 固定对称性   </span></span><br><span class="line">    <span class="comment"># CONSTRAINT Z                          # 固定Z方向</span></span><br><span class="line">    TYPE DIRECT_CELL_OPT                    <span class="comment"># 同时优化晶胞和里面的位置(默认)</span></span><br><span class="line">    MAX_FORCE 6.0E-4</span><br><span class="line">  &amp;END GEO_OPT</span><br><span class="line"><span class="comment"># ----------------------------------------- #</span></span><br><span class="line">&amp;END MOTION</span><br></pre></td></tr></table></figure></li><li><p><strong>坐标固定：<code>CONSTRAINT</code></strong></p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&amp;MOTION</span><br><span class="line"><span class="comment"># ------------- Constraints --------------- #</span></span><br><span class="line">  &amp;CONSTRAINT</span><br><span class="line">    <span class="comment"># ---------- Fixed atoms -------------- #</span></span><br><span class="line">    &amp;FIXED_ATOMS</span><br><span class="line">      COMPONENTS_TO_FIX XYZ                 <span class="comment"># 限制固定的方向，也可以设置X,XY等  </span></span><br><span class="line">      LIST 1..54</span><br><span class="line">      LIST 289..324</span><br><span class="line">    &amp;END FIXED_ATOMS</span><br><span class="line">  &amp;END CONSTRAINT</span><br><span class="line"><span class="comment"># ----------------------------------------- #  </span></span><br><span class="line">&amp;MOTION</span><br></pre></td></tr></table></figure></li></ol><h4 id="频率计算"><a href="#频率计算" class="headerlink" title="频率计算"></a>频率计算</h4><ol><li><strong><code>&amp;GLOBAL</code>中<code>RUN_TYPE</code>设置<code>VIBRATIONAL_ANALYSIS</code>，输出信息精度调高</strong></li><li><strong>SCF优化精度不变，同时添加<code>&amp;VIBRATIONAL_ANALYSIS</code></strong><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&amp;VIBRATIONAL_ANALYSIS</span><br><span class="line">  NPROC_REP 48                              <span class="comment"># 总核数=节点数*核数</span></span><br><span class="line">  DX 0.01                                   <span class="comment"># 步长</span></span><br><span class="line">  FULLY_PERIODIC F                          <span class="comment"># 是否周期性</span></span><br><span class="line"><span class="comment"># ----------------- Print ----------------- #</span></span><br><span class="line">  &amp;PRINT</span><br><span class="line">    &amp;MOLDEN_VIB                             <span class="comment"># 生成振动模式的 MOLDEN 文件</span></span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;CARTESIAN_EIGS                         <span class="comment"># 输出输出频率计算中笛卡尔坐标系下的本征值和本征向量</span></span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;PROGRAM_RUN_INFO                       <span class="comment"># 记录程序运行的详细信息</span></span><br><span class="line">      &amp;EACH</span><br><span class="line">        REPLICA_EVAL 1</span><br><span class="line">      &amp;END</span><br><span class="line">    &amp;END</span><br><span class="line">  &amp;END PRINT</span><br><span class="line"><span class="comment"># ----------------------------------------- #</span></span><br><span class="line">&amp;END VIBRATIONAL_ANALYSIS</span><br></pre></td></tr></table></figure></li><li><strong>自由能计算</strong><br><a href="http://sobereva.com/552">http://sobereva.com/552</a><br> 使用卢天的<code>~/software/Shermo_2.6/Shermo</code>计算<code>ZPE</code>，需要引用<br><code>10.1016/j.comptc.2021.113249</code></li></ol><h4 id="过渡态计算"><a href="#过渡态计算" class="headerlink" title="过渡态计算"></a>过渡态计算</h4><p><a href="http://sobereva.com/44">http://sobereva.com/44</a></p><ol><li><strong>DIMER</strong><br>在势能放置两个相邻的点 Dimer 来寻找 TS，通过不断重复旋转移动dimer，直到找到能量最高点。</li><li><strong>CINEB</strong><br>在 IS 到 FS 之间插入一系列结构，共插入P-1个，反应为0，产物为P。优化不是对每个点孤立地优化，优化过程所有点一起运动。插点结构受到<br>1.来自势能面的力（保留平行分量）；2.chain方向上的弹簧力（保留垂直分量）</li></ol><p><strong>CP2K-CINEB过程</strong><br><strong><code>&amp;GLOBAL</code>中<code>RUN_TYPE</code>设置<code>BAND</code></strong></p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&amp;MOTION</span><br><span class="line"><span class="comment"># ----------------- Band ------------------ #</span></span><br><span class="line">  &amp;BAND</span><br><span class="line">  NPROC_REP 28</span><br><span class="line">  BAND_TYPE CI-NEB</span><br><span class="line">  ALIGN_FRAMES F</span><br><span class="line">  ROTATE_FRAMES F</span><br><span class="line">  NUMBER_OF_REPLICA 6</span><br><span class="line">  K_SPRING 0.08</span><br><span class="line">    <span class="comment"># ---------- Convergence -------------- #</span></span><br><span class="line">    &amp;CONVERGENCE_CONTROL</span><br><span class="line">      MAX_DR 0.01</span><br><span class="line">      MAX_FORCE 0.001</span><br><span class="line">      RMS_DR 0.02</span><br><span class="line">      RMS_FORCE 0.001</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;CI_NEB</span><br><span class="line">      NSTEPS_IT 5</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;OPTIMIZE_BAND</span><br><span class="line">      OPT_TYPE DIIS</span><br><span class="line">      OPTIMIZE_END_POINTS F</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;REPLICA</span><br><span class="line">      COORD_FILE_NAME ./1.xyz</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;REPLICA</span><br><span class="line">      COORD_FILE_NAME ./2.xyz</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;REPLICA</span><br><span class="line">      COORD_FILE_NAME ./3.xyz</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;REPLICA</span><br><span class="line">      COORD_FILE_NAME ./4.xyz</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;REPLICA</span><br><span class="line">      COORD_FILE_NAME ./5.xyz</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;PROGRAM_RUN_INFO</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;CONVERGENCE_INFO</span><br><span class="line">    &amp;END</span><br><span class="line">  &amp;END BAND</span><br><span class="line"><span class="comment"># ----------------------------------------- #</span></span><br><span class="line">&amp;END MOTION</span><br></pre></td></tr></table></figure><p><strong>CP2K-DIMER过程</strong><br><a href="http://bbs.keinsci.com/thread-23516-1-1.html">http://bbs.keinsci.com/thread-23516-1-1.html</a></p><ol><li>初猜选取dimer结构，得到coord.inc文件</li><li>设置优化方向 <code>sed -i &#39;1,2d&#39; coord.inc</code></li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">METHOD DIMER</span><br><span class="line">&amp;DIMER</span><br><span class="line">  DR 0.01</span><br><span class="line">  ANGLE_TOLERANCE [deg] 4.0</span><br><span class="line">  INTERPOLATE_GRADIENT</span><br><span class="line">  &amp;DIMER_VECTOR</span><br><span class="line">     @INCLUDE &#x27;DIMER_VECTOR&#x27;</span><br><span class="line">  &amp;END DIMER_VECTOR</span><br><span class="line">  &amp;ROT_OPT</span><br><span class="line">    OPTIMIZER CG</span><br><span class="line">    MAX_ITER 10</span><br><span class="line"></span><br><span class="line">    MAX_DR 3.0E-3</span><br><span class="line">    MAX_FORCE 6.0E-4</span><br><span class="line">    &amp;CG</span><br><span class="line">      # MAX_STEEP_STEPS 15</span><br><span class="line">      &amp;LINE_SEARCH</span><br><span class="line">        TYPE 2PNT</span><br><span class="line">      &amp;END LINE_SEARCH</span><br><span class="line">    &amp;END CG</span><br><span class="line">  &amp;END ROT_OPT</span><br><span class="line">&amp;END DIMER</span><br></pre></td></tr></table></figure><h4 id="杂化泛函（待更新）"><a href="#杂化泛函（待更新）" class="headerlink" title="杂化泛函（待更新）"></a>杂化泛函（待更新）</h4><h4 id="单点计算（待更新）"><a href="#单点计算（待更新）" class="headerlink" title="单点计算（待更新）"></a>单点计算（待更新）</h4><h4 id="AIMD"><a href="#AIMD" class="headerlink" title="AIMD"></a>AIMD</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&amp;QS</span><br><span class="line">  EPS_DEFAULT 1.0E-14</span><br><span class="line">  EXTRAPOLATION ASPC</span><br><span class="line">  EXTRAPOLATION_ORDER 3</span><br><span class="line">&amp;END QS</span><br></pre></td></tr></table></figure><ol><li>EXTRAPOLATION 控制波函数外推，在做结构优化&#x2F;MD的时候，下一离子步的波函数用前几个离子步的波函数组合可以得到非常快的SCF收敛。建议用ASPC(Always stable predictor corrector)，注：不能和K点设置同时使用。</li><li>EXTRAPOLATION_ORDER是ASPC extrapolation order。一般用默认值3。</li></ol><p>这两个参数可以促进AIMD的时候的每一离子步的SCF收敛，默认打开。这也是cp2k算AIMD比较快的一个原因。</p><h2 id="输出文件"><a href="#输出文件" class="headerlink" title="输出文件"></a>输出文件</h2><p>(mermaid 模块还在测试)</p><pre class="mermaid">graph TDA[cp2k输入文件]-->B[GLOBAL]A-->C[FORCE_EVAL]A-->D[MOTION]    C-->E[SUBSYS]    C-->H[PRINT]    C-->F[DFT]        E-->G[CELL]        E-->I[COORD]        E-->J[TOPOLOGY]        E-->K[KIND]        F-->O[QS]        F-->L[SCF]        F-->N[MGRID]        F-->P[XC]        F-->T[PRINT]            L-->M[OT]            L-->Q[DIAGONALIZATION]</pre><h1 id="三、数据处理"><a href="#三、数据处理" class="headerlink" title="三、数据处理"></a>三、数据处理</h1><h3 id="脚本使用"><a href="#脚本使用" class="headerlink" title="脚本使用"></a>脚本使用</h3><p><code>*.out</code>,<code>(*.wfn.bak-*)</code>wfn会不断覆盖，记录最后三步的波函数</p><h1 id="四、学习资料"><a href="#四、学习资料" class="headerlink" title="四、学习资料"></a>四、学习资料</h1><ol><li>CP2K的tutorials：<br><a href="https://www.cp2k.org/exercises">https://www.cp2k.org/exercises</a><br><a href="https://www.cp2k.org/howto">https://www.cp2k.org/howto</a></li><li>CP2K手册：<a href="http://manual.cp2k.org/trunk/">http://manual.cp2k.org/trunk/</a></li><li>CP2K的google group：<a href="https://groups.google.com/group/cp2k">https://groups.google.com/group/cp2k</a></li><li>Zevan的博客：<a href="http://kenshin325.lofter.com/tag/cp2k">http://kenshin325.lofter.com/tag/cp2k</a></li><li>兰一的知乎专栏：<a href="https://zhuanlan.zhihu.com/cp2k-tutorial">https://zhuanlan.zhihu.com/cp2k-tutorial</a></li><li>CP2K有用的工具： <a href="https://www.cp2k.org/tools">https://www.cp2k.org/tools</a></li><li>python编写的cp2k输入文件生成器(最高支持5.1)：<br><a href="https://github.com/avishart/CP2K_Editor">https://github.com/avishart/CP2K_Editor</a></li><li>难收敛<a href="http://sobereva.com/665">http://sobereva.com/665</a></li><li><a href="http://wiki.cheng-group.net/wiki/software_usage/cp2k/cp2k/">http://wiki.cheng-group.net/wiki/software_usage/cp2k/cp2k/</a></li></ol>]]></content>
+      
+      
       <categories>
-        <category>Linux</category>
+          
+          <category> DFT </category>
+          
       </categories>
-      <tags>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Bader View of VASP</title>
-    <url>/2024/06/03/bader-view-of-vasp/</url>
-    <content><![CDATA[<p><strong><font size=6>Bader View of VASP</font></strong></p>
-<p>本教程基于 HPC of zhenggroup 集群环境</p>
-<h2 id="Bader-计算过程"><a href="#Bader-计算过程" class="headerlink" title="Bader 计算过程"></a>Bader 计算过程</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">LAECHG=.TRUE. </span><br><span class="line">LCHARG = .TRUE.</span><br><span class="line">NSW = 0</span><br></pre></td></tr></table></figure>
-<p>得到CHGCAR文件</p>
-<h2 id="计算结果分析"><a href="#计算结果分析" class="headerlink" title="计算结果分析"></a>计算结果分析</h2><h3 id="数值分析"><a href="#数值分析" class="headerlink" title="数值分析"></a>数值分析</h3><ol>
-<li><code>bader.sh</code>分析CHGCAR文件得到<code>ACF.dat</code><br>其中 ACF.dat 文件包含：原子坐标和每个原子的价层电子数目，通过对比价电子数和 POTCAR 中的 ZVAL 就能得到每个原子的 bader 电荷</li>
-<li><code>grep ZVAL POTCAR</code>得到元素的价电子(vaspkit手册中，刘锦程提到进行 Bader 电荷分析，可采用带 _pv,_sv 的赝势)</li>
-</ol>
-<h3 id="可视化分析"><a href="#可视化分析" class="headerlink" title="可视化分析"></a>可视化分析</h3><ol>
-<li><code>python bader2pqr.py</code>得到<code>bader.pqr</code>,<code>get_lattice.exe</code>得到<code>vmdrc.txt</code></li>
-<li>打开vmd，将bader.pqr拖入窗口，<code>vmdrc.txt</code>的命令行逐行输入到终端，可修改颜色范围<br><img src="/images/Bader-view-of-VASP-4fb526d3fb4d86c020ee682e14d650f.png" alt="vmd使用"></li>
-</ol>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
-<li><a href="https://www.vasp.org/howto">VASP 官网</a></li>
-<li><a href="https://www.bigbrosci.com/">Learn VASP The Hard Way</a></li>
-</ol>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> cp2k </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Bader View of VASP</title>
+      <link href="/2024/06/03/bader-view-of-vasp/"/>
+      <url>/2024/06/03/bader-view-of-vasp/</url>
+      
+        <content type="html"><![CDATA[<p><strong><font size=6>Bader View of VASP</font></strong></p><p>本教程基于 HPC of zhenggroup 集群环境</p><h2 id="Bader-计算过程"><a href="#Bader-计算过程" class="headerlink" title="Bader 计算过程"></a>Bader 计算过程</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LAECHG=.TRUE. </span><br><span class="line">LCHARG = .TRUE.</span><br><span class="line">NSW = 0</span><br></pre></td></tr></table></figure><p>得到CHGCAR文件</p><h2 id="计算结果分析"><a href="#计算结果分析" class="headerlink" title="计算结果分析"></a>计算结果分析</h2><h3 id="数值分析"><a href="#数值分析" class="headerlink" title="数值分析"></a>数值分析</h3><ol><li><code>bader.sh</code>分析CHGCAR文件得到<code>ACF.dat</code><br>其中 ACF.dat 文件包含：原子坐标和每个原子的价层电子数目，通过对比价电子数和 POTCAR 中的 ZVAL 就能得到每个原子的 bader 电荷</li><li><code>grep ZVAL POTCAR</code>得到元素的价电子(vaspkit手册中，刘锦程提到进行 Bader 电荷分析，可采用带 _pv,_sv 的赝势)</li></ol><h3 id="可视化分析"><a href="#可视化分析" class="headerlink" title="可视化分析"></a>可视化分析</h3><ol><li><code>python bader2pqr.py</code>得到<code>bader.pqr</code>,<code>get_lattice.exe</code>得到<code>vmdrc.txt</code></li><li>打开vmd，将bader.pqr拖入窗口，<code>vmdrc.txt</code>的命令行逐行输入到终端，可修改颜色范围<br><img src="/images/Bader-view-of-VASP-4fb526d3fb4d86c020ee682e14d650f.png" alt="vmd使用"></li></ol><h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol><li><a href="https://www.vasp.org/howto">VASP 官网</a></li><li><a href="https://www.bigbrosci.com/">Learn VASP The Hard Way</a></li></ol>]]></content>
+      
+      
       <categories>
-        <category>DFT</category>
+          
+          <category> DFT </category>
+          
       </categories>
-      <tags>
-        <tag>vasp</tag>
-        <tag>bader</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Notes of Python</title>
-    <url>/2024/05/15/notes-of-python/</url>
-    <content><![CDATA[<p><strong><font size=6>Python 常用命令</font></strong></p>
-<h2 id="一、内置函数"><a href="#一、内置函数" class="headerlink" title="一、内置函数"></a>一、内置函数</h2><h3 id="字符串相关"><a href="#字符串相关" class="headerlink" title="字符串相关"></a>字符串相关</h3><table>
-<thead>
-<tr>
-<th>需求</th>
-<th>输入</th>
-<th>输出</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>计算字符串长度</td>
-<td>len(“Hello, Python!”)</td>
-<td>14</td>
-</tr>
-<tr>
-<td>str1 &#x3D; ‘aaBBccEEff’ 全部转换为小写字符</td>
-<td>str1.lower()</td>
-<td>‘aabbcceeff’</td>
-</tr>
-<tr>
-<td>全部转换为大写字符</td>
-<td>str1.upper()</td>
-<td>‘AABBCCEEFF’</td>
-</tr>
-<tr>
-<td>统计字符串中指定字符出现的次数（指定范围）</td>
-<td>str1.count(“a”, 0, 3)</td>
-<td>2</td>
-</tr>
-<tr>
-<td>判断字符串是否以指定字符开头（指定范围）</td>
-<td>str1.startswith(“a”)</td>
-<td>True</td>
-</tr>
-<tr>
-<td>判断字符串是否以指定字符结尾（指定范围）</td>
-<td>str1.endswith(“b”, 0, 2)</td>
-<td>False</td>
-</tr>
-<tr>
-<td>查找字符串中指定的字符第一次出现的索引（指定范围），不会触发异常（返回-1）</td>
-<td>str1.find(“d”, 3)</td>
-<td>-1</td>
-</tr>
-<tr>
-<td>查找~，会触发异常</td>
-<td>str1.index(“c”, 3)</td>
-<td>4</td>
-</tr>
-<tr>
-<td>将字符串中的字符替换为指定的字符</td>
-<td>str1.replace(“a”, “W”, 1)</td>
-<td>‘WaBBccEEff’</td>
-</tr>
-<tr>
-<td>test1 &#x3D; “  abc  “删除字符串两边的所有空白</td>
-<td>test1.strip()</td>
-<td>‘abc’</td>
-</tr>
-<tr>
-<td>删除字符串指定字符</td>
-<td>test1.strip().strip(“a”)</td>
-<td>‘bc’</td>
-</tr>
-</tbody></table>
-<h3 id="数字相关"><a href="#数字相关" class="headerlink" title="数字相关"></a>数字相关</h3><table>
-<thead>
-<tr>
-<th>需求</th>
-<th>输入</th>
-<th>输出</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>绝对值</td>
-<td>abs(-5)</td>
-<td>5</td>
-</tr>
-<tr>
-<td>商和余数</td>
-<td>divmod(13,2)</td>
-<td>(6,1)</td>
-</tr>
-<tr>
-<td>四舍六入五看齐,奇进偶不进</td>
-<td>round(3.50)</td>
-<td>4</td>
-</tr>
-<tr>
-<td>求 a 的 b 次幂（取余）</td>
-<td>pow(5,2) , pow(5,2,3)</td>
-<td>(25, 1)</td>
-</tr>
-<tr>
-<td>求和</td>
-<td>sum([1,2,3,4,5,6,7,8,9,10])</td>
-<td>55</td>
-</tr>
-<tr>
-<td>求最小值</td>
-<td>min(3,2,5,19,6,3)</td>
-<td>2</td>
-</tr>
-<tr>
-<td>求最大值</td>
-<td>max(3,5,12,8,5,11)</td>
-<td>12</td>
-</tr>
-<tr>
-<td>创建不可变的数字序列</td>
-<td>list(range(1, 10, 2)</td>
-<td>[1, 3, 5, 7, 9]</td>
-</tr>
-<tr>
-<td>转化为二进制</td>
-<td>bin(10)</td>
-<td>0b1010</td>
-</tr>
-</tbody></table>
-<h2 id="二、单行命令"><a href="#二、单行命令" class="headerlink" title="二、单行命令"></a>二、单行命令</h2><h3 id="生成等差数列"><a href="#生成等差数列" class="headerlink" title="生成等差数列"></a>生成等差数列</h3><p>生成一个从1到10的等差数列，公差为1。放入列表list1中。</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">list1 = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">11</span>, <span class="number">1</span>)]</span><br><span class="line"><span class="built_in">print</span>(list1)</span><br></pre></td></tr></table></figure>
-<p>输出结果<code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</code></p>
-<h3 id="反转字符串"><a href="#反转字符串" class="headerlink" title="反转字符串"></a>反转字符串</h3><p>切片操作符[::-1]。从后向前取值，步长为-1，即实现字符串反转。</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">str1 = <span class="string">&quot;Hello, World!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(str1[::-<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
-<p>输出结果<code>!dlroW ,olleH</code></p>
-<h3 id="列表去重"><a href="#列表去重" class="headerlink" title="列表去重"></a>列表去重</h3><p>使用set()函数将列表转换为集合，自动去除重复元素，再将其转换回列表。</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">list2 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">unique_list = <span class="built_in">list</span>(<span class="built_in">set</span>(list2))</span><br><span class="line"><span class="built_in">print</span>(unique_list)</span><br></pre></td></tr></table></figure>
-<p>输出结果<code>[1, 2, 3, 4, 5]</code></p>
-<h3 id="简洁计算阶乘"><a href="#简洁计算阶乘" class="headerlink" title="简洁计算阶乘"></a>简洁计算阶乘</h3><p>当n等于0时，阶乘为1；否则，阶乘等于n乘以n-1的阶乘。此处递归未定义函数，实际应用中需确保递归深度可控。</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">factorial = <span class="keyword">lambda</span> n:<span class="number">1</span> <span class="keyword">if</span> n == <span class="number">0</span> <span class="keyword">else</span> n * factorial(n - <span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(factorial(<span class="number">5</span>))</span><br></pre></td></tr></table></figure>
-<p>输出结果<code>120</code></p>
-<h3 id="统计字符串中单词出现次数"><a href="#统计字符串中单词出现次数" class="headerlink" title="统计字符串中单词出现次数"></a>统计字符串中单词出现次数</h3><p>str.count()方法用于统计字符串中指定子串（在此例中为’hello’）出现的次数</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">text = <span class="string">&quot;hello world hello python&quot;</span></span><br><span class="line">word_count = text.count(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(word_count)</span><br></pre></td></tr></table></figure>
-<p>输出结果<code>2</code></p>
-<h3 id="生成斐波那契数列"><a href="#生成斐波那契数列" class="headerlink" title="生成斐波那契数列"></a>生成斐波那契数列</h3><p>使用列表推导式结合append()函数生成斐波那契数列。fibonacci初始为[0, 1]，接着逐次计算前两项之和，不断扩展列表。</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">fibonacci = [<span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">[fibonacci.append(fibonacci[i] + fibonacci[i+<span class="number">1</span>]) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]</span><br><span class="line"><span class="built_in">print</span>(fibonacci)</span><br></pre></td></tr></table></figure>
-<p>输出结果<code>[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]</code></p>
-<h3 id="快速交换两个变量值"><a href="#快速交换两个变量值" class="headerlink" title="快速交换两个变量值"></a>快速交换两个变量值</h3><p>Python允许同时赋值多个变量</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">a, b = <span class="number">10</span>, <span class="number">20</span></span><br><span class="line">a, b = b, a</span><br><span class="line"><span class="built_in">print</span>(a, b) </span><br></pre></td></tr></table></figure>
-<p>输出结果<code>20 10</code></p>
-<h3 id="求最大公约数（GCD）"><a href="#求最大公约数（GCD）" class="headerlink" title="求最大公约数（GCD）"></a>求最大公约数（GCD）</h3><p>Python内置math模块中的gcd()函数，直接计算两个数的最大公约数。</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line">gcd = math.gcd(<span class="number">48</span>, <span class="number">18</span>)</span><br><span class="line"><span class="built_in">print</span>(gcd)</span><br></pre></td></tr></table></figure>
-<p>输出结果<code>6</code></p>
-<h3 id="列表元素排序并保持原索引"><a href="#列表元素排序并保持原索引" class="headerlink" title="列表元素排序并保持原索引"></a>列表元素排序并保持原索引</h3><p>使用sorted()函数对列表索引进行排序，key参数指定按照my_list对应位置的元素值进行排序。这样，原列表的元素顺序不变，但索引已按元素值排序。</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">my_list = [ <span class="string">&#x27;elderberry&#x27;</span>,<span class="string">&#x27;apple&#x27;</span>, <span class="string">&#x27;banana&#x27;</span>, <span class="string">&#x27;cherry&#x27;</span>, <span class="string">&#x27;date&#x27;</span>,]</span><br><span class="line">sorted_list = <span class="built_in">sorted</span>(<span class="built_in">range</span>(<span class="built_in">len</span>(my_list)), key=<span class="keyword">lambda</span> i: my_list[i])</span><br><span class="line"><span class="built_in">print</span>(sorted_list)</span><br></pre></td></tr></table></figure>
-<p>输出结果<code>[1, 2, 3, 4, 0]</code></p>
-<h3 id="使用列表推导式高效生成新列表"><a href="#使用列表推导式高效生成新列表" class="headerlink" title="使用列表推导式高效生成新列表"></a>使用列表推导式高效生成新列表</h3><p>列表推导式可以简洁地根据现有列表numbers生成一个新的列表squared</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">squared = [num **<span class="number">2</span> <span class="keyword">for</span> num <span class="keyword">in</span> numbers]</span><br><span class="line"><span class="built_in">print</span>(squared)</span><br></pre></td></tr></table></figure>
-<p>输出结果<code>[1, 4, 9, 16, 25]</code></p>
-<h3 id="矩阵转置"><a href="#矩阵转置" class="headerlink" title="矩阵转置"></a>矩阵转置</h3><p>zip()函数将矩阵的行转为列，再使用map()和list()将结果转换为列表形式</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">matrix = [[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>], [<span class="number">5</span>, <span class="number">6</span>]]</span><br><span class="line">transposed = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">list</span>, <span class="built_in">zip</span>(*matrix)))</span><br><span class="line"><span class="built_in">print</span>(transposed)</span><br></pre></td></tr></table></figure>
-<p>输出结果<code>[[1, 3, 5], [2, 4, 6]]</code></p>
-<h3 id="快速判断素数"><a href="#快速判断素数" class="headerlink" title="快速判断素数"></a>快速判断素数</h3><p>检查n是否能被2到其平方根之间的任何数整除。如果都不能整除，则返回True，表示n是素数。</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">is_prime</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">all</span>(n % i != <span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="built_in">int</span>(n**<span class="number">0.5</span>)+<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(is_prime(<span class="number">17</span>)) </span><br></pre></td></tr></table></figure>
-<p>输出结果<code>True</code></p>
-<h3 id="快速判断素数-1"><a href="#快速判断素数-1" class="headerlink" title="快速判断素数"></a>快速判断素数</h3><p>使用itertools.product()函数生成多个列表的笛卡尔积，结果为一个包含所有组合的列表。</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line">cartesian_product = <span class="built_in">list</span>(itertools.product([<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&quot;C&quot;</span>], [<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>,<span class="string">&quot;c&quot;</span>],[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]))</span><br><span class="line"><span class="built_in">print</span>(cartesian_product)</span><br></pre></td></tr></table></figure>
-<p>输出结果<code>[(&#39;A&#39;, &#39;a&#39;, 1), (&#39;A&#39;, &#39;a&#39;, 2), (&#39;A&#39;, &#39;a&#39;, 3), (&#39;A&#39;, &#39;b&#39;, 1), (&#39;A&#39;, &#39;b&#39;, 2), (&#39;A&#39;, &#39;b&#39;, 3), (&#39;A&#39;, &#39;c&#39;, 1), (&#39;A&#39;, &#39;c&#39;, 2), (&#39;A&#39;, &#39;c&#39;, 3), (&#39;B&#39;, &#39;a&#39;, 1), (&#39;B&#39;, &#39;a&#39;, 2), (&#39;B&#39;, &#39;a&#39;, 3), (&#39;B&#39;, &#39;b&#39;, 1), (&#39;B&#39;, &#39;b&#39;, 2), (&#39;B&#39;, &#39;b&#39;, 3), (&#39;B&#39;, &#39;c&#39;, 1), (&#39;B&#39;, &#39;c&#39;, 2), (&#39;B&#39;, &#39;c&#39;, 3), (&#39;C&#39;, &#39;a&#39;, 1), (&#39;C&#39;, &#39;a&#39;, 2), (&#39;C&#39;, &#39;a&#39;, 3), (&#39;C&#39;, &#39;b&#39;, 1), (&#39;C&#39;, &#39;b&#39;, 2), (&#39;C&#39;, &#39;b&#39;, 3), (&#39;C&#39;, &#39;c&#39;, 1), (&#39;C&#39;, &#39;c&#39;, 2), (&#39;C&#39;, &#39;c&#39;, 3)]</code></p>
-<h3 id="遍历列表并打印索引和对应的值"><a href="#遍历列表并打印索引和对应的值" class="headerlink" title="遍历列表并打印索引和对应的值"></a>遍历列表并打印索引和对应的值</h3><p>使用 enumerate() 函数遍历列表并打印索引和对应的值, 创建生成器对象</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">generator = ((i, j) <span class="keyword">for</span> i, j <span class="keyword">in</span> <span class="built_in">enumerate</span>([<span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;C&#x27;</span>]))</span><br><span class="line"><span class="comment"># 方法一</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> generator:</span><br><span class="line">    <span class="built_in">print</span>(item)</span><br><span class="line"><span class="comment"># 方法二</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(((i, j) <span class="keyword">for</span> i, j <span class="keyword">in</span> <span class="built_in">enumerate</span>([<span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;C&#x27;</span>]))))</span><br></pre></td></tr></table></figure>
-<p>输出结果<code>(0, &#39;A&#39;) (1, &#39;B&#39;) (2, &#39;C&#39;)</code> or <code>[(0, &#39;A&#39;), (1, &#39;B&#39;), (2, &#39;C&#39;)]</code></p>
-<h3 id="对列表中元素排序"><a href="#对列表中元素排序" class="headerlink" title="对列表中元素排序"></a>对列表中元素排序</h3><p>对可迭代对象做排序操作</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 方法一</span></span><br><span class="line">lst = [<span class="number">5</span>,<span class="number">7</span>,<span class="number">6</span>,<span class="number">12</span>,<span class="number">1</span>,<span class="number">13</span>,<span class="number">9</span>,<span class="number">18</span>,<span class="number">5</span>]</span><br><span class="line">lst.sort()  </span><br><span class="line"><span class="built_in">print</span>(lst) </span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法二</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">sorted</span>(lst))</span><br><span class="line"></span><br><span class="line"><span class="comment">#倒序</span></span><br><span class="line"><span class="built_in">sorted</span>(lst,reverse=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-<p>输出结果<code>[1, 5, 5, 6, 7, 9, 12, 13, 18]</code></p>
-<h3 id="将对象中对应的元素打包成一个元组"><a href="#将对象中对应的元素打包成一个元组" class="headerlink" title="将对象中对应的元素打包成一个元组"></a>将对象中对应的元素打包成一个元组</h3><p>将可迭代的对象作为参数，将对象中对应的元素打包成一个元组，然后返回由这些元组组成的列表。如果各个迭代器的元素个数不一致，则返回的列表长度与最短的对象相同。</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">lst1 = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;e&#x27;</span>, <span class="string">&#x27;f&#x27;</span>]</span><br><span class="line">lst2 = [<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;5&#x27;</span>, <span class="string">&#x27;6&#x27;</span>]</span><br><span class="line">lst3 = [<span class="string">&#x27;one&#x27;</span>, <span class="string">&#x27;two&#x27;</span>, <span class="string">&#x27;three&#x27;</span>, <span class="string">&#x27;four&#x27;</span>, <span class="string">&#x27;five&#x27;</span>, <span class="string">&#x27;six&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> el <span class="keyword">in</span> <span class="built_in">zip</span>(lst1, lst2, lst3):</span><br><span class="line">    <span class="built_in">print</span>(el)</span><br></pre></td></tr></table></figure>
-<p>输出结果<code>(&#39;a&#39;, &#39;1&#39;, &#39;one&#39;) (&#39;b&#39;, &#39;2&#39;, &#39;two&#39;) (&#39;c&#39;, &#39;3&#39;, &#39;three&#39;) (&#39;d&#39;, &#39;4&#39;, &#39;four&#39;) (&#39;e&#39;, &#39;5&#39;, &#39;five&#39;) (&#39;f&#39;, &#39;6&#39;, &#39;six&#39;)</code></p>
-<h2 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h2><ol>
-<li><a href="https://mp.weixin.qq.com/s/1g92Sr3WtB67XEiFrCv8oQ">https://mp.weixin.qq.com/s/1g92Sr3WtB67XEiFrCv8oQ</a></li>
-<li><a href="https://mp.weixin.qq.com/s/IOFMUH5rIfUF0GhNpsenlg">https://mp.weixin.qq.com/s/IOFMUH5rIfUF0GhNpsenlg</a></li>
-</ol>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> vasp </tag>
+            
+            <tag> bader </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Notes of Linux</title>
+      <link href="/2024/05/15/notes-of-linux/"/>
+      <url>/2024/05/15/notes-of-linux/</url>
+      
+        <content type="html"><![CDATA[<p><strong><font size=6>Linux 基础</font></strong></p><h1 id="一、Linux-常用命令"><a href="#一、Linux-常用命令" class="headerlink" title="一、Linux 常用命令"></a>一、Linux 常用命令</h1><h3 id="文件、路径操作"><a href="#文件、路径操作" class="headerlink" title="文件、路径操作"></a>文件、路径操作</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取当前目录</span></span><br><span class="line">current_directory=$(<span class="built_in">pwd</span>)    <span class="comment"># Linux</span></span><br><span class="line">current_directory = os.getcwd()    <span class="comment"># Python</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建文件、目录、删除、重命名</span></span><br><span class="line"><span class="built_in">touch</span> file.txt ; <span class="built_in">mkdir</span> <span class="built_in">dir</span></span><br><span class="line"><span class="built_in">rm</span> file.txt ; <span class="built_in">rm</span> -r <span class="built_in">dir</span></span><br><span class="line"><span class="built_in">mv</span> old_name new_name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看文件</span></span><br><span class="line"><span class="built_in">cat</span> file.txt</span><br><span class="line"><span class="built_in">cat</span> file.txt | grep <span class="string">&quot;keyword&quot;</span></span><br><span class="line"><span class="built_in">head</span> -n 10 file.txt ; <span class="built_in">tail</span> -n 10 file.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找，find+路径+-name+匹配文件名</span></span><br><span class="line">find . -name *.py</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找，grep+字符+文件路径，显示第一行</span></span><br><span class="line">grep LOOP OUTCAR | <span class="built_in">head</span> -n 1</span><br></pre></td></tr></table></figure><h3 id="批量替换常用关键参数，sed-i-‘s-模式-替换-‘-file"><a href="#批量替换常用关键参数，sed-i-‘s-模式-替换-‘-file" class="headerlink" title="批量替换常用关键参数，sed -i ‘s&#x2F;模式&#x2F;替换&#x2F;‘ file"></a>批量替换常用关键参数，sed -i ‘s&#x2F;模式&#x2F;替换&#x2F;‘ file</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sed -i 表示原地编辑不在终端输出，&#x27;.*&#x27;表示任意字符重复零次或多次，</span></span><br><span class="line"><span class="comment"># \(.*\): 捕获从行首到第一个出现的 F F F 之前的所有字符，并将其存储在第一个捕获组 \1 中。</span></span><br><span class="line">sed -i <span class="string">&#x27;s/IBRION =.*/IBRION = 2/&#x27;</span>  */INCAR</span><br><span class="line">sed -i <span class="string">&#x27;s/NCORE =.*/NCORE = 12/&#x27;</span>  */INCAR</span><br><span class="line">sed -i <span class="string">&#x27;s/^\(.*\)F   F   F\(.*\)$/\1F   F   T\2/&#x27;</span> */POSCAR</span><br></pre></td></tr></table></figure><h3 id="文件压缩、解压"><a href="#文件压缩、解压" class="headerlink" title="文件压缩、解压"></a>文件压缩、解压</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -z: 使用 gzip 解压缩归档文件; -c/x: 打包/提取归档文件;-v: 显示详细信息，处理文件时显示文件名（可选）;-f: 指定归档文件的名称</span></span><br><span class="line">tar -zcvf file.tar.gz file.txt <span class="comment"># 压缩</span></span><br><span class="line">tar -zxvf file.tar <span class="comment">#解压缩</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># -r: 递归处理</span></span><br><span class="line">zip -r html.zip /home/html</span><br><span class="line">unzip html.zip</span><br></pre></td></tr></table></figure><h3 id="磁盘管理，文件数量"><a href="#磁盘管理，文件数量" class="headerlink" title="磁盘管理，文件数量"></a>磁盘管理，文件数量</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -h：使用 KB、MB、GB 等单位输出</span></span><br><span class="line"><span class="comment"># 查看文件系统整体磁盘使用情况 </span></span><br><span class="line"><span class="built_in">df</span> -h</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看目录所占磁盘空间</span></span><br><span class="line"><span class="built_in">du</span> -h ./test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看当前目录下文件数量，wc --l 统计行数</span></span><br><span class="line"><span class="built_in">ls</span> -l | grep <span class="string">&#x27;^-r&#x27;</span> | <span class="built_in">wc</span> --l</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看当前目录下目录数量，wc --l 统计行数</span></span><br><span class="line"><span class="built_in">ls</span> -l | grep <span class="string">&#x27;^d&#x27;</span> | <span class="built_in">wc</span> --l</span><br></pre></td></tr></table></figure><h3 id="文件权限操作（change-mode）"><a href="#文件权限操作（change-mode）" class="headerlink" title="文件权限操作（change mode）"></a>文件权限操作（change mode）</h3><p>Linux&#x2F;Unix 的文件调用权限分为三级 : 文件所有者（Owner）、用户组（Group）、其它用户（Other Users）<br><img src="/images/Linux_notes-image.png" alt="chmod"><br>只有文件所有者和超级用户可以修改文件或目录的权限。可以使用绝对模式（八进制数字模式），符号模式指定文件的权限。<br><img src="/images/Linux_notes-image-1.png" alt="limit"><br>改变权限：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> 644 file.txt</span><br><span class="line"><span class="built_in">chmod</span> 777 file.txt   </span><br><span class="line"><span class="built_in">chmod</span> +rwx file.txt</span><br><span class="line"><span class="built_in">chown</span> user file.txt <span class="comment"># 改变文件所有者</span></span><br></pre></td></tr></table></figure><h3 id="获取当前目录下的所有子目录"><a href="#获取当前目录下的所有子目录" class="headerlink" title="获取当前目录下的所有子目录"></a>获取当前目录下的所有子目录</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查找所有一级子目录，-maxdepth 1 表示只查找一级子目录，! -name &#x27;.&#x27; 表示排除当前目录</span></span><br><span class="line">find . -maxdepth 1 -<span class="built_in">type</span> d ! -name <span class="string">&#x27;.&#x27;</span></span><br><span class="line"><span class="comment"># 查找所有一级子目录</span></span><br><span class="line"><span class="built_in">ls</span> -d */ </span><br></pre></td></tr></table></figure><h3 id="读取输入内容"><a href="#读取输入内容" class="headerlink" title="读取输入内容"></a>读取输入内容</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">read</span> Value<span class="comment">#Linux</span></span><br><span class="line">Value = input(<span class="string">&quot;&quot;</span>)  <span class="comment">#Python</span></span><br></pre></td></tr></table></figure><h2 id="二、Linux-目录结构"><a href="#二、Linux-目录结构" class="headerlink" title="二、Linux 目录结构"></a>二、Linux 目录结构</h2><h3 id="文件系统层次结构标准"><a href="#文件系统层次结构标准" class="headerlink" title="文件系统层次结构标准"></a>文件系统层次结构标准</h3><p>Filesystem Hierarchy Standard</p><ol><li><a href="https://blog.csdn.net/Ph_Nirvana/article/details/62427684">https://blog.csdn.net/Ph_Nirvana/article/details/62427684</a></li><li><a href="https://blog.csdn.net/m0_38044196/article/details/72844025">https://blog.csdn.net/m0_38044196/article/details/72844025</a></li><li><a href="https://zh.wikipedia.org/wiki/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84%E6%A0%87%E5%87%86">文件系统层次结构标准 - 维基百科，自由的百科全书 (wikipedia.org)</a></li></ol><table><thead><tr><th align="center">目录</th><th align="center">说明</th></tr></thead><tbody><tr><td align="center">&#x2F;</td><td align="center">整个文件系统层次结构的根目录</td></tr><tr><td align="center">&#x2F;bin&#x2F;</td><td align="center">需要在单用户模式可用的可执行文件</td></tr><tr><td align="center">&#x2F;boot&#x2F;</td><td align="center">引导程序文件</td></tr><tr><td align="center">&#x2F;dev&#x2F;</td><td align="center">必要设备</td></tr><tr><td align="center">&#x2F;etc&#x2F;</td><td align="center">特定主机，系统范围内的配置文件</td></tr><tr><td align="center">&#x2F;home&#x2F;</td><td align="center">用户的家目录，包含保存的文件、个人设置等，一般为单独的分区</td></tr><tr><td align="center">&#x2F;lib&#x2F;</td><td align="center">&#x2F;bin&#x2F; 和 &#x2F;sbin&#x2F;中二进制文件必要的库文件</td></tr><tr><td align="center">&#x2F;mnt&#x2F;</td><td align="center">临时挂载的文件系统</td></tr><tr><td align="center">&#x2F;opt&#x2F;</td><td align="center">可选应用软件包</td></tr><tr><td align="center">&#x2F;proc&#x2F;</td><td align="center">虚拟文件系统，将内核与进程状态归档为文本文件。例如：uptime、 network。在Linux中，对应Procfs格式挂载</td></tr><tr><td align="center">&#x2F;root&#x2F;</td><td align="center">超级用户的家目录</td></tr><tr><td align="center">&#x2F;sbin&#x2F;</td><td align="center">必要的系统二进制文件，例如： init、 ip、 mount</td></tr><tr><td align="center">&#x2F;tmp&#x2F;</td><td align="center">临时文件(参见 &#x2F;var&#x2F;tmp)，在系统重启时目录中文件不会被保留</td></tr><tr><td align="center">&#x2F;usr&#x2F;</td><td align="center">用于存储只读用户数据的第二层次</td></tr><tr><td align="center">&#x2F;var&#x2F;</td><td align="center">变量文件——在正常运行的系统中其内容不断变化的文件，如日志，脱机文件和临时电子邮件文件。</td></tr></tbody></table><h2 id="二、服务器管理"><a href="#二、服务器管理" class="headerlink" title="二、服务器管理"></a>二、服务器管理</h2><h3 id="PBS命令"><a href="#PBS命令" class="headerlink" title="PBS命令"></a>PBS命令</h3><h3 id="超线程"><a href="#超线程" class="headerlink" title="超线程"></a>超线程</h3><p><a href="http://sobereva.com/392">http://sobereva.com/392</a></p><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol><li><a href="https://www.runoob.com/linux">https://www.runoob.com/linux</a></li></ol>]]></content>
+      
+      
       <categories>
-        <category>Python</category>
+          
+          <category> Linux </category>
+          
       </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Notes of Shell</title>
-    <url>/2024/05/15/notes-of-shell/</url>
-    <content><![CDATA[<p><strong><font size=6>Shell 笔记</font></strong></p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Notes of Shell</title>
+      <link href="/2024/05/15/notes-of-shell/"/>
+      <url>/2024/05/15/notes-of-shell/</url>
+      
+        <content type="html"><![CDATA[<p><strong><font size=6>Shell 笔记</font></strong></p>]]></content>
+      
+      
       <categories>
-        <category>Linux</category>
+          
+          <category> Linux </category>
+          
       </categories>
-      <tags>
-        <tag>Shell</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>OS Module of Python</title>
-    <url>/2024/05/15/os-module-of-python/</url>
-    <content><![CDATA[<p><strong><font size=6>Python os 模块</font></strong></p>
-<h2 id="一、os模块"><a href="#一、os模块" class="headerlink" title="一、os模块"></a>一、os模块</h2><p>os 模块提供了非常丰富的方法用来处理文件和目录。</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br></pre></td></tr></table></figure>
-<h3 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h3><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 在操作系统命令行中运行一个shell命令</span></span><br><span class="line">os.system(command)</span><br></pre></td></tr></table></figure>
-<h3 id="操作工作目录"><a href="#操作工作目录" class="headerlink" title="操作工作目录"></a>操作工作目录</h3><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 返回当前工作目录的路径</span></span><br><span class="line">os.getcwd()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 改变当前工作目录</span></span><br><span class="line">os.chdir(path)</span><br></pre></td></tr></table></figure>
-<h3 id="得到环境变量"><a href="#得到环境变量" class="headerlink" title="得到环境变量"></a>得到环境变量</h3><figure class="highlight py"><table><tr><td class="code"><pre><span class="line">os.environ</span><br></pre></td></tr></table></figure>
-<h3 id="列出子目录"><a href="#列出子目录" class="headerlink" title="列出子目录"></a>列出子目录</h3><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 返回指定目录下的所有文件和子目录的名称列表</span></span><br><span class="line">os.listdir(path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成子目录列表</span></span><br><span class="line">sub_contents = [content.name <span class="keyword">for</span> content <span class="keyword">in</span> os.scandir(root_dir) <span class="keyword">if</span> content.is_dir()]</span><br><span class="line">sub_contents = [item <span class="keyword">for</span> item <span class="keyword">in</span> os.listdir(root_dir) <span class="keyword">if</span> os.path.isdir(os.path.join(root_dir, item))]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成子文件列表</span></span><br><span class="line">sub_files = [file.name <span class="keyword">for</span> file <span class="keyword">in</span> os.scandir(root_dir) <span class="keyword">if</span> file.is_file()]</span><br><span class="line">sub_files = [item <span class="keyword">for</span> item <span class="keyword">in</span> os.listdir(root_dir) <span class="keyword">if</span> os.path.isfile(os.path.join(root_dir, item))]</span><br></pre></td></tr></table></figure>
-<h3 id="创建，删除，重命名目录"><a href="#创建，删除，重命名目录" class="headerlink" title="创建，删除，重命名目录"></a>创建，删除，重命名目录</h3><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建单个目录（父目录必须存在）</span></span><br><span class="line">os.mkdir(path)</span><br><span class="line"><span class="comment"># 创建递归目录（允许创建父目录），路径，权限，目录存在不触发异常</span></span><br><span class="line">os.makedirs(path, mode=<span class="number">511</span>, exist_ok=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除一个空目录</span></span><br><span class="line">os.rmdir(path)</span><br><span class="line"><span class="comment"># 递归删除一个或多个空目录</span></span><br><span class="line">os.removedirs(path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重命名文件或目录</span></span><br><span class="line">os.rename(old, new)</span><br><span class="line"><span class="comment"># 递归重命名文件或目录</span></span><br><span class="line">os.renames(old, new)</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="二、os-path模块"><a href="#二、os-path模块" class="headerlink" title="二、os.path模块"></a>二、os.path模块</h2><h3 id="检查路径，返回布尔值"><a href="#检查路径，返回布尔值" class="headerlink" title="检查路径，返回布尔值"></a>检查路径，返回布尔值</h3><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 检查路径path是否存在</span></span><br><span class="line">os.path.exists(path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查路径path是否是一个文件</span></span><br><span class="line">os.path.isfile(path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查路径path是否是一个目录</span></span><br><span class="line">os.path.isdir(path)</span><br></pre></td></tr></table></figure>
-<h3 id="拼接、分割路径"><a href="#拼接、分割路径" class="headerlink" title="拼接、分割路径"></a>拼接、分割路径</h3><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 将多个路径拼接成一个路径</span></span><br><span class="line">os.path.join(path1, path2, ...)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将路径path分割为目录和文件名</span></span><br><span class="line">os.path.split(path)</span><br></pre></td></tr></table></figure>
-<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 返回path的绝对路径</span></span><br><span class="line">os.path.abspath(path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回路径path的文件名部分</span></span><br><span class="line">os.path.basename(path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回路径path的目录部分</span></span><br><span class="line">os.path.basename(path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回path的文件大小</span></span><br><span class="line">os.path.getsize(path)</span><br></pre></td></tr></table></figure>
-
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
-<li><a href="https://www.runoob.com/python/os-file-methods.html">https://www.runoob.com/python/os-file-methods.html</a></li>
-</ol>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> Shell </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>OS Module of Python</title>
+      <link href="/2024/05/15/os-module-of-python/"/>
+      <url>/2024/05/15/os-module-of-python/</url>
+      
+        <content type="html"><![CDATA[<p><strong><font size=6>Python os 模块</font></strong></p><h2 id="一、os模块"><a href="#一、os模块" class="headerlink" title="一、os模块"></a>一、os模块</h2><p>os 模块提供了非常丰富的方法用来处理文件和目录。</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br></pre></td></tr></table></figure><h3 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在操作系统命令行中运行一个shell命令</span></span><br><span class="line">os.system(command)</span><br></pre></td></tr></table></figure><h3 id="操作工作目录"><a href="#操作工作目录" class="headerlink" title="操作工作目录"></a>操作工作目录</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 返回当前工作目录的路径</span></span><br><span class="line">os.getcwd()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 改变当前工作目录</span></span><br><span class="line">os.chdir(path)</span><br></pre></td></tr></table></figure><h3 id="得到环境变量"><a href="#得到环境变量" class="headerlink" title="得到环境变量"></a>得到环境变量</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.environ</span><br></pre></td></tr></table></figure><h3 id="列出子目录"><a href="#列出子目录" class="headerlink" title="列出子目录"></a>列出子目录</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 返回指定目录下的所有文件和子目录的名称列表</span></span><br><span class="line">os.listdir(path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成子目录列表</span></span><br><span class="line">sub_contents = [content.name <span class="keyword">for</span> content <span class="keyword">in</span> os.scandir(root_dir) <span class="keyword">if</span> content.is_dir()]</span><br><span class="line">sub_contents = [item <span class="keyword">for</span> item <span class="keyword">in</span> os.listdir(root_dir) <span class="keyword">if</span> os.path.isdir(os.path.join(root_dir, item))]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成子文件列表</span></span><br><span class="line">sub_files = [file.name <span class="keyword">for</span> file <span class="keyword">in</span> os.scandir(root_dir) <span class="keyword">if</span> file.is_file()]</span><br><span class="line">sub_files = [item <span class="keyword">for</span> item <span class="keyword">in</span> os.listdir(root_dir) <span class="keyword">if</span> os.path.isfile(os.path.join(root_dir, item))]</span><br></pre></td></tr></table></figure><h3 id="创建，删除，重命名目录"><a href="#创建，删除，重命名目录" class="headerlink" title="创建，删除，重命名目录"></a>创建，删除，重命名目录</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建单个目录（父目录必须存在）</span></span><br><span class="line">os.mkdir(path)</span><br><span class="line"><span class="comment"># 创建递归目录（允许创建父目录），路径，权限，目录存在不触发异常</span></span><br><span class="line">os.makedirs(path, mode=<span class="number">511</span>, exist_ok=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除一个空目录</span></span><br><span class="line">os.rmdir(path)</span><br><span class="line"><span class="comment"># 递归删除一个或多个空目录</span></span><br><span class="line">os.removedirs(path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重命名文件或目录</span></span><br><span class="line">os.rename(old, new)</span><br><span class="line"><span class="comment"># 递归重命名文件或目录</span></span><br><span class="line">os.renames(old, new)</span><br></pre></td></tr></table></figure><h2 id="二、os-path模块"><a href="#二、os-path模块" class="headerlink" title="二、os.path模块"></a>二、os.path模块</h2><h3 id="检查路径，返回布尔值"><a href="#检查路径，返回布尔值" class="headerlink" title="检查路径，返回布尔值"></a>检查路径，返回布尔值</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检查路径path是否存在</span></span><br><span class="line">os.path.exists(path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查路径path是否是一个文件</span></span><br><span class="line">os.path.isfile(path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查路径path是否是一个目录</span></span><br><span class="line">os.path.isdir(path)</span><br></pre></td></tr></table></figure><h3 id="拼接、分割路径"><a href="#拼接、分割路径" class="headerlink" title="拼接、分割路径"></a>拼接、分割路径</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将多个路径拼接成一个路径</span></span><br><span class="line">os.path.join(path1, path2, ...)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将路径path分割为目录和文件名</span></span><br><span class="line">os.path.split(path)</span><br></pre></td></tr></table></figure><h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 返回path的绝对路径</span></span><br><span class="line">os.path.abspath(path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回路径path的文件名部分</span></span><br><span class="line">os.path.basename(path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回路径path的目录部分</span></span><br><span class="line">os.path.basename(path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回path的文件大小</span></span><br><span class="line">os.path.getsize(path)</span><br></pre></td></tr></table></figure><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol><li><a href="https://www.runoob.com/python/os-file-methods.html">https://www.runoob.com/python/os-file-methods.html</a></li></ol>]]></content>
+      
+      
       <categories>
-        <category>Python</category>
+          
+          <category> Python </category>
+          
       </categories>
-      <tags>
-        <tag>os</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Quick Start of Gaussian</title>
-    <url>/2024/05/14/quick-start-of-gaussian/</url>
-    <content><![CDATA[<h1 id="Notes-of-gaussian"><a href="#Notes-of-gaussian" class="headerlink" title="Notes of gaussian"></a>Notes of gaussian</h1><p>本教程基于 HPC of zhenggroup 集群环境</p>
-<p>参考资料 <a href="http://sobereva.com/list.html">http://sobereva.com/list.html</a></p>
-<h2 id="零、理论基础"><a href="#零、理论基础" class="headerlink" title="零、理论基础"></a>零、理论基础</h2><h4 id="泛函-基组设置"><a href="#泛函-基组设置" class="headerlink" title="泛函&#x2F;基组设置"></a>泛函&#x2F;基组设置</h4><p><a href="http://sobereva.com/272">简谈量子化学计算中DFT泛函的选择</a><br><a href="http://sobereva.com/336">谈谈量子化学中基组的选择</a></p>
-<h4 id="激发态"><a href="#激发态" class="headerlink" title="激发态"></a>激发态</h4><p><a href="http://sobereva.com/265">乱谈激发态的计算方法</a><br><a href="http://sobereva.com/314">Gaussian中用TDDFT计算激发态和吸收、荧光、磷光光谱的方法</a><br><a href="http://sobereva.com/230">电子激发任务中轨道跃迁贡献的计算</a></p>
-<h2 id="一、输入文件"><a href="#一、输入文件" class="headerlink" title="一、输入文件"></a>一、输入文件</h2><h3 id="input-gjf"><a href="#input-gjf" class="headerlink" title="input.gjf"></a>input.gjf</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">%mem=84GB</span><br><span class="line">%nprocshared=48</span><br><span class="line">%chk=COF-3-td.chk</span><br><span class="line">#p PBE1PBE scrf=(smd,solvent=water) def2TZVP em=GD3BJ TD(nstates=10) IOp(9/40=4)</span><br><span class="line"></span><br><span class="line">COF-3</span><br><span class="line"></span><br><span class="line">0 1</span><br><span class="line"> C                 33.03196170  -14.12931527    1.88576471</span><br><span class="line"> H                 31.92769914  -14.10953751    2.72772983</span><br><span class="line"> O                 30.78605907  -13.40639889    2.39344442</span><br><span class="line"> N                 30.71722291  -12.70823752    1.19042342</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<h2 id="二、输出文件"><a href="#二、输出文件" class="headerlink" title="二、输出文件"></a>二、输出文件</h2><p>chk → fchk<br>&#x2F;public&#x2F;software&#x2F;g16&#x2F;formchk filename</p>
-<h4 id="HOMO-LUMO-gap"><a href="#HOMO-LUMO-gap" class="headerlink" title="HOMO-LUMO gap"></a>HOMO-LUMO gap</h4><h5 id="理论基础"><a href="#理论基础" class="headerlink" title="理论基础"></a>理论基础</h5><p><a href="http://sobereva.com/543">正确地认识分子的能隙(gap)、HOMO和LUMO</a><br>(计算DFT, 虚拟态，轨道没有真实存在)<br>HOMO-LUMO gap &#x3D; E(LUMO) - E(HOMO) &gt; 0<br>(UV-Vis：波长最大的吸收峰位置; TDDFT，真实态，电子态真实存在)<br>Optical gap: 基态电子态通过吸收光子所能跃迁到的最低激发态对应的激发能，S0态极小点结构下S0到S1态的垂直跃迁对应的激发能。</p>
-<ol>
-<li>HOMO-LUMO gap越小，一般认为导电性越好。</li>
-<li>HOMO-LUMO gap越小，通常极化率也越大</li>
-</ol>
-<h2 id="三、结果分析"><a href="#三、结果分析" class="headerlink" title="三、结果分析"></a>三、结果分析</h2><h4 id="Excitation、S-D、Visualization"><a href="#Excitation、S-D、Visualization" class="headerlink" title="Excitation、S&#x2F;D、Visualization"></a>Excitation、S&#x2F;D、Visualization</h4><h5 id="Excitation"><a href="#Excitation" class="headerlink" title="Excitation"></a>Excitation</h5><ol>
-<li>Multiwfn</li>
-<li>input.out (out文件路径)</li>
-<li>18-Electron excitation analysis </li>
-<li>15-Print major MO transitions in all excited states</li>
-</ol>
-<h5 id="S-D"><a href="#S-D" class="headerlink" title="S&#x2F;D"></a>S&#x2F;D</h5><ol>
-<li>Multiwfn</li>
-<li>COF-3-td.fchk (fchk文件路径)</li>
-<li>18-Electron excitation analysis </li>
-<li>1-Analyze and visualize hole&amp;electron distribution, transition density, and transition electric&#x2F;magnetic dipole moment density</li>
-<li>input.out (out文件路径)</li>
-<li>S0→S？ </li>
-<li>1-Visualize and analyze hole, electron, transition density and so on</li>
-<li>2-Medium quality grid, covering whole system, about 512000 points in total<br>Sm index&#x2F;D index</li>
-<li><strong>3-Show isosurface of hole and electron distribution simultaneously</strong></li>
-<li><strong>7-Show isosurface of charge density difference</strong></li>
-</ol>
-<h5 id="Visualization"><a href="#Visualization" class="headerlink" title="Visualization"></a>Visualization</h5><p><a href="https://www.bilibili.com/video/BV1B94y1J7gR/?spm_id_from=333.788&vd_source=dbd7edddb514b6a82b44048682e9c391">https://www.bilibili.com/video/BV1B94y1J7gR/?spm_id_from=333.788&amp;vd_source=dbd7edddb514b6a82b44048682e9c391</a><br>cube 文件生成 + VMD可视化</p>
-<h2 id="文献引用"><a href="#文献引用" class="headerlink" title="文献引用"></a>文献引用</h2><p>[1] def2-TZVP基组 <a href="https://doi.org/10.1063/1.467146">https://doi.org/10.1063/1.467146</a><br>[2] Multiwfn <a href="https://doi.org/10.1002/jcc.22885">https://doi.org/10.1002/jcc.22885</a><br>[3] 溶剂模型 <a href="https://doi.org/10.1063/1.3359469">https://doi.org/10.1063/1.3359469</a><br>[4] xtb <a href="https://doi.org/10.1021/acs.jctc.8b01176">https://doi.org/10.1021/acs.jctc.8b01176</a><br>[5] D3BJ <a href="https://doi.org/10.1002/jcc.21759">https://doi.org/10.1002/jcc.21759</a></p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> os </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Notes of Python</title>
+      <link href="/2024/05/15/notes-of-python/"/>
+      <url>/2024/05/15/notes-of-python/</url>
+      
+        <content type="html"><![CDATA[<p><strong><font size=6>Python 常用命令</font></strong></p><h2 id="一、内置函数"><a href="#一、内置函数" class="headerlink" title="一、内置函数"></a>一、内置函数</h2><h3 id="字符串相关"><a href="#字符串相关" class="headerlink" title="字符串相关"></a>字符串相关</h3><table><thead><tr><th>需求</th><th>输入</th><th>输出</th></tr></thead><tbody><tr><td>计算字符串长度</td><td>len(“Hello, Python!”)</td><td>14</td></tr><tr><td>str1 &#x3D; ‘aaBBccEEff’ 全部转换为小写字符</td><td>str1.lower()</td><td>‘aabbcceeff’</td></tr><tr><td>全部转换为大写字符</td><td>str1.upper()</td><td>‘AABBCCEEFF’</td></tr><tr><td>统计字符串中指定字符出现的次数（指定范围）</td><td>str1.count(“a”, 0, 3)</td><td>2</td></tr><tr><td>判断字符串是否以指定字符开头（指定范围）</td><td>str1.startswith(“a”)</td><td>True</td></tr><tr><td>判断字符串是否以指定字符结尾（指定范围）</td><td>str1.endswith(“b”, 0, 2)</td><td>False</td></tr><tr><td>查找字符串中指定的字符第一次出现的索引（指定范围），不会触发异常（返回-1）</td><td>str1.find(“d”, 3)</td><td>-1</td></tr><tr><td>查找~，会触发异常</td><td>str1.index(“c”, 3)</td><td>4</td></tr><tr><td>将字符串中的字符替换为指定的字符</td><td>str1.replace(“a”, “W”, 1)</td><td>‘WaBBccEEff’</td></tr><tr><td>test1 &#x3D; “  abc  “删除字符串两边的所有空白</td><td>test1.strip()</td><td>‘abc’</td></tr><tr><td>删除字符串指定字符</td><td>test1.strip().strip(“a”)</td><td>‘bc’</td></tr></tbody></table><h3 id="数字相关"><a href="#数字相关" class="headerlink" title="数字相关"></a>数字相关</h3><table><thead><tr><th>需求</th><th>输入</th><th>输出</th></tr></thead><tbody><tr><td>绝对值</td><td>abs(-5)</td><td>5</td></tr><tr><td>商和余数</td><td>divmod(13,2)</td><td>(6,1)</td></tr><tr><td>四舍六入五看齐,奇进偶不进</td><td>round(3.50)</td><td>4</td></tr><tr><td>求 a 的 b 次幂（取余）</td><td>pow(5,2) , pow(5,2,3)</td><td>(25, 1)</td></tr><tr><td>求和</td><td>sum([1,2,3,4,5,6,7,8,9,10])</td><td>55</td></tr><tr><td>求最小值</td><td>min(3,2,5,19,6,3)</td><td>2</td></tr><tr><td>求最大值</td><td>max(3,5,12,8,5,11)</td><td>12</td></tr><tr><td>创建不可变的数字序列</td><td>list(range(1, 10, 2)</td><td>[1, 3, 5, 7, 9]</td></tr><tr><td>转化为二进制</td><td>bin(10)</td><td>0b1010</td></tr></tbody></table><h2 id="二、单行命令"><a href="#二、单行命令" class="headerlink" title="二、单行命令"></a>二、单行命令</h2><h3 id="生成等差数列"><a href="#生成等差数列" class="headerlink" title="生成等差数列"></a>生成等差数列</h3><p>生成一个从1到10的等差数列，公差为1。放入列表list1中。</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list1 = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">11</span>, <span class="number">1</span>)]</span><br><span class="line"><span class="built_in">print</span>(list1)</span><br></pre></td></tr></table></figure><p>输出结果<code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</code></p><h3 id="反转字符串"><a href="#反转字符串" class="headerlink" title="反转字符串"></a>反转字符串</h3><p>切片操作符[::-1]。从后向前取值，步长为-1，即实现字符串反转。</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str1 = <span class="string">&quot;Hello, World!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(str1[::-<span class="number">1</span>])</span><br></pre></td></tr></table></figure><p>输出结果<code>!dlroW ,olleH</code></p><h3 id="列表去重"><a href="#列表去重" class="headerlink" title="列表去重"></a>列表去重</h3><p>使用set()函数将列表转换为集合，自动去除重复元素，再将其转换回列表。</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">list2 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">unique_list = <span class="built_in">list</span>(<span class="built_in">set</span>(list2))</span><br><span class="line"><span class="built_in">print</span>(unique_list)</span><br></pre></td></tr></table></figure><p>输出结果<code>[1, 2, 3, 4, 5]</code></p><h3 id="简洁计算阶乘"><a href="#简洁计算阶乘" class="headerlink" title="简洁计算阶乘"></a>简洁计算阶乘</h3><p>当n等于0时，阶乘为1；否则，阶乘等于n乘以n-1的阶乘。此处递归未定义函数，实际应用中需确保递归深度可控。</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">factorial = <span class="keyword">lambda</span> n:<span class="number">1</span> <span class="keyword">if</span> n == <span class="number">0</span> <span class="keyword">else</span> n * factorial(n - <span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(factorial(<span class="number">5</span>))</span><br></pre></td></tr></table></figure><p>输出结果<code>120</code></p><h3 id="统计字符串中单词出现次数"><a href="#统计字符串中单词出现次数" class="headerlink" title="统计字符串中单词出现次数"></a>统计字符串中单词出现次数</h3><p>str.count()方法用于统计字符串中指定子串（在此例中为’hello’）出现的次数</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">text = <span class="string">&quot;hello world hello python&quot;</span></span><br><span class="line">word_count = text.count(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(word_count)</span><br></pre></td></tr></table></figure><p>输出结果<code>2</code></p><h3 id="生成斐波那契数列"><a href="#生成斐波那契数列" class="headerlink" title="生成斐波那契数列"></a>生成斐波那契数列</h3><p>使用列表推导式结合append()函数生成斐波那契数列。fibonacci初始为[0, 1]，接着逐次计算前两项之和，不断扩展列表。</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fibonacci = [<span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">[fibonacci.append(fibonacci[i] + fibonacci[i+<span class="number">1</span>]) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]</span><br><span class="line"><span class="built_in">print</span>(fibonacci)</span><br></pre></td></tr></table></figure><p>输出结果<code>[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]</code></p><h3 id="快速交换两个变量值"><a href="#快速交换两个变量值" class="headerlink" title="快速交换两个变量值"></a>快速交换两个变量值</h3><p>Python允许同时赋值多个变量</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a, b = <span class="number">10</span>, <span class="number">20</span></span><br><span class="line">a, b = b, a</span><br><span class="line"><span class="built_in">print</span>(a, b) </span><br></pre></td></tr></table></figure><p>输出结果<code>20 10</code></p><h3 id="求最大公约数（GCD）"><a href="#求最大公约数（GCD）" class="headerlink" title="求最大公约数（GCD）"></a>求最大公约数（GCD）</h3><p>Python内置math模块中的gcd()函数，直接计算两个数的最大公约数。</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line">gcd = math.gcd(<span class="number">48</span>, <span class="number">18</span>)</span><br><span class="line"><span class="built_in">print</span>(gcd)</span><br></pre></td></tr></table></figure><p>输出结果<code>6</code></p><h3 id="列表元素排序并保持原索引"><a href="#列表元素排序并保持原索引" class="headerlink" title="列表元素排序并保持原索引"></a>列表元素排序并保持原索引</h3><p>使用sorted()函数对列表索引进行排序，key参数指定按照my_list对应位置的元素值进行排序。这样，原列表的元素顺序不变，但索引已按元素值排序。</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">my_list = [ <span class="string">&#x27;elderberry&#x27;</span>,<span class="string">&#x27;apple&#x27;</span>, <span class="string">&#x27;banana&#x27;</span>, <span class="string">&#x27;cherry&#x27;</span>, <span class="string">&#x27;date&#x27;</span>,]</span><br><span class="line">sorted_list = <span class="built_in">sorted</span>(<span class="built_in">range</span>(<span class="built_in">len</span>(my_list)), key=<span class="keyword">lambda</span> i: my_list[i])</span><br><span class="line"><span class="built_in">print</span>(sorted_list)</span><br></pre></td></tr></table></figure><p>输出结果<code>[1, 2, 3, 4, 0]</code></p><h3 id="使用列表推导式高效生成新列表"><a href="#使用列表推导式高效生成新列表" class="headerlink" title="使用列表推导式高效生成新列表"></a>使用列表推导式高效生成新列表</h3><p>列表推导式可以简洁地根据现有列表numbers生成一个新的列表squared</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">squared = [num **<span class="number">2</span> <span class="keyword">for</span> num <span class="keyword">in</span> numbers]</span><br><span class="line"><span class="built_in">print</span>(squared)</span><br></pre></td></tr></table></figure><p>输出结果<code>[1, 4, 9, 16, 25]</code></p><h3 id="矩阵转置"><a href="#矩阵转置" class="headerlink" title="矩阵转置"></a>矩阵转置</h3><p>zip()函数将矩阵的行转为列，再使用map()和list()将结果转换为列表形式</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">matrix = [[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>], [<span class="number">5</span>, <span class="number">6</span>]]</span><br><span class="line">transposed = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">list</span>, <span class="built_in">zip</span>(*matrix)))</span><br><span class="line"><span class="built_in">print</span>(transposed)</span><br></pre></td></tr></table></figure><p>输出结果<code>[[1, 3, 5], [2, 4, 6]]</code></p><h3 id="快速判断素数"><a href="#快速判断素数" class="headerlink" title="快速判断素数"></a>快速判断素数</h3><p>检查n是否能被2到其平方根之间的任何数整除。如果都不能整除，则返回True，表示n是素数。</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">is_prime</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">all</span>(n % i != <span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="built_in">int</span>(n**<span class="number">0.5</span>)+<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(is_prime(<span class="number">17</span>)) </span><br></pre></td></tr></table></figure><p>输出结果<code>True</code></p><h3 id="快速判断素数-1"><a href="#快速判断素数-1" class="headerlink" title="快速判断素数"></a>快速判断素数</h3><p>使用itertools.product()函数生成多个列表的笛卡尔积，结果为一个包含所有组合的列表。</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line">cartesian_product = <span class="built_in">list</span>(itertools.product([<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&quot;C&quot;</span>], [<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>,<span class="string">&quot;c&quot;</span>],[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]))</span><br><span class="line"><span class="built_in">print</span>(cartesian_product)</span><br></pre></td></tr></table></figure><p>输出结果<code>[(&#39;A&#39;, &#39;a&#39;, 1), (&#39;A&#39;, &#39;a&#39;, 2), (&#39;A&#39;, &#39;a&#39;, 3), (&#39;A&#39;, &#39;b&#39;, 1), (&#39;A&#39;, &#39;b&#39;, 2), (&#39;A&#39;, &#39;b&#39;, 3), (&#39;A&#39;, &#39;c&#39;, 1), (&#39;A&#39;, &#39;c&#39;, 2), (&#39;A&#39;, &#39;c&#39;, 3), (&#39;B&#39;, &#39;a&#39;, 1), (&#39;B&#39;, &#39;a&#39;, 2), (&#39;B&#39;, &#39;a&#39;, 3), (&#39;B&#39;, &#39;b&#39;, 1), (&#39;B&#39;, &#39;b&#39;, 2), (&#39;B&#39;, &#39;b&#39;, 3), (&#39;B&#39;, &#39;c&#39;, 1), (&#39;B&#39;, &#39;c&#39;, 2), (&#39;B&#39;, &#39;c&#39;, 3), (&#39;C&#39;, &#39;a&#39;, 1), (&#39;C&#39;, &#39;a&#39;, 2), (&#39;C&#39;, &#39;a&#39;, 3), (&#39;C&#39;, &#39;b&#39;, 1), (&#39;C&#39;, &#39;b&#39;, 2), (&#39;C&#39;, &#39;b&#39;, 3), (&#39;C&#39;, &#39;c&#39;, 1), (&#39;C&#39;, &#39;c&#39;, 2), (&#39;C&#39;, &#39;c&#39;, 3)]</code></p><h3 id="遍历列表并打印索引和对应的值"><a href="#遍历列表并打印索引和对应的值" class="headerlink" title="遍历列表并打印索引和对应的值"></a>遍历列表并打印索引和对应的值</h3><p>使用 enumerate() 函数遍历列表并打印索引和对应的值, 创建生成器对象</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">generator = ((i, j) <span class="keyword">for</span> i, j <span class="keyword">in</span> <span class="built_in">enumerate</span>([<span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;C&#x27;</span>]))</span><br><span class="line"><span class="comment"># 方法一</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> generator:</span><br><span class="line">    <span class="built_in">print</span>(item)</span><br><span class="line"><span class="comment"># 方法二</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(((i, j) <span class="keyword">for</span> i, j <span class="keyword">in</span> <span class="built_in">enumerate</span>([<span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;C&#x27;</span>]))))</span><br></pre></td></tr></table></figure><p>输出结果<code>(0, &#39;A&#39;) (1, &#39;B&#39;) (2, &#39;C&#39;)</code> or <code>[(0, &#39;A&#39;), (1, &#39;B&#39;), (2, &#39;C&#39;)]</code></p><h3 id="对列表中元素排序"><a href="#对列表中元素排序" class="headerlink" title="对列表中元素排序"></a>对列表中元素排序</h3><p>对可迭代对象做排序操作</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法一</span></span><br><span class="line">lst = [<span class="number">5</span>,<span class="number">7</span>,<span class="number">6</span>,<span class="number">12</span>,<span class="number">1</span>,<span class="number">13</span>,<span class="number">9</span>,<span class="number">18</span>,<span class="number">5</span>]</span><br><span class="line">lst.sort()  </span><br><span class="line"><span class="built_in">print</span>(lst) </span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法二</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">sorted</span>(lst))</span><br><span class="line"></span><br><span class="line"><span class="comment">#倒序</span></span><br><span class="line"><span class="built_in">sorted</span>(lst,reverse=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure><p>输出结果<code>[1, 5, 5, 6, 7, 9, 12, 13, 18]</code></p><h3 id="将对象中对应的元素打包成一个元组"><a href="#将对象中对应的元素打包成一个元组" class="headerlink" title="将对象中对应的元素打包成一个元组"></a>将对象中对应的元素打包成一个元组</h3><p>将可迭代的对象作为参数，将对象中对应的元素打包成一个元组，然后返回由这些元组组成的列表。如果各个迭代器的元素个数不一致，则返回的列表长度与最短的对象相同。</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">lst1 = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;e&#x27;</span>, <span class="string">&#x27;f&#x27;</span>]</span><br><span class="line">lst2 = [<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;5&#x27;</span>, <span class="string">&#x27;6&#x27;</span>]</span><br><span class="line">lst3 = [<span class="string">&#x27;one&#x27;</span>, <span class="string">&#x27;two&#x27;</span>, <span class="string">&#x27;three&#x27;</span>, <span class="string">&#x27;four&#x27;</span>, <span class="string">&#x27;five&#x27;</span>, <span class="string">&#x27;six&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> el <span class="keyword">in</span> <span class="built_in">zip</span>(lst1, lst2, lst3):</span><br><span class="line">    <span class="built_in">print</span>(el)</span><br></pre></td></tr></table></figure><p>输出结果<code>(&#39;a&#39;, &#39;1&#39;, &#39;one&#39;) (&#39;b&#39;, &#39;2&#39;, &#39;two&#39;) (&#39;c&#39;, &#39;3&#39;, &#39;three&#39;) (&#39;d&#39;, &#39;4&#39;, &#39;four&#39;) (&#39;e&#39;, &#39;5&#39;, &#39;five&#39;) (&#39;f&#39;, &#39;6&#39;, &#39;six&#39;)</code></p><h2 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h2><ol><li><a href="https://mp.weixin.qq.com/s/1g92Sr3WtB67XEiFrCv8oQ">https://mp.weixin.qq.com/s/1g92Sr3WtB67XEiFrCv8oQ</a></li><li><a href="https://mp.weixin.qq.com/s/IOFMUH5rIfUF0GhNpsenlg">https://mp.weixin.qq.com/s/IOFMUH5rIfUF0GhNpsenlg</a></li></ol>]]></content>
+      
+      
       <categories>
-        <category>DFT</category>
+          
+          <category> Python </category>
+          
       </categories>
-      <tags>
-        <tag>gaussian</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Quick Start of CP2K</title>
-    <url>/2024/06/07/quick-start-of-cp2k/</url>
-    <content><![CDATA[<p><strong><font size=6>Quick Start of CP2K</font></strong></p>
-<p>本教程基于 HPC of zhenggroup 集群环境</p>
-<h1 id="一、CP2K介绍"><a href="#一、CP2K介绍" class="headerlink" title="一、CP2K介绍"></a>一、CP2K介绍</h1><h2 id="关于CP2K"><a href="#关于CP2K" class="headerlink" title="关于CP2K"></a>关于CP2K</h2><ol>
-<li>CP2K是一种量子化学和固态物理第一性原理计算软件包，可以执行固态，液态，分子，和生物系统的计算模拟。</li>
-<li>CP2K是开源免费程序，使用混合高斯和平面波基组GPW和GAPW的DFT方法比平面波基组计算更<strong>快</strong>。</li>
-<li>CP2K用到好多非常新和前沿的算法<br><strong>OT(Orbital Transformation)，</strong><br>ASPC(Always stable predictor corrector)，<br>ADMM(Auxiliary Density Matrix Methods)，<br>PIMD(pathintegral Molecular Dynamics)，<br>adaptive buffered QM&#x2F;MM</li>
-<li>相关文章 <a href="https://www.cp2k.org/science">https://www.cp2k.org/science</a></li>
-<li>催化：ACS Catal. 2019, 9 (9), 7876-7887</li>
-</ol>
-<h2 id="CP2K的应用和局限"><a href="#CP2K的应用和局限" class="headerlink" title="CP2K的应用和局限"></a>CP2K的应用和局限</h2><p><strong>应用:</strong> DFT,AIMD,(QM&#x2F;MM),NEB,MD    <a href="https://www.cp2k.org/features">https://www.cp2k.org/features</a><br><strong>局限:</strong> 1. 对导体计算较慢，OT算法算有带隙的材料可以很快收敛。导体一般用较慢的对角化方法。<br>         2. 磁性体系提前指定自旋多重度。<br>         3. 高斯基组带来的基组重叠误差（Basis Set Superposition Error, BSSE），不适合计算结合能。VASP使用平面波基组不存在此问题。<br>         4. 能量计算使用VASP更准确</p>
-<h1 id="二、CP2K使用"><a href="#二、CP2K使用" class="headerlink" title="二、CP2K使用"></a>二、CP2K使用</h1><h2 id="输入文件-环境准备"><a href="#输入文件-环境准备" class="headerlink" title="输入文件+环境准备"></a>输入文件+环境准备</h2><p><code>*.inp</code>,<code>(coord.inc/xyz)</code>,<code>CP2K.pbs</code></p>
-<p>在提交脚本<code>cp2k.pbs</code>内添加以下内容</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> /public/software/gcc-9.3.0/gcc-9.3.0_env.sh</span><br><span class="line"><span class="built_in">source</span> /public/software/intel2020u2//intel2020u2_env.sh</span><br><span class="line"><span class="built_in">export</span> OMP_NUM_THREADS=1</span><br><span class="line">mpirun  -n 48 /public/software/cp2k-8.1/exe/local/cp2k.popt  -i cp2k.inp &gt; cp2k.out</span><br></pre></td></tr></table></figure>
-<h2 id="cp2k-inp-常用参数说明"><a href="#cp2k-inp-常用参数说明" class="headerlink" title="cp2k.inp 常用参数说明"></a><code>cp2k.inp</code> 常用参数说明</h2><p>CP2K手册<a href="https://manual.cp2k.org/trunk/index.html">https://manual.cp2k.org/trunk/index.html</a><br>关键词以section和subsection的形式套娃，每一个section都是以【&amp;section_name】开头的，以【&amp;END section_name 】结尾的。(顺序随意，嵌套不能乱)每一行只写一个关键词，关键词后面写参数，大小写和空格不敏感。</p>
-<h3 id="通用参数GLOBAL"><a href="#通用参数GLOBAL" class="headerlink" title="通用参数GLOBAL"></a>通用参数<code>GLOBAL</code></h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">&amp;GLOBAL</span><br><span class="line">  PROJECT cp2k                              <span class="comment"># 任务名称</span></span><br><span class="line">  RUN_TYPE GEO_OPT                          <span class="comment"># 计算类型 ENERGY,ENERGY_FORCE,GEO_OPT,CELL_OPT,VIBRATIONAL_ANALYSIS,BAND,MD,PINT</span></span><br><span class="line">  PRINT_LEVEL LOW                           <span class="comment"># 输出等级</span></span><br><span class="line">&amp;END GLOBAL</span><br></pre></td></tr></table></figure>
-<h3 id="体系的力和能量FORCE-EVAL"><a href="#体系的力和能量FORCE-EVAL" class="headerlink" title="体系的力和能量FORCE_EVAL"></a>体系的力和能量<code>FORCE_EVAL</code></h3><ol>
-<li><strong><code>SUBSYS</code>(subsystem): coordinates, topology, molecules and cell</strong><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">&amp;FORCE_EVAL</span><br><span class="line">  METHOD Quickstep                          <span class="comment"># 使用DFT的GPW方法进行计算原子受力</span></span><br><span class="line">  &amp;SUBSYS</span><br><span class="line"><span class="comment"># --------------- Structure --------------- #</span></span><br><span class="line">    &amp;TOPOLOGY</span><br><span class="line">      &amp;CENTER_COORDINATES                   <span class="comment"># 结构放在盒子中间</span></span><br><span class="line">      &amp;END CENTER_COORDINATES</span><br><span class="line">      COORD_FILE_FORMAT xyz</span><br><span class="line">      COORD_FILE_NAME  ./coord.xyz</span><br><span class="line">    &amp;END TOPOLOGY</span><br><span class="line"><span class="comment"># ------------ Lattice vectors ------------ #</span></span><br><span class="line">    &amp;CELL                                   <span class="comment"># 也可输入 `ABC 10 11 13` 代表正交晶系，单位埃</span></span><br><span class="line">      A    8.42    0.00    0.00</span><br><span class="line">      B    4.21    7.29    0.00</span><br><span class="line">      C    0.00    0.00   19.32</span><br><span class="line">      PERIODIC XYZ                          <span class="comment"># NONE,X,XY,XYZ,XZ,Y,YZ,Z  XYZ代表三个方向周期性计算</span></span><br><span class="line">    &amp;END CELL</span><br><span class="line"><span class="comment"># ------------ Basis, Potential ----------- #</span></span><br><span class="line">    &amp;KIND Au                                <span class="comment"># 元素种类</span></span><br><span class="line">      ELEMENT Au                            </span><br><span class="line">      BASIS_SET DZVP-MOLOPT-SR-GTH-q11      <span class="comment"># 基组设置(对应文件里存在的条目)</span></span><br><span class="line">      POTENTIAL GTH-PBE                     <span class="comment"># 赝势设置</span></span><br><span class="line">    &amp;END KIND</span><br><span class="line"><span class="comment"># ----------------------------------------- #</span></span><br><span class="line">  &amp;END SUBSYS</span><br><span class="line">  ...</span><br><span class="line">&amp;END FORCE_EVAL</span><br></pre></td></tr></table></figure>
-其他输入原子坐标方式<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Method 1：inc --------------------------- #</span></span><br><span class="line">&amp;COORD  </span><br><span class="line">    @INCLUDE <span class="string">&#x27;coord.inc&#x27;</span>  <span class="comment">#xyz文件去掉前两行</span></span><br><span class="line">&amp;END COORD</span><br><span class="line"></span><br><span class="line"><span class="comment"># Method 2：Cartesian coordinates --------- #</span></span><br><span class="line">&amp;COORD </span><br><span class="line">C          -3.36178719   11.43419295    1.72360000</span><br><span class="line">H           3.11299203   11.00326708    1.72360000</span><br><span class="line">...</span><br><span class="line">&amp;END COORD </span><br></pre></td></tr></table></figure></li>
-<li><strong>DFT: Parameter needed by LCAO DFT programs <strong>(Quickstep)</strong> 关于自洽循环(电子步)的计算参数</strong><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">&amp;FORCE_EVAL</span><br><span class="line">  &amp;DFT</span><br><span class="line">    BASIS_SET_FILE_NAME  BASIS_MOLOPT       <span class="comment"># 基组文件路径</span></span><br><span class="line">    POTENTIAL_FILE_NAME  POTENTIAL          <span class="comment"># 赝势文件路径</span></span><br><span class="line"><span class="comment"># --------------- Quickstep --------------- #</span></span><br><span class="line">    &amp;QS                                     <span class="comment"># </span></span><br><span class="line">      EPS_DEFAULT 1.0E-12                   <span class="comment"># 高精度计算时，EPS_DEFAULT 1.0E-14</span></span><br><span class="line">    &amp;END QS                                 </span><br><span class="line"><span class="comment"># ----------------- Grid ------------------ #</span></span><br><span class="line">    &amp;MGRID                                  <span class="comment"># </span></span><br><span class="line">      NGRIDS 4                              <span class="comment"># 多重网格叠加做FFT, 值越大，算得越快，越不精确</span></span><br><span class="line">      CUTOFF 500                            <span class="comment"># 整体网格精度的最高值 https://manual.cp2k.org/trunk/methods/dft/cutoff.html，尽量&gt;800</span></span><br><span class="line">      REL_CUTOFF 50                         <span class="comment"># 控制有多少网格点落到最精细的级别</span></span><br><span class="line">    &amp;END MGRID </span><br><span class="line"><span class="comment"># ----------------- SCF ------------------- #</span></span><br><span class="line">    &amp;SCF                                    </span><br><span class="line">      SCF_GUESS ATOMIC                      <span class="comment"># 初猜/可以改成RESTART</span></span><br><span class="line">      EPS_SCF 1.0E-6                        <span class="comment"># 能量收敛精度</span></span><br><span class="line">      MAX_SCF 100                           <span class="comment"># SCF循环圈数</span></span><br><span class="line">      <span class="comment"># ------ OT, DIAGONALIZATION -------- #</span></span><br><span class="line">      &amp;OT T                                 <span class="comment"># 使用OT(Orbital Transformation)优化波函数</span></span><br><span class="line">      MINIMIZER CG                          <span class="comment"># 共轭梯度法(最可靠)(CG)/迭代子空间直接反演法(速度快)(DIIS)/布罗伊登法(BROYDEN)  </span></span><br><span class="line">      LINESEARCH 3PNT                       <span class="comment"># 搜索算法</span></span><br><span class="line">      PRECONDITIONER FULL_SINGLE_INVERSE    <span class="comment"># 适用于大型系统；难收敛改Full All</span></span><br><span class="line">      &amp;END OT </span><br><span class="line">      <span class="comment"># &amp;DIAGONALIZATION ON                 # 对角化方法，不如OT快</span></span><br><span class="line">      <span class="comment">#   ALGORITHM STANDARD </span></span><br><span class="line">      <span class="comment"># &amp;END DIAGONALIZATION </span></span><br><span class="line">      <span class="comment"># ----------------------------------- #</span></span><br><span class="line">    &amp;END SCF                                </span><br><span class="line"><span class="comment"># --- eXchange and Correlation potential -- #</span></span><br><span class="line">    &amp;XC                                     <span class="comment"># 交换-关联密度泛函，要与基组和赝势的选择一致。</span></span><br><span class="line">      &amp;XC_FUNCTIONAL PBE </span><br><span class="line">      &amp;END XC_FUNCTIONAL </span><br><span class="line">    &amp;END XC</span><br><span class="line"><span class="comment"># ----------------- Print ----------------- #</span></span><br><span class="line">    &amp;PRINT                                  <span class="comment"># 输出参数 https://manual.cp2k.org/trunk/CP2K_INPUT/FORCE_EVAL/DFT/PRINT.html </span></span><br><span class="line">      &amp;FORCES ON                            <span class="comment"># 输出力</span></span><br><span class="line">      &amp;END FORCES</span><br><span class="line">    &amp;END PRINT</span><br><span class="line"><span class="comment"># ----------------------------------------- #</span></span><br><span class="line">  &amp;END DFT</span><br><span class="line">  ...</span><br><span class="line">&amp;END FORCE_EVAL</span><br></pre></td></tr></table></figure></li>
-<li><strong>其他常用<code>&amp;DFT</code>参数</strong></li>
-</ol>
-<table>
-<thead>
-<tr>
-<th align="center">&amp;DFT 参数</th>
-<th align="center">设置</th>
-<th align="center">含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">BASIS_SET_FILE_NAME</td>
-<td align="center">BASIS_MOLOPT, BASIS_MOLOPT_UCL</td>
-<td align="center">基组文件，前面可加路径${DATAPATH} 需要@SET DATAPATH ….</td>
-</tr>
-<tr>
-<td align="center">POTENTIAL_FILE_NAME</td>
-<td align="center">GTH_POTENTIALS</td>
-<td align="center">赝势文件</td>
-</tr>
-<tr>
-<td align="center">UKS</td>
-<td align="center">T</td>
-<td align="center">开壳层</td>
-</tr>
-<tr>
-<td align="center">ROK</td>
-<td align="center">T</td>
-<td align="center">限制性开壳层</td>
-</tr>
-<tr>
-<td align="center">MULTIPLICITY</td>
-<td align="center">整数</td>
-<td align="center">闭壳层1，开壳层双重态2，三重态3</td>
-</tr>
-<tr>
-<td align="center">WFN_RESTART_FILE_NAME</td>
-<td align="center">.&#x2F;RESTART.wfn（波函数路径）</td>
-<td align="center">需要同时开启<code>&amp;DFT/&amp;SCF</code>中的<code>SCF_GUESS RESTART</code></td>
-</tr>
-<tr>
-<td align="center">PLUS_U_METHOD</td>
-<td align="center">见手册</td>
-<td align="center">DFT+U （U值在 &amp;KIND 里控制）</td>
-</tr>
-<tr>
-<td align="center">SURFACE_DIPOLE_CORRECTION</td>
-<td align="center">T</td>
-<td align="center">表面，偶极校正 &lt;&#x3D;&gt; IDIPOL &#x3D; T</td>
-</tr>
-<tr>
-<td align="center">SURF_DIP_DIR</td>
-<td align="center">Z</td>
-<td align="center">Z方向 &lt;&#x3D;&gt; IDIPOL &#x3D; 3</td>
-</tr>
-</tbody></table>
-<ol start="4">
-<li><p><strong>OT和Diagonalization比较</strong><br>OT：速度快，没有高斯展宽，对于金属系统收敛性差，不支持DFT+U，以及KPOINTS<br>Dia：计算量大，要设置高斯展宽，支持DFT+U和KPOINTS</p>
-</li>
-<li><p><strong>PIRNT</strong><br><code>&amp;FORCE_EVAL/</code> 中添加<code>&amp;PRINT/&amp;FORCES ON/&amp;END FORCES</code>，输出力。<br><code>&amp;FORCE_EVAL/&amp;DFT/&amp;SCF</code> 中添加<code>&amp;PRINT/&amp;RESTART FILENAME =RESTART.wfn/&amp;END RESTART</code>，输出波函数。</p>
-</li>
-<li><p><strong>基组</strong><br>计算精度，SZV &lt; DZVP &lt; TZVP &lt; TZV2P &lt; TZV2PX<br><strong>VP(Valence Polarized同时添加极化函数)</strong><br>VASP平面波基组(PW)，不同的体系设定相同的平面波截断能（ENCUT），那么用到的基组都是一样的。<br>高斯基组计算AB体系和A体系使用的基组不一样，AB中B的部分基组也贡献于描述A原子。(基组重叠误差，基组越大，误差越小，SR相比与普通的基组，速度略有提升，BSSE误差增大)<br>AB体系算出来的能量被低估。(<strong>计算吸附能、结合能等都会偏负</strong>，E(AB) – E(A) – E(B))</p>
-</li>
-<li><p><strong>对角化K点设置</strong></p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">&amp;FORCE_EVAL</span><br><span class="line">  &amp;DFT</span><br><span class="line"><span class="comment"># ----------------KPOINTS------------------ #</span></span><br><span class="line">    &amp;KPOINTS</span><br><span class="line">      SCHEME MONKHORST-PACK 3 3 3           </span><br><span class="line">      SYMMETRY T                            <span class="comment"># 识别晶胞对称性</span></span><br><span class="line">      VERBOSE T                             <span class="comment"># 输出</span></span><br><span class="line">      FULL_GRID T</span><br><span class="line">    &amp;END KPOINTS</span><br><span class="line"><span class="comment"># ----------------------------------------- #</span></span><br><span class="line">  &amp;END DFT</span><br><span class="line">&amp;END FORCE_EVAL</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h3 id="原子运动参数MOTION"><a href="#原子运动参数MOTION" class="headerlink" title="原子运动参数MOTION"></a>原子运动参数<code>MOTION</code></h3><h4 id="结构和晶胞优化"><a href="#结构和晶胞优化" class="headerlink" title="结构和晶胞优化"></a>结构和晶胞优化</h4><ol>
-<li><p><strong>几何结构优化：<code>GEO_OPT</code></strong><br><a href="https://manual.cp2k.org/trunk/methods/optimization/geometry.html">cp2k manual - geometry optimization</a><br><a href="https://manual.cp2k.org/trunk/methods/optimization/geometry.html#">ex:H2O</a><br><code>&amp;GLOBAL</code>中<code>RUN_TYPE</code>设置<code>GEO_OPT</code></p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">&amp;MOTION</span><br><span class="line"><span class="comment"># ------------ Geometry Optimizer --------- #</span></span><br><span class="line">  &amp;GEO_OPT</span><br><span class="line">    MAX_ITER 400</span><br><span class="line">    OPTIMIZER BFGS                          <span class="comment"># LBFGS大体系，BFGS针中小体系，CG更为Robust</span></span><br><span class="line">    MAX_FORCE 6.0E-4</span><br><span class="line">  &amp;END GEO_OPT</span><br><span class="line"><span class="comment"># ----------------------------------------- #</span></span><br><span class="line">&amp;END MOTION</span><br></pre></td></tr></table></figure>
-<p>输出文件：(以H2O为例) <code>H2O.out</code>, <code>H2O-pos-1.xyz</code>, <code>H2O-1.restart</code>, <code>H2O-1.restart.bak-1,2,3</code><br><code>H2O-1.restart.bak-*</code>代表计算结束前<code>*</code>次迭代结果，<code>..bak-1</code>和<code>H2O-1.restart</code>相同<br>终止后续算：使用<code>H2O-1.restart</code>作为input文件重新提交任务</p>
-</li>
-<li><p><strong>晶胞优化：<code>CELL_OPT</code></strong><br><a href="https://manual.cp2k.org/trunk/CP2K_INPUT/MOTION/CELL_OPT.html#cell-opt">cp2k manual - cell optimization</a><br><code>&amp;GLOBAL</code>中<code>RUN_TYPE</code>设置<code>CELL_OPT</code></p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">&amp;MOTION</span><br><span class="line"><span class="comment"># -------------- Cell Optimizer ----------- #</span></span><br><span class="line">  &amp;CELL_OPT</span><br><span class="line">    MAX_ITER 400</span><br><span class="line">    OPTIMIZER CG                            <span class="comment"># LBFGS大体系，BFGS针中小体系，CG更为Robust</span></span><br><span class="line">    KEEP_ANGLES                             <span class="comment"># 固定角度</span></span><br><span class="line">    KEEP_SYMMETRY T                         <span class="comment"># 固定对称性   </span></span><br><span class="line">    <span class="comment"># CONSTRAINT Z                          # 固定Z方向</span></span><br><span class="line">    TYPE DIRECT_CELL_OPT                    <span class="comment"># 同时优化晶胞和里面的位置(默认)</span></span><br><span class="line">    MAX_FORCE 6.0E-4</span><br><span class="line">  &amp;END GEO_OPT</span><br><span class="line"><span class="comment"># ----------------------------------------- #</span></span><br><span class="line">&amp;END MOTION</span><br></pre></td></tr></table></figure></li>
-<li><p><strong>坐标固定：<code>CONSTRAINT</code></strong></p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">&amp;MOTION</span><br><span class="line"><span class="comment"># ------------- Constraints --------------- #</span></span><br><span class="line">  &amp;CONSTRAINT</span><br><span class="line">    <span class="comment"># ---------- Fixed atoms -------------- #</span></span><br><span class="line">    &amp;FIXED_ATOMS</span><br><span class="line">      COMPONENTS_TO_FIX XYZ                 <span class="comment"># 限制固定的方向，也可以设置X,XY等  </span></span><br><span class="line">      LIST 1..54</span><br><span class="line">      LIST 289..324</span><br><span class="line">    &amp;END FIXED_ATOMS</span><br><span class="line">  &amp;END CONSTRAINT</span><br><span class="line"><span class="comment"># ----------------------------------------- #  </span></span><br><span class="line">&amp;MOTION</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h4 id="频率计算"><a href="#频率计算" class="headerlink" title="频率计算"></a>频率计算</h4><ol>
-<li><strong><code>&amp;GLOBAL</code>中<code>RUN_TYPE</code>设置<code>VIBRATIONAL_ANALYSIS</code>，输出信息精度调高</strong></li>
-<li><strong>SCF优化精度不变，同时添加<code>&amp;VIBRATIONAL_ANALYSIS</code></strong><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">&amp;VIBRATIONAL_ANALYSIS</span><br><span class="line">  NPROC_REP 48                              <span class="comment"># 总核数=节点数*核数</span></span><br><span class="line">  DX 0.01                                   <span class="comment"># 步长</span></span><br><span class="line">  FULLY_PERIODIC F                          <span class="comment"># 是否周期性</span></span><br><span class="line"><span class="comment"># ----------------- Print ----------------- #</span></span><br><span class="line">  &amp;PRINT</span><br><span class="line">    &amp;MOLDEN_VIB                             <span class="comment"># 生成振动模式的 MOLDEN 文件</span></span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;CARTESIAN_EIGS                         <span class="comment"># 输出输出频率计算中笛卡尔坐标系下的本征值和本征向量</span></span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;PROGRAM_RUN_INFO                       <span class="comment"># 记录程序运行的详细信息</span></span><br><span class="line">      &amp;EACH</span><br><span class="line">        REPLICA_EVAL 1</span><br><span class="line">      &amp;END</span><br><span class="line">    &amp;END</span><br><span class="line">  &amp;END PRINT</span><br><span class="line"><span class="comment"># ----------------------------------------- #</span></span><br><span class="line">&amp;END VIBRATIONAL_ANALYSIS</span><br></pre></td></tr></table></figure></li>
-<li><strong>自由能计算</strong><br><a href="http://sobereva.com/552">http://sobereva.com/552</a><br> 使用卢天的<code>~/software/Shermo_2.6/Shermo</code>计算<code>ZPE</code>，需要引用<br><code>10.1016/j.comptc.2021.113249</code></li>
-</ol>
-<h4 id="过渡态计算"><a href="#过渡态计算" class="headerlink" title="过渡态计算"></a>过渡态计算</h4><p><a href="http://sobereva.com/44">http://sobereva.com/44</a></p>
-<ol>
-<li><strong>DIMER</strong><br>在势能放置两个相邻的点 Dimer 来寻找 TS，通过不断重复旋转移动dimer，直到找到能量最高点。</li>
-<li><strong>CINEB</strong><br>在 IS 到 FS 之间插入一系列结构，共插入P-1个，反应为0，产物为P。优化不是对每个点孤立地优化，优化过程所有点一起运动。插点结构受到<br>1.来自势能面的力（保留平行分量）；2.chain方向上的弹簧力（保留垂直分量）</li>
-</ol>
-<p><strong>CP2K-CINEB过程</strong><br><strong><code>&amp;GLOBAL</code>中<code>RUN_TYPE</code>设置<code>BAND</code></strong></p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">&amp;MOTION</span><br><span class="line"><span class="comment"># ----------------- Band ------------------ #</span></span><br><span class="line">  &amp;BAND</span><br><span class="line">  NPROC_REP 28</span><br><span class="line">  BAND_TYPE CI-NEB</span><br><span class="line">  ALIGN_FRAMES F</span><br><span class="line">  ROTATE_FRAMES F</span><br><span class="line">  NUMBER_OF_REPLICA 6</span><br><span class="line">  K_SPRING 0.08</span><br><span class="line">    <span class="comment"># ---------- Convergence -------------- #</span></span><br><span class="line">    &amp;CONVERGENCE_CONTROL</span><br><span class="line">      MAX_DR 0.01</span><br><span class="line">      MAX_FORCE 0.001</span><br><span class="line">      RMS_DR 0.02</span><br><span class="line">      RMS_FORCE 0.001</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;CI_NEB</span><br><span class="line">      NSTEPS_IT 5</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;OPTIMIZE_BAND</span><br><span class="line">      OPT_TYPE DIIS</span><br><span class="line">      OPTIMIZE_END_POINTS F</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;REPLICA</span><br><span class="line">      COORD_FILE_NAME ./1.xyz</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;REPLICA</span><br><span class="line">      COORD_FILE_NAME ./2.xyz</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;REPLICA</span><br><span class="line">      COORD_FILE_NAME ./3.xyz</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;REPLICA</span><br><span class="line">      COORD_FILE_NAME ./4.xyz</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;REPLICA</span><br><span class="line">      COORD_FILE_NAME ./5.xyz</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;PROGRAM_RUN_INFO</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;CONVERGENCE_INFO</span><br><span class="line">    &amp;END</span><br><span class="line">  &amp;END BAND</span><br><span class="line"><span class="comment"># ----------------------------------------- #</span></span><br><span class="line">&amp;END MOTION</span><br></pre></td></tr></table></figure>
-
-<p><strong>CP2K-DIMER过程</strong><br><a href="http://bbs.keinsci.com/thread-23516-1-1.html">http://bbs.keinsci.com/thread-23516-1-1.html</a></p>
-<ol>
-<li>初猜选取dimer结构，得到coord.inc文件</li>
-<li>设置优化方向 <code>sed -i &#39;1,2d&#39; coord.inc</code></li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">METHOD DIMER</span><br><span class="line">&amp;DIMER</span><br><span class="line">  DR 0.01</span><br><span class="line">  ANGLE_TOLERANCE [deg] 4.0</span><br><span class="line">  INTERPOLATE_GRADIENT</span><br><span class="line">  &amp;DIMER_VECTOR</span><br><span class="line">     @INCLUDE &#x27;DIMER_VECTOR&#x27;</span><br><span class="line">  &amp;END DIMER_VECTOR</span><br><span class="line">  &amp;ROT_OPT</span><br><span class="line">    OPTIMIZER CG</span><br><span class="line">    MAX_ITER 10</span><br><span class="line"></span><br><span class="line">    MAX_DR 3.0E-3</span><br><span class="line">    MAX_FORCE 6.0E-4</span><br><span class="line">    &amp;CG</span><br><span class="line">      # MAX_STEEP_STEPS 15</span><br><span class="line">      &amp;LINE_SEARCH</span><br><span class="line">        TYPE 2PNT</span><br><span class="line">      &amp;END LINE_SEARCH</span><br><span class="line">    &amp;END CG</span><br><span class="line">  &amp;END ROT_OPT</span><br><span class="line">&amp;END DIMER</span><br></pre></td></tr></table></figure>
-<h4 id="杂化泛函（待更新）"><a href="#杂化泛函（待更新）" class="headerlink" title="杂化泛函（待更新）"></a>杂化泛函（待更新）</h4><h4 id="单点计算（待更新）"><a href="#单点计算（待更新）" class="headerlink" title="单点计算（待更新）"></a>单点计算（待更新）</h4><h4 id="AIMD"><a href="#AIMD" class="headerlink" title="AIMD"></a>AIMD</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">&amp;QS</span><br><span class="line">  EPS_DEFAULT 1.0E-14</span><br><span class="line">  EXTRAPOLATION ASPC</span><br><span class="line">  EXTRAPOLATION_ORDER 3</span><br><span class="line">&amp;END QS</span><br></pre></td></tr></table></figure>
-<ol>
-<li>EXTRAPOLATION 控制波函数外推，在做结构优化&#x2F;MD的时候，下一离子步的波函数用前几个离子步的波函数组合可以得到非常快的SCF收敛。建议用ASPC(Always stable predictor corrector)，注：不能和K点设置同时使用。</li>
-<li>EXTRAPOLATION_ORDER是ASPC extrapolation order。一般用默认值3。</li>
-</ol>
-<p>这两个参数可以促进AIMD的时候的每一离子步的SCF收敛，默认打开。这也是cp2k算AIMD比较快的一个原因。</p>
-<h2 id="输出文件"><a href="#输出文件" class="headerlink" title="输出文件"></a>输出文件</h2><p>(mermaid 模块还在测试)</p>
-<pre class="mermaid">graph TD
-A[cp2k输入文件]-->B[GLOBAL]
-A-->C[FORCE_EVAL]
-A-->D[MOTION]
-    C-->E[SUBSYS]
-    C-->H[PRINT]
-    C-->F[DFT]
-        E-->G[CELL]
-        E-->I[COORD]
-        E-->J[TOPOLOGY]
-        E-->K[KIND]
-        F-->O[QS]
-        F-->L[SCF]
-        F-->N[MGRID]
-        F-->P[XC]
-        F-->T[PRINT]
-            L-->M[OT]
-            L-->Q[DIAGONALIZATION]</pre>
-
-
-<h1 id="三、数据处理"><a href="#三、数据处理" class="headerlink" title="三、数据处理"></a>三、数据处理</h1><h3 id="脚本使用"><a href="#脚本使用" class="headerlink" title="脚本使用"></a>脚本使用</h3><p><code>*.out</code>,<code>(*.wfn.bak-*)</code>wfn会不断覆盖，记录最后三步的波函数</p>
-<h1 id="四、学习资料"><a href="#四、学习资料" class="headerlink" title="四、学习资料"></a>四、学习资料</h1><ol>
-<li>CP2K的tutorials：<br><a href="https://www.cp2k.org/exercises">https://www.cp2k.org/exercises</a><br><a href="https://www.cp2k.org/howto">https://www.cp2k.org/howto</a></li>
-<li>CP2K手册：<a href="http://manual.cp2k.org/trunk/">http://manual.cp2k.org/trunk/</a></li>
-<li>CP2K的google group：<a href="https://groups.google.com/group/cp2k">https://groups.google.com/group/cp2k</a></li>
-<li>Zevan的博客：<a href="http://kenshin325.lofter.com/tag/cp2k">http://kenshin325.lofter.com/tag/cp2k</a></li>
-<li>兰一的知乎专栏：<a href="https://zhuanlan.zhihu.com/cp2k-tutorial">https://zhuanlan.zhihu.com/cp2k-tutorial</a></li>
-<li>CP2K有用的工具： <a href="https://www.cp2k.org/tools">https://www.cp2k.org/tools</a></li>
-<li>python编写的cp2k输入文件生成器(最高支持5.1)：<br><a href="https://github.com/avishart/CP2K_Editor">https://github.com/avishart/CP2K_Editor</a></li>
-<li>难收敛<a href="http://sobereva.com/665">http://sobereva.com/665</a></li>
-<li><a href="http://wiki.cheng-group.net/wiki/software_usage/cp2k/cp2k/">http://wiki.cheng-group.net/wiki/software_usage/cp2k/cp2k/</a></li>
-</ol>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>categories</title>
+      <link href="/2024/05/14/categories/index/"/>
+      <url>/2024/05/14/categories/index/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Quick Start of Gaussian</title>
+      <link href="/2024/05/14/quick-start-of-gaussian/"/>
+      <url>/2024/05/14/quick-start-of-gaussian/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Notes-of-gaussian"><a href="#Notes-of-gaussian" class="headerlink" title="Notes of gaussian"></a>Notes of gaussian</h1><p>本教程基于 HPC of zhenggroup 集群环境</p><p>参考资料 <a href="http://sobereva.com/list.html">http://sobereva.com/list.html</a></p><h2 id="零、理论基础"><a href="#零、理论基础" class="headerlink" title="零、理论基础"></a>零、理论基础</h2><h4 id="泛函-基组设置"><a href="#泛函-基组设置" class="headerlink" title="泛函&#x2F;基组设置"></a>泛函&#x2F;基组设置</h4><p><a href="http://sobereva.com/272">简谈量子化学计算中DFT泛函的选择</a><br><a href="http://sobereva.com/336">谈谈量子化学中基组的选择</a></p><h4 id="激发态"><a href="#激发态" class="headerlink" title="激发态"></a>激发态</h4><p><a href="http://sobereva.com/265">乱谈激发态的计算方法</a><br><a href="http://sobereva.com/314">Gaussian中用TDDFT计算激发态和吸收、荧光、磷光光谱的方法</a><br><a href="http://sobereva.com/230">电子激发任务中轨道跃迁贡献的计算</a></p><h2 id="一、输入文件"><a href="#一、输入文件" class="headerlink" title="一、输入文件"></a>一、输入文件</h2><h3 id="input-gjf"><a href="#input-gjf" class="headerlink" title="input.gjf"></a>input.gjf</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">%mem=84GB</span><br><span class="line">%nprocshared=48</span><br><span class="line">%chk=COF-3-td.chk</span><br><span class="line">#p PBE1PBE scrf=(smd,solvent=water) def2TZVP em=GD3BJ TD(nstates=10) IOp(9/40=4)</span><br><span class="line"></span><br><span class="line">COF-3</span><br><span class="line"></span><br><span class="line">0 1</span><br><span class="line"> C                 33.03196170  -14.12931527    1.88576471</span><br><span class="line"> H                 31.92769914  -14.10953751    2.72772983</span><br><span class="line"> O                 30.78605907  -13.40639889    2.39344442</span><br><span class="line"> N                 30.71722291  -12.70823752    1.19042342</span><br><span class="line">...</span><br></pre></td></tr></table></figure><h2 id="二、输出文件"><a href="#二、输出文件" class="headerlink" title="二、输出文件"></a>二、输出文件</h2><p>chk → fchk<br>&#x2F;public&#x2F;software&#x2F;g16&#x2F;formchk filename</p><h4 id="HOMO-LUMO-gap"><a href="#HOMO-LUMO-gap" class="headerlink" title="HOMO-LUMO gap"></a>HOMO-LUMO gap</h4><h5 id="理论基础"><a href="#理论基础" class="headerlink" title="理论基础"></a>理论基础</h5><p><a href="http://sobereva.com/543">正确地认识分子的能隙(gap)、HOMO和LUMO</a><br>(计算DFT, 虚拟态，轨道没有真实存在)<br>HOMO-LUMO gap &#x3D; E(LUMO) - E(HOMO) &gt; 0<br>(UV-Vis：波长最大的吸收峰位置; TDDFT，真实态，电子态真实存在)<br>Optical gap: 基态电子态通过吸收光子所能跃迁到的最低激发态对应的激发能，S0态极小点结构下S0到S1态的垂直跃迁对应的激发能。</p><ol><li>HOMO-LUMO gap越小，一般认为导电性越好。</li><li>HOMO-LUMO gap越小，通常极化率也越大</li></ol><h2 id="三、结果分析"><a href="#三、结果分析" class="headerlink" title="三、结果分析"></a>三、结果分析</h2><h4 id="Excitation、S-D、Visualization"><a href="#Excitation、S-D、Visualization" class="headerlink" title="Excitation、S&#x2F;D、Visualization"></a>Excitation、S&#x2F;D、Visualization</h4><h5 id="Excitation"><a href="#Excitation" class="headerlink" title="Excitation"></a>Excitation</h5><ol><li>Multiwfn</li><li>input.out (out文件路径)</li><li>18-Electron excitation analysis </li><li>15-Print major MO transitions in all excited states</li></ol><h5 id="S-D"><a href="#S-D" class="headerlink" title="S&#x2F;D"></a>S&#x2F;D</h5><ol><li>Multiwfn</li><li>COF-3-td.fchk (fchk文件路径)</li><li>18-Electron excitation analysis </li><li>1-Analyze and visualize hole&amp;electron distribution, transition density, and transition electric&#x2F;magnetic dipole moment density</li><li>input.out (out文件路径)</li><li>S0→S？ </li><li>1-Visualize and analyze hole, electron, transition density and so on</li><li>2-Medium quality grid, covering whole system, about 512000 points in total<br>Sm index&#x2F;D index</li><li><strong>3-Show isosurface of hole and electron distribution simultaneously</strong></li><li><strong>7-Show isosurface of charge density difference</strong></li></ol><h5 id="Visualization"><a href="#Visualization" class="headerlink" title="Visualization"></a>Visualization</h5><p><a href="https://www.bilibili.com/video/BV1B94y1J7gR/?spm_id_from=333.788&vd_source=dbd7edddb514b6a82b44048682e9c391">https://www.bilibili.com/video/BV1B94y1J7gR/?spm_id_from=333.788&amp;vd_source=dbd7edddb514b6a82b44048682e9c391</a><br>cube 文件生成 + VMD可视化</p><h2 id="文献引用"><a href="#文献引用" class="headerlink" title="文献引用"></a>文献引用</h2><p>[1] def2-TZVP基组 <a href="https://doi.org/10.1063/1.467146">https://doi.org/10.1063/1.467146</a><br>[2] Multiwfn <a href="https://doi.org/10.1002/jcc.22885">https://doi.org/10.1002/jcc.22885</a><br>[3] 溶剂模型 <a href="https://doi.org/10.1063/1.3359469">https://doi.org/10.1063/1.3359469</a><br>[4] xtb <a href="https://doi.org/10.1021/acs.jctc.8b01176">https://doi.org/10.1021/acs.jctc.8b01176</a><br>[5] D3BJ <a href="https://doi.org/10.1002/jcc.21759">https://doi.org/10.1002/jcc.21759</a></p>]]></content>
+      
+      
       <categories>
-        <category>DFT</category>
+          
+          <category> DFT </category>
+          
       </categories>
-      <tags>
-        <tag>cp2k</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Quick Start of VASP</title>
-    <url>/2024/05/14/quick-start-of-vasp/</url>
-    <content><![CDATA[<p><strong><font size=6>Quick Start of VASP</font></strong></p>
-<p>本教程基于 HPC of zhenggroup 集群环境</p>
-<h2 id="一、VASP简介"><a href="#一、VASP简介" class="headerlink" title="一、VASP简介"></a>一、VASP简介</h2><h3 id="关于-VASP"><a href="#关于-VASP" class="headerlink" title="关于 VASP"></a>关于 VASP</h3><p><a href="https://www.vasp.at/info/about/">https://www.vasp.at/info/about/</a><br>The Vienna Ab initio Simulation Package (VASP) is a computer program for atomic scale materials modelling, e.g. electronic structure calculations and quantum-mechanical molecular dynamics, from first principles.</p>
-<p>VASP是用于原子尺度材料模拟的计算程序，基于第一性原理</p>
-<ol>
-<li>计算电子结构性质</li>
-<li>计算量子力学分子动力学</li>
-</ol>
-<p>VASP <strong>computes an approximate solution</strong> to <strong>the many-body Schrödinger equation</strong>, either within density functional theory (DFT), solving the Kohn-Sham equations, or within the Hartree-Fock (HF) approximation, solving the Roothaan equations. Hybrid functionals that mix the Hartree-Fock approach with density functional theory are implemented as well.Furthermore, Green’s functions methods (GW quasiparticles, and ACFDT-RPA) and many-body perturbation theory (2nd-order Møller-Plesset) are available in VASP.</p>
-<p>VASP计算多体薛定谔方程近似解。</p>
-<ol>
-<li>DFT求解Kohn-Sham方程</li>
-<li>HF求解Roothaan方程</li>
-<li>杂化泛函</li>
-<li>格林函数方法(GW准粒子和ACFDT-RPA)和多体微扰理论(二阶Møller-Plesset)</li>
-</ol>
-<p>In VASP, central quantities, like the one-electron orbitals, the electronic charge density, and the local potential are expressed in <strong>plane wave basis sets</strong>. The interactions between the electrons and ions are described using norm-conserving or ultrasoft pseudopotentials, or the projector-augmented-wave method.</p>
-<ol>
-<li>中心量，如单电子轨道、电子电荷密度和局域势都以平面波基组表示。</li>
-<li>电子和离子之间的相互作用以模守恒赝势、超软赝势或缀加投影缀加波(PAW)方法来描述。</li>
-</ol>
-<p>To determine the electronic groundstate, VASP makes use of <strong>efficient iterative matrix diagonalisation techniques</strong>, like the residual minimisation method with direct inversion of the iterative subspace (RMM-DIIS) or blocked Davidson algorithms. These are coupled to highly efficient Broyden and Pulay density mixing schemes to speed up the self-consistency cycle.</p>
-<p>为确定电子基态，VASP使用高效迭代的矩阵对角化技术，如带有迭代子空间直接反演的残差极小化方法(RMM-DIIS)或阻塞Davidson算法。这些算法与高效Broyden和Pulay密度混合方案相耦合，用以加快自洽循环。</p>
-<p>VASP 算法<br>结构优化算法：conjugate gradient, Quasi-Newton or damped molecular dynamics<br>过渡态搜索：Nudged elastic band methods</p>
-<h3 id="VASP-应用和局限"><a href="#VASP-应用和局限" class="headerlink" title="VASP 应用和局限"></a>VASP 应用和局限</h3><p>VASP 侧重表面、体相材料计算<br><strong>PBE泛函 + PAW赝势 + PW基组</strong><br><code>Perdew-Burke- Ernzerhof</code>+<code>projector-augmented-wave</code>+<code>plane wave</code><br>PBE泛函：Phys. Rev. Lett. 78, 1396 (1997)<br>关于PAW算法的介绍：<a href="https://zhuanlan.zhihu.com/p/575479762">https://zhuanlan.zhihu.com/p/575479762</a><br>PW基组</p>
-<ol>
-<li>计算周期性的体系</li>
-<li>体系不能过大，200原子以内</li>
-</ol>
-<h2 id="二、VASP使用"><a href="#二、VASP使用" class="headerlink" title="二、VASP使用"></a>二、VASP使用</h2><h3 id="输入文件"><a href="#输入文件" class="headerlink" title="输入文件"></a>输入文件</h3><p><code>INCAR</code>,<code>POSCAR</code>,<code>POTCAR</code>,<code>KPINTS</code>,<code>(OPTCELL)</code>,<code>vasp.pbs</code></p>
-<h4 id="表面建模"><a href="#表面建模" class="headerlink" title="表面建模"></a>表面建模</h4><ol>
-<li>真空层<br>R. Hoffmann, Angew. Chem. Int. Ed., 2013, 52, 93-103<br>MS建模：<a href="https://www.bilibili.com/video/BV1b54y1672a/?spm_id_from=333.999.0.0">https://www.bilibili.com/video/BV1b54y1672a/?spm_id_from=333.999.0.0</a><br>Modules-Amorphous Cell模块添加溶剂化层*<br>ASE建模<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 切面</span></span><br></pre></td></tr></table></figure></li>
-<li>Wood表面标记<br>fcc(100)-c(2×2)  &lt;&#x3D;&gt;   fcc(100)-($\sqrt{2}$ × $\sqrt{2}$)R45°</li>
-<li>晶胞基矢</li>
-<li>画图：MS，vesta，VMD，origin，illustrator</li>
-</ol>
-<h4 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h4><p>在提交脚本<code>vasp.pbs</code>内添加以下内容</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 方法一：镜像</span></span><br><span class="line">module load singularity/3.8.7   <span class="comment"># 加载容器</span></span><br><span class="line">singularity run  /public/software/images/ase.sif  mpirun -np 48  vasp_std  1&gt;<span class="built_in">log</span> 2&gt;err   执行计算</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法二：本地软件</span></span><br><span class="line">module load hdf5    <span class="comment"># 存储数据/并行I/O</span></span><br><span class="line">module load gcc/9.3.0   <span class="comment"># GNU 编译器套件</span></span><br><span class="line"><span class="built_in">source</span> /public/software/intel2020u2/intel2020u2_env.sh  <span class="comment"># intel 环境</span></span><br><span class="line">mpirun -np 48 /public/software/vasp.6.3.2/bin/vasp_std 1&gt;<span class="built_in">log</span> 2&gt;err   <span class="comment"># 执行计算</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="INCAR-常用参数说明"><a href="#INCAR-常用参数说明" class="headerlink" title="INCAR 常用参数说明"></a>INCAR 常用参数说明</h4><ol>
-<li>输入输出<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SYSTEM</span><br><span class="line">ISTART</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h3 id="结构优化"><a href="#结构优化" class="headerlink" title="结构优化"></a>结构优化</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="单点计算"><a href="#单点计算" class="headerlink" title="单点计算"></a>单点计算</h3><h4 id="Bader"><a href="#Bader" class="headerlink" title="Bader"></a>Bader</h4><h4 id="PDOS"><a href="#PDOS" class="headerlink" title="PDOS"></a>PDOS</h4><h2 id="三、数据处理"><a href="#三、数据处理" class="headerlink" title="三、数据处理"></a>三、数据处理</h2><h3 id="3-1-脚本使用"><a href="#3-1-脚本使用" class="headerlink" title="3.1 脚本使用"></a>3.1 脚本使用</h3><h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
-<li><a href="https://www.vasp.org/howto">VASP 官网</a></li>
-<li><a href="https://www.bigbrosci.com/">Learn VASP The Hard Way</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/571694885">https://zhuanlan.zhihu.com/p/571694885</a></li>
-<li><a href="https://nwchemgit.github.io/pw-lecture.pdf">平面波基组和赝势理论</a></li>
-<li><a href="https://www.tcm.phy.cam.ac.uk/castep/documentation/WebHelp/content/modules/castep/thcastepplanebasis.htm">https://www.tcm.phy.cam.ac.uk/castep/documentation/WebHelp/content/modules/castep/thcastepplanebasis.htm</a></li>
-<li><a href="http://staff.ustc.edu.cn/~zyli/teaching.html">http://staff.ustc.edu.cn/~zyli/teaching.html</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/575479762">https://zhuanlan.zhihu.com/p/575479762</a></li>
-</ol>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> gaussian </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Quick Start of VASP</title>
+      <link href="/2024/05/14/quick-start-of-vasp/"/>
+      <url>/2024/05/14/quick-start-of-vasp/</url>
+      
+        <content type="html"><![CDATA[<p><strong><font size=6>Quick Start of VASP</font></strong></p><p>本教程基于 HPC of zhenggroup 集群环境</p><h2 id="一、VASP简介"><a href="#一、VASP简介" class="headerlink" title="一、VASP简介"></a>一、VASP简介</h2><h3 id="关于-VASP"><a href="#关于-VASP" class="headerlink" title="关于 VASP"></a>关于 VASP</h3><p><a href="https://www.vasp.at/info/about/">https://www.vasp.at/info/about/</a><br>The Vienna Ab initio Simulation Package (VASP) is a computer program for atomic scale materials modelling, e.g. electronic structure calculations and quantum-mechanical molecular dynamics, from first principles.</p><p>VASP是用于原子尺度材料模拟的计算程序，基于第一性原理</p><ol><li>计算电子结构性质</li><li>计算量子力学分子动力学</li></ol><p>VASP <strong>computes an approximate solution</strong> to <strong>the many-body Schrödinger equation</strong>, either within density functional theory (DFT), solving the Kohn-Sham equations, or within the Hartree-Fock (HF) approximation, solving the Roothaan equations. Hybrid functionals that mix the Hartree-Fock approach with density functional theory are implemented as well.Furthermore, Green’s functions methods (GW quasiparticles, and ACFDT-RPA) and many-body perturbation theory (2nd-order Møller-Plesset) are available in VASP.</p><p>VASP计算多体薛定谔方程近似解。</p><ol><li>DFT求解Kohn-Sham方程</li><li>HF求解Roothaan方程</li><li>杂化泛函</li><li>格林函数方法(GW准粒子和ACFDT-RPA)和多体微扰理论(二阶Møller-Plesset)</li></ol><p>In VASP, central quantities, like the one-electron orbitals, the electronic charge density, and the local potential are expressed in <strong>plane wave basis sets</strong>. The interactions between the electrons and ions are described using norm-conserving or ultrasoft pseudopotentials, or the projector-augmented-wave method.</p><ol><li>中心量，如单电子轨道、电子电荷密度和局域势都以平面波基组表示。</li><li>电子和离子之间的相互作用以模守恒赝势、超软赝势或缀加投影缀加波(PAW)方法来描述。</li></ol><p>To determine the electronic groundstate, VASP makes use of <strong>efficient iterative matrix diagonalisation techniques</strong>, like the residual minimisation method with direct inversion of the iterative subspace (RMM-DIIS) or blocked Davidson algorithms. These are coupled to highly efficient Broyden and Pulay density mixing schemes to speed up the self-consistency cycle.</p><p>为确定电子基态，VASP使用高效迭代的矩阵对角化技术，如带有迭代子空间直接反演的残差极小化方法(RMM-DIIS)或阻塞Davidson算法。这些算法与高效Broyden和Pulay密度混合方案相耦合，用以加快自洽循环。</p><p>VASP 算法<br>结构优化算法：conjugate gradient, Quasi-Newton or damped molecular dynamics<br>过渡态搜索：Nudged elastic band methods</p><h3 id="VASP-应用和局限"><a href="#VASP-应用和局限" class="headerlink" title="VASP 应用和局限"></a>VASP 应用和局限</h3><p>VASP 侧重表面、体相材料计算<br><strong>PBE泛函 + PAW赝势 + PW基组</strong><br><code>Perdew-Burke- Ernzerhof</code>+<code>projector-augmented-wave</code>+<code>plane wave</code><br>PBE泛函：Phys. Rev. Lett. 78, 1396 (1997)<br>关于PAW算法的介绍：<a href="https://zhuanlan.zhihu.com/p/575479762">https://zhuanlan.zhihu.com/p/575479762</a><br>PW基组</p><ol><li>计算周期性的体系</li><li>体系不能过大，200原子以内</li></ol><h2 id="二、VASP使用"><a href="#二、VASP使用" class="headerlink" title="二、VASP使用"></a>二、VASP使用</h2><h3 id="输入文件"><a href="#输入文件" class="headerlink" title="输入文件"></a>输入文件</h3><p><code>INCAR</code>,<code>POSCAR</code>,<code>POTCAR</code>,<code>KPINTS</code>,<code>(OPTCELL)</code>,<code>vasp.pbs</code></p><h4 id="表面建模"><a href="#表面建模" class="headerlink" title="表面建模"></a>表面建模</h4><ol><li>真空层<br>R. Hoffmann, Angew. Chem. Int. Ed., 2013, 52, 93-103<br>MS建模：<a href="https://www.bilibili.com/video/BV1b54y1672a/?spm_id_from=333.999.0.0">https://www.bilibili.com/video/BV1b54y1672a/?spm_id_from=333.999.0.0</a><br>Modules-Amorphous Cell模块添加溶剂化层*<br>ASE建模<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切面</span></span><br></pre></td></tr></table></figure></li><li>Wood表面标记<br>fcc(100)-c(2×2)  &lt;&#x3D;&gt;   fcc(100)-($\sqrt{2}$ × $\sqrt{2}$)R45°</li><li>晶胞基矢</li><li>画图：MS，vesta，VMD，origin，illustrator</li></ol><h4 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h4><p>在提交脚本<code>vasp.pbs</code>内添加以下内容</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法一：镜像</span></span><br><span class="line">module load singularity/3.8.7   <span class="comment"># 加载容器</span></span><br><span class="line">singularity run  /public/software/images/ase.sif  mpirun -np 48  vasp_std  1&gt;<span class="built_in">log</span> 2&gt;err   执行计算</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法二：本地软件</span></span><br><span class="line">module load hdf5    <span class="comment"># 存储数据/并行I/O</span></span><br><span class="line">module load gcc/9.3.0   <span class="comment"># GNU 编译器套件</span></span><br><span class="line"><span class="built_in">source</span> /public/software/intel2020u2/intel2020u2_env.sh  <span class="comment"># intel 环境</span></span><br><span class="line">mpirun -np 48 /public/software/vasp.6.3.2/bin/vasp_std 1&gt;<span class="built_in">log</span> 2&gt;err   <span class="comment"># 执行计算</span></span><br></pre></td></tr></table></figure><h4 id="INCAR-常用参数说明"><a href="#INCAR-常用参数说明" class="headerlink" title="INCAR 常用参数说明"></a>INCAR 常用参数说明</h4><ol><li>输入输出<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SYSTEM</span><br><span class="line">ISTART</span><br></pre></td></tr></table></figure></li></ol><h3 id="结构优化"><a href="#结构优化" class="headerlink" title="结构优化"></a>结构优化</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure><h3 id="单点计算"><a href="#单点计算" class="headerlink" title="单点计算"></a>单点计算</h3><h4 id="Bader"><a href="#Bader" class="headerlink" title="Bader"></a>Bader</h4><h4 id="PDOS"><a href="#PDOS" class="headerlink" title="PDOS"></a>PDOS</h4><h2 id="三、数据处理"><a href="#三、数据处理" class="headerlink" title="三、数据处理"></a>三、数据处理</h2><h3 id="3-1-脚本使用"><a href="#3-1-脚本使用" class="headerlink" title="3.1 脚本使用"></a>3.1 脚本使用</h3><h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol><li><a href="https://www.vasp.org/howto">VASP 官网</a></li><li><a href="https://www.bigbrosci.com/">Learn VASP The Hard Way</a></li><li><a href="https://zhuanlan.zhihu.com/p/571694885">https://zhuanlan.zhihu.com/p/571694885</a></li><li><a href="https://nwchemgit.github.io/pw-lecture.pdf">平面波基组和赝势理论</a></li><li><a href="https://www.tcm.phy.cam.ac.uk/castep/documentation/WebHelp/content/modules/castep/thcastepplanebasis.htm">https://www.tcm.phy.cam.ac.uk/castep/documentation/WebHelp/content/modules/castep/thcastepplanebasis.htm</a></li><li><a href="http://staff.ustc.edu.cn/~zyli/teaching.html">http://staff.ustc.edu.cn/~zyli/teaching.html</a></li><li><a href="https://zhuanlan.zhihu.com/p/575479762">https://zhuanlan.zhihu.com/p/575479762</a></li></ol>]]></content>
+      
+      
       <categories>
-        <category>DFT</category>
+          
+          <category> DFT </category>
+          
       </categories>
-      <tags>
-        <tag>vasp</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2024/01/19/hello-world/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉，您输入的密码错误，请检查后重新输入。" data-whm="抱歉, 当前文章不能被校验, 不过您还是可以看看解密后的内容。">
-  <script id="hbeData" type="hbeData" data-hmacdigest="51d06e6b4a3afe01a6fc089df3150efd36636e090f8f694da9a278b64d44aa26">ddcfc8a5c52612a27a3ec02e4a25d248657173a8108afd888c703fe024d911f0dd2f03071acd54e9c5ec29ff35c38fbe95ceee29426b9897655e57cec09ee134bc454e0901cfdc8f23ff9696b62549393325c7c7e9ae908f6c2f874c0ebab9db05421881557c4033cdafcdc58f01d2ae46b509ac5368369d519aee92024eec5c030de8c74c0ad707b5f4161c8c6287a4737286caced6555410629daa352be10e4b3d7bfb48717fb96ea447d7d78b2dfa99e5be0a6f2bdaef9920aaf78edb2145ef6bb3b6ab1ad50f21fb52376ab49fcc842dc3ae49d23c5ab5a96eb36e1d7c7761eca02b3b1977a5d2254acf7d70fa3a951abc54ac6f845e42e2ab4f2fe34c4a342b12d2bfbedced877a3ada84575f56011fb176200ac314671b4e700072297ef2a4b0236183f75ab28c031d36cf11bae15d53668871996380bcb4551aef10f4debf5a312e27ab3db010e5c01b86338bcc27f076faf227151b0f477e00f8648cb50d037945d95742649ed88b4b9c057f6e37f52185b2ee6122fcdda3509de8a9c0054a3652ac3eb715102ef104e1ef7bd7da1de607c8d0d20d1e10694a7a1036905b950b9ab438a6f6b8496df39b3197081e673f6ae93a9836fef724559f7c951af6e765ca06d859176fdf83416082ece3f41f47d7a49cb0ef31c1c28d27a9477381f982a28134dbbc42c45ef67c6e54b92b49ff6f80f064beca134aacb65c39b52c6015e374e019468c2ea65ae2c81bd45aa65342b3bd756c9dc1a1993fd49eb057372d8a8f27308623b6bda1023b4d07569ce1018ac61f8aefe9a16b7bb0fd1646cf99e23f9eccb01d0aa7ad26fa71bd71a91115e4bdfe7994e07d408b6b3af86eec98da344578cd4bd381db0386becedd4d9eef471674286c5a9b13927c34acba5f4d2759d23d41320e6ff422ecc8756a803abc42fbad328219a3c872bbfaf3f3e723799495154f97c1814d68a47600b47099206ac2a575fe6f102546e22ae9ee2e93f842afc9dd0ac464cf6f2f467e7ab6e531e42809644fd122990f1b24874dca1a2586797d48ee1271b0dade903ad0f6418cc50ef09424ff094dd978a120c1d3785fadf3b1f61197c974328afa2fd619a445803701fd1582bef55e826e950f9b4b5a9f6b40c990f017b933893246ec55840a841d789d9ee98fa781d84b611d3bb1033666bf6c37c920549be7da4f6755d1103924556bbc75bed67a0177e2108cc3f2eb51d2c2ffa917bee767d29f253b026ee5247c6f65c225ef92b53432a5f24ae1d5032856504e1191b7356a86dd1ccebbbe2f3671d5c746cde1b3662204c55e4b8283ef3a5f0c6762637487e5dce5746589692974029350057f03a60fe63a70a20f1d801b0ce7b8c207f5852d1aa49717e89a6ae46b9c42e88d8c3c86958c842e01a8889f431e42d639dc21f9e7370418b4db63d796c6fe1efe75baaad4178100b6c02f3d48135b980b9a8e8e6cbb65fbe32496f4776b317f23ac79bcc42c37467fef365389a06e497dbebf8d5081bf3a1858b96e4254236f6c81aed434d9def64bffbe2f40c9f10cfc77800589e7c977b295b895ee8f1202fff5a1f9d937014124419871c8f6f7a4a7478544c391f20f6183b1934a7fa966433fcd4cc9fbad39ac46a8acbaf3ca92e25f8183c4864fa3d1a9037e2859be220fb0e250e5bbb82274dab44a2f800b8605ebc69d80afb810aa2b82c87acf979c634eceea6b3ddcf4fdf09a28b9796379eecfb81077389f635358ada2d00ff64c0450de3279d88e14753cab427e97b41506262fdaa46f519bd96e52351e5cbfd6869f61cb5e39cae50787511e57ddc5c43bf43135f470ecc3ce9a530c97529cc94d3fa775eb608d8d2141e129e4d1ba2e1f253a15137e298593296e61b2fbbaa8e2789dc49f5fb3735149a7c82d5840ab753603cae838496087aeda0175aae900717a0df21e71869c25c6cea20e4ba189f5d1a5b91c7812c9c7ac8862047d85e8b9f88f06c3ff249d73a6ff42c163bfc1efb9e65d47371be3216b64ad0e10c22fc97974f138fed1c05a3101a2f04163d132769c8a350e0502dce842f1108b511f9a02deb0d15fd009f1483214e6b851ba3a66e77300ce5c537852bb1c4e6bf77fc426d53608d4b753491a72e43590bcd2a4093cfb714b84b193de252e3df867465ad1bfcc92376c2df5d704a1ea99f9e3a216e12710a3f6fb72ce0f9372547fb88fce6d695074566840b5a9b3d49c4693ff5971c7f7ad5cb29ea4fccba7126417c13edbb1e29702bd7128afb692b1618707615837ec73ba4906b28c00dbaa670916eca4d2ae33fde47b1fe216fb6f7a0dd4203a617e7ad9dcdde8db0faeb333058a73047127565ef58a2df09d24192e6c649e7c45b4385220579666c7a653cd29d524e8a781a52d02ebd986b258e1f309f6a84e39dd3044ad213015727150b205c2e9e4a0b4b7f9f4ae1bf1ff872edc94f36ff20cdd9be6d15f16cf20626ea92fc5ba665bc7a34bf5ffc59bf6a592f8f2de6d21118c0c2dd2f71d1d417c10e0a092e0c5fe54ee254579bdda42e80ef3514c38cd5e96b321b1039969927714cd601cf0a0fdc34be6448eb9f03a1105388135df6d299f74d0de55c8bc372da6a39aeb768566cb0dbf42dccddb97a315aabce973a787105709b4e70c2bdc915d4b79deafc3e05f346437ec0d5d59df0b62a958538dbf0bc77f4ff1e11170e46fb13d34527503a2b93fc2dfd6de1f64b79f7e01ae4a9861f605d7cd4da345e070448a1f991a9e7a69d40e0dee366028109d4999cf8e19b25853099fda8d4d8e20772717222314858bc73bb15169ecc74127d5447701425d84589f0f756d73124b4558de92cff09aae76e260c0f584d26671e516b5f2e7ec4b927e0fbe92a44252a4d4aa1c2aefedd10c06ab145273af8998e441a693b9f7a47674bd41bdde60aecebb1cad985e64634491d5a25596aa668e45105f407586992ba28c697d26e624ac39a5551fb4521fd7f64b4d85bec7604c48ac73d266453aa7ce10d6ba37b2141894345e1492f3bc3acbe817202acd7c23acf2f93aa314bf368f5ce747a28326e69b66f0f6c24c47fa0fa43a37bd078c00697d8963d0a44f38df432c95717d0c08cf044af8643ab60b0a13550ed9a2afffbb38215f</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">当前文章暂不对外可见，请输入密码后查看！</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <tags>
-        <tag>private</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>categories</title>
-    <url>/2024/05/14/categories/index/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>Pearl</title>
-    <url>/2024/06/28/pearl/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉，您输入的密码错误，请检查后重新输入。" data-whm="抱歉, 当前文章不能被校验, 不过您还是可以看看解密后的内容。">
-  <script id="hbeData" type="hbeData" data-hmacdigest="ffb5cc736fb6e7733f9f17aa19e0f4342cf2211fc3622f04f8f901c753947ad3">9c6161198b65c0c7ed655745c399b5b3c22b49d63312cddb0a2937408d4045fef9e62b4649d6ecf6e9f8073af0e2a97754690bb8adb982f94baeb965b7d732a251cdca5db18dfaeab133b6958a2cd1448143e2f52451725bbc885ea0c90fc3065bdcb22152b47075ef109827b6bac52d7fa64ae61c7957ab85897fc304f8853bc934dea7b7f2c3c8c31a17d3cfdcaa0e1e8bb1071a3925b9d2d0040b32ee60707ebc985cef23122fc53574dd3e37a5255be3fdcec3676cffa2d9af7a8fe932a1292956dc7f14fdc2e078ee0463ed3c19af92e77856da868a6c9966a64e5a17d3</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">当前文章暂不对外可见，请输入密码后查看！</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <tags>
-        <tag>private</tag>
-      </tags>
-  </entry>
+      
+      
+        <tags>
+            
+            <tag> vasp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2024/01/19/hello-world/"/>
+      <url>/2024/01/19/hello-world/</url>
+      
+        <content type="html"><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉，您输入的密码错误，请检查后重新输入。" data-whm="抱歉, 当前文章不能被校验, 不过您还是可以看看解密后的内容。">  <script id="hbeData" type="hbeData" data-hmacdigest="51d06e6b4a3afe01a6fc089df3150efd36636e090f8f694da9a278b64d44aa26">ddcfc8a5c52612a27a3ec02e4a25d248657173a8108afd888c703fe024d911f0dd2f03071acd54e9c5ec29ff35c38fbe95ceee29426b9897655e57cec09ee134bc454e0901cfdc8f23ff9696b62549393325c7c7e9ae908f6c2f874c0ebab9db05421881557c4033cdafcdc58f01d2ae46b509ac5368369d519aee92024eec5c030de8c74c0ad707b5f4161c8c6287a4737286caced6555410629daa352be10e4b3d7bfb48717fb96ea447d7d78b2dfa99e5be0a6f2bdaef9920aaf78edb2145ef6bb3b6ab1ad50f21fb52376ab49fcc842dc3ae49d23c5ab5a96eb36e1d7c7761eca02b3b1977a5d2254acf7d70fa3a951abc54ac6f845e42e2ab4f2fe34c4a342b12d2bfbedced877a3ada84575f56011fb176200ac314671b4e700072297ef2a4b0236183f75ab28c031d36cf11bae15d53668871996380bcb4551aef10f4debf5a312e27ab3db010e5c01b86338bcc27f076faf227151b0f477e00f8648cb50d037945d95742649ed88b4b9c057f6e37f52185b2ee6122fcdda3509de8a9c0054a3652ac3eb715102ef104e1ef7bd7da1de607c8d0d20d1e10694a7a1036905b950b9ab438a6f6b8496df39b3197081e673f6ae93a9836fef724559f7c951af6e765ca06d859176fdf83416082ece3f41f47d7a49cb0ef31c1c28d27a9477381f982a28134dbbc42c45ef67c6e54b92b49ff6f80f064beca134aacb65c39b52c6015e374e019468c2ea65ae2c81bd45aa65342b3bd756c9dc1a1993fd49eb057372d8a8f27308623b6bda1023b4d07569ce1018ac61f8aefe9a16b7bb0fd1646cf99e23f9eccb01d0aa7ad26fa71bd71a91115e4bdfe7994e07d408b6b3af86eec98da344578cd4bd381db0386becedd4d9eef471674286c5a9b13927c34acba5f4d2759d23d41320e6ff422ecc8756a803abc42fbad328219a3c872bbfaf3f3e723799495154f97c1814d68a47600b47099206ac2a575fe6f102546e22ae9ee2e93f842afc9dd0ac464cf6f2f467e7ab6e531e42809644fd122990f1b24874dca1a2586797d48ee1271b0dade903ad0f6418cc50ef09424ff094dd978a120c1d3785fadf3b1f61197c974328afa2fd619a445803701fd1582bef55e826e950f9b4b5a9f6b40c990f017b933893246ec55840a841d789d9ee98fa781d84b611d3bb1033666bf6c37c920549be7da4f6755d1103924556bbc75bed67a0177e2108cc3f2eb51d2c2ffa917bee767d29f253b026ee5247c6f65c225ef92b53432a5f24ae1d5032856504e1191b7356a86dd1ccebbbe2f3671d5c746cde1b3662204c55e4b8283ef3a5f0c6762637487e5dce5746589692974029350057f03a60fe63a70a20f1d801b0ce7b8c207f5852d1aa49717e89a6ae46b9c42e88d8c3c86958c842e01a8889f431e42d639dc21f9e7370418b4db63d796c6fe1efe75baaad4178100b6c02f3d48135b980b9a8e8e6cbb65fbe32496f4776b317f23ac79bcc42c37467fef365389a06e497dbebf8d5081bf3a1858b96e4254236f6c81aed434d9def64bffbe2f40c9f10cfc77800589e7c977b295b895ee8f1202fff5a1f9d937014124419871c8f6f7a4a7478544c391f20f6183b1934a7fa966433fcd4cc9fbad39ac46a8acbaf3ca92e25f8183c4864fa3d1a9037e2859be220fb0e250e5bbb82274dab44a2f800b8605ebc69d80afb810aa2b82c87acf979c634eceea6b3ddcf4fdf09a28b9796379eecfb81077389f635358ada2d00ff64c0450de3279d88e14753cab427e97b41506262fdaa46f519bd96e52351e5cbfd6869f61cb5e39cae50787511e57ddc5c43bf43135f470ecc3ce9a530c97529cc94d3fa775eb608d8d2141e129e4d1ba2e1f253a15137e298593296e61b2fbbaa8e2789dc49f5fb3735149a7c82d5840ab753603cae838496087aeda0175aae900717a0df21e71869c25c6cea20e4ba189f5d1a5b91c7812c9c7ac8862047d85e8b9f88f06c3ff249d73a6ff42c163bfc1efb9e65d47371be3216b64ad0e10c22fc97974f138fed1c05a3101a2f04163d132769c8a350e0502dce842f1108b511f9a02deb0d15fd009f1483214e6b851ba3a66e77300ce5c537852bb1c4e6bf77fc426d53608d4b753491a72e43590bcd2a4093cfb714b84b193de252e3df867465ad1bfcc92376c2df5d704a1ea99f9e3a216e12710a3f6fb72ce0f9372547fb88fce6d695074566840b5a9b3d49c4693ff5971c7f7ad5cb29ea4fccba7126417c13edbb1e29702bd7128afb692b1618707615837ec73ba4906b28c00dbaa670916eca4d2ae33fde47b1fe216fb6f7a0dd4203a617e7ad9dcdde8db0faeb333058a73047127565ef58a2df09d24192e6c649e7c45b4385220579666c7a653cd29d524e8a781a52d02ebd986b258e1f309f6a84e39dd3044ad213015727150b205c2e9e4a0b4b7f9f4ae1bf1ff872edc94f36ff20cdd9be6d15f16cf20626ea92fc5ba665bc7a34bf5ffc59bf6a592f8f2de6d21118c0c2dd2f71d1d417c10e0a092e0c5fe54ee254579bdda42e80ef3514c38cd5e96b321b1039969927714cd601cf0a0fdc34be6448eb9f03a1105388135df6d299f74d0de55c8bc372da6a39aeb768566cb0dbf42dccddb97a315aabce973a787105709b4e70c2bdc915d4b79deafc3e05f346437ec0d5d59df0b62a958538dbf0bc77f4ff1e11170e46fb13d34527503a2b93fc2dfd6de1f64b79f7e01ae4a9861f605d7cd4da345e070448a1f991a9e7a69d40e0dee366028109d4999cf8e19b25853099fda8d4d8e20772717222314858bc73bb15169ecc74127d5447701425d84589f0f756d73124b4558de92cff09aae76e260c0f584d26671e516b5f2e7ec4b927e0fbe92a44252a4d4aa1c2aefedd10c06ab145273af8998e441a693b9f7a47674bd41bdde60aecebb1cad985e64634491d5a25596aa668e45105f407586992ba28c697d26e624ac39a5551fb4521fd7f64b4d85bec7604c48ac73d266453aa7ce10d6ba37b2141894345e1492f3bc3acbe817202acd7c23acf2f93aa314bf368f5ce747a28326e69b66f0f6c24c47fa0fa43a37bd078c00697d8963d0a44f38df432c95717d0c08cf044af8643ab60b0a13550ed9a2afffbb38215f</script>  <div class="hbe hbe-content">    <div class="hbe hbe-input hbe-input-default">      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-default">当前文章暂不对外可见，请输入密码后查看！</span>      </label>    </div>  </div></div><script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> private </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
 </search>
