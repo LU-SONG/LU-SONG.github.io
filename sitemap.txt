@@ -1,3 +1,4 @@
+https://lu-song.github.io/2024/06/28/pearl/
 https://lu-song.github.io/2024/06/07/quick-start-of-cp2k/
 https://lu-song.github.io/link/index.html
 https://lu-song.github.io/2024/01/19/hello-world/
@@ -9,7 +10,7 @@ https://lu-song.github.io/2024/05/15/notes-of-linux/
 https://lu-song.github.io/2024/05/15/os-module-of-python/
 https://lu-song.github.io/2024/05/15/notes-of-python/
 https://lu-song.github.io/tags/index.html
-https://lu-song.github.io/categories/index.html
+https://lu-song.github.io/2024/05/14/categories/index/
 https://lu-song.github.io/about/index.html
 https://lu-song.github.io/
 https://lu-song.github.io/tags/Linux/
