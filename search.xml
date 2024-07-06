@@ -679,4 +679,37 @@ A-->D[MOTION]
         <tag>Bash</tag>
       </tags>
   </entry>
+  <entry>
+    <title>OS Module of Python</title>
+    <url>/2024/05/15/notes-of-numpy/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>os</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Numpy Module of Python</title>
+    <url>/2024/07/06/numpy-module-of-python/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>os</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Numpy Module of Python</title>
+    <url>/2024/07/06/pandas-module-of-python/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>os</tag>
+      </tags>
+  </entry>
 </search>

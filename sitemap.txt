@@ -1,3 +1,6 @@
+https://lu-song.github.io/2024/07/06/numpy-module-of-python/
+https://lu-song.github.io/2024/07/06/pandas-module-of-python/
+https://lu-song.github.io/2024/05/15/notes-of-numpy/
 https://lu-song.github.io/2024/01/19/hello-world/
 https://lu-song.github.io/2024/06/28/pearl/
 https://lu-song.github.io/2024/06/03/bader-view-of-vasp/
