@@ -1,10 +1,12 @@
-https://lu-song.github.io/2024/07/06/numpy-module-of-python/
-https://lu-song.github.io/2024/07/06/pandas-module-of-python/
+https://lu-song.github.io/2024/07/07/numpy-module-of-python/
+https://lu-song.github.io/jupyter/numpy.html
+https://lu-song.github.io/2024/07/07/pandas-module-of-python/
+https://lu-song.github.io/jupyter/pandas.html
+https://lu-song.github.io/2024/05/15/os-module-of-python/
 https://lu-song.github.io/2024/01/19/hello-world/
 https://lu-song.github.io/2024/06/28/pearl/
 https://lu-song.github.io/2024/06/03/bader-view-of-vasp/
 https://lu-song.github.io/2024/07/05/notes-of-bash/
-https://lu-song.github.io/2024/05/15/os-module-of-python/
 https://lu-song.github.io/2024/05/15/notes-of-python/
 https://lu-song.github.io/2024/05/15/notes-of-linux/
 https://lu-song.github.io/2024/05/14/quick-start-of-gaussian/
@@ -23,6 +25,8 @@ https://lu-song.github.io/tags/gaussian/
 https://lu-song.github.io/tags/cp2k/
 https://lu-song.github.io/tags/private/
 https://lu-song.github.io/tags/Bash/
+https://lu-song.github.io/tags/numpy/
+https://lu-song.github.io/tags/pandas/
 https://lu-song.github.io/categories/Linux/
 https://lu-song.github.io/categories/DFT/
 https://lu-song.github.io/categories/Python/
