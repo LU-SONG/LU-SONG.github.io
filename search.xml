@@ -330,7 +330,7 @@
 
 <h2 id="二、os-path模块"><a href="#二、os-path模块" class="headerlink" title="二、os.path模块"></a>二、os.path模块</h2><h3 id="检查路径，返回布尔值"><a href="#检查路径，返回布尔值" class="headerlink" title="检查路径，返回布尔值"></a>检查路径，返回布尔值</h3><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 检查路径path是否存在</span></span><br><span class="line">os.path.exists(path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查路径path是否是一个文件</span></span><br><span class="line">os.path.isfile(path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查路径path是否是一个目录</span></span><br><span class="line">os.path.isdir(path)</span><br></pre></td></tr></table></figure>
 <h3 id="拼接、分割路径"><a href="#拼接、分割路径" class="headerlink" title="拼接、分割路径"></a>拼接、分割路径</h3><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 将多个路径拼接成一个路径</span></span><br><span class="line">os.path.join(path1, path2, ...)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将路径path分割为目录和文件名</span></span><br><span class="line">os.path.split(path)</span><br></pre></td></tr></table></figure>
-<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 返回path的绝对路径</span></span><br><span class="line">os.path.abspath(path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回路径path的文件名部分</span></span><br><span class="line">os.path.basename(path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回路径path的目录部分</span></span><br><span class="line">os.path.basename(path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回path的文件大小</span></span><br><span class="line">os.path.getsize(path)</span><br></pre></td></tr></table></figure>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 返回path的绝对路径</span></span><br><span class="line">os.path.abspath(path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回路径path的文件名部分</span></span><br><span class="line">os.path.basename(path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回路径path的目录部分</span></span><br><span class="line">os.path.dirname(path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回path的文件大小</span></span><br><span class="line">os.path.getsize(path)</span><br></pre></td></tr></table></figure>
 
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
 <li><a href="https://www.runoob.com/python/os-file-methods.html">https://www.runoob.com/python/os-file-methods.html</a></li>
@@ -655,7 +655,7 @@ A-->D[MOTION]
     <title>Pearl</title>
     <url>/2024/06/28/pearl/</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉，您输入的密码错误，请检查后重新输入。" data-whm="抱歉, 当前文章不能被校验, 不过您还是可以看看解密后的内容。">
-  <script id="hbeData" type="hbeData" data-hmacdigest="ffb5cc736fb6e7733f9f17aa19e0f4342cf2211fc3622f04f8f901c753947ad3">9c6161198b65c0c7ed655745c399b5b3c22b49d63312cddb0a2937408d4045fef9e62b4649d6ecf6e9f8073af0e2a97754690bb8adb982f94baeb965b7d732a251cdca5db18dfaeab133b6958a2cd1448143e2f52451725bbc885ea0c90fc3065bdcb22152b47075ef109827b6bac52d7fa64ae61c7957ab85897fc304f8853bc934dea7b7f2c3c8c31a17d3cfdcaa0e1e8bb1071a3925b9d2d0040b32ee60707ebc985cef23122fc53574dd3e37a5255be3fdcec3676cffa2d9af7a8fe932a1292956dc7f14fdc2e078ee0463ed3c19af92e77856da868a6c9966a64e5a17d3</script>
+  <script id="hbeData" type="hbeData" data-hmacdigest="be8b3a3fd137eac25ed8b78b1f7972cfb9714c2dfdd3e7598b2eb18b887929a5">9c6161198b65c0c7ed655745c399b5b3c22b49d63312cddb0a2937408d4045fef9e62b4649d6ecf6e9f8073af0e2a97754690bb8adb982f94baeb965b7d732a251cdca5db18dfaeab133b6958a2cd1448143e2f52451725bbc885ea0c90fc3065bdcb22152b47075ef109827b6bac52d7fa64ae61c7957ab85897fc304f8853bc934dea7b7f2c3c8c31a17d3cfdcaa0e1e8bb1071a3925b9d2d0040b32ee60707ebc985cef23122fc53574dd3e37a5255be3fdcec3676cffa2d9af7a8fe932a1292956dc7f14fdc2e078ee0463ed3c199932caf3d1c298e345968ca75ae6f5da76e0b4e120d0e45c38aaf2c039a985fa18de32ef7c2295b293eaba264f12750c698acd62d97448f760ec63ae633e75e9782494d7f7896046f3ddc831f879721d250e7f3c329753f96fb2939e1373696302ffde1fced64f46fc47711004b70657cfd5726b6e2ca7b1005afafeb0a86fd98e9c9d372a3049c4eb6b0c461bbeccf9731383d6c26dc42eb0b644b247df816346c846ead1c2c83d485e9a3a0e80c1517a2fdc467c1fdf1c4379f468d5d39e66</script>
   <div class="hbe hbe-content">
     <div class="hbe hbe-input hbe-input-default">
       <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
@@ -787,6 +787,18 @@ A-->D[MOTION]
       </categories>
       <tags>
         <tag>pandas</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Theory</title>
+    <url>/2024/07/21/theory/</url>
+    <content><![CDATA[<p><strong><font size=6>Theory</font></strong><br><a href="http://cluster.qibebt.ac.cn/info/1189/1136.htm">d-band</a></p>
+]]></content>
+      <categories>
+        <category>Learn</category>
+      </categories>
+      <tags>
+        <tag>Theory</tag>
       </tags>
   </entry>
 </search>
