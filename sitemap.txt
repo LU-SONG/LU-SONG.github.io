@@ -32,6 +32,7 @@ https://lu-song.github.io/tags/numpy/
 https://lu-song.github.io/tags/pandas/
 https://lu-song.github.io/tags/Theory/
 https://lu-song.github.io/tags/Python/
+https://lu-song.github.io/tags/computer-science/
 https://lu-song.github.io/categories/Linux/
 https://lu-song.github.io/categories/DFT/
 https://lu-song.github.io/categories/Python/
