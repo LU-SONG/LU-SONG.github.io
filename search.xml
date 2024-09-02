@@ -136,8 +136,8 @@
   <entry>
     <title>Notes of Python</title>
     <url>/2024/05/15/notes-of-python/</url>
-    <content><![CDATA[<p><strong><font size=6>Python 常用命令</font></strong></p>
-<h2 id="一、内置函数"><a href="#一、内置函数" class="headerlink" title="一、内置函数"></a>一、内置函数</h2><h3 id="字符串相关"><a href="#字符串相关" class="headerlink" title="字符串相关"></a>字符串相关</h3><table>
+    <content><![CDATA[<p><strong><font size=6>Python 常用命令（一）</font></strong></p>
+<h2 id="一、内置函数"><a href="#一、内置函数" class="headerlink" title="一、内置函数"></a>一、内置函数</h2><h3 id="字符串相关（数）"><a href="#字符串相关（数）" class="headerlink" title="字符串相关（数）"></a>字符串相关（数）</h3><table>
 <thead>
 <tr>
 <th>需求</th>
@@ -151,29 +151,9 @@
 <td>14</td>
 </tr>
 <tr>
-<td>str1 &#x3D; ‘aaBBccEEff’ 全部转换为小写字符</td>
-<td>str1.lower()</td>
-<td>‘aabbcceeff’</td>
-</tr>
-<tr>
-<td>全部转换为大写字符</td>
-<td>str1.upper()</td>
-<td>‘AABBCCEEFF’</td>
-</tr>
-<tr>
-<td>统计字符串中指定字符出现的次数（指定范围）</td>
+<td>str1 &#x3D; ‘aaBBccEEff’ 统计字符串中指定字符出现的次数（指定范围）</td>
 <td>str1.count(“a”, 0, 3)</td>
 <td>2</td>
-</tr>
-<tr>
-<td>判断字符串是否以指定字符开头（指定范围）</td>
-<td>str1.startswith(“a”)</td>
-<td>True</td>
-</tr>
-<tr>
-<td>判断字符串是否以指定字符结尾（指定范围）</td>
-<td>str1.endswith(“b”, 0, 2)</td>
-<td>False</td>
 </tr>
 <tr>
 <td>查找字符串中指定的字符第一次出现的索引（指定范围），不会触发异常（返回-1）</td>
@@ -184,6 +164,40 @@
 <td>查找~，会触发异常</td>
 <td>str1.index(“c”, 3)</td>
 <td>4</td>
+</tr>
+<tr>
+<td>二进制 → 十进制</td>
+<td>int(‘101010’,2)</td>
+<td>42</td>
+</tr>
+<tr>
+<td>八进制 → 十进制</td>
+<td>int(‘367’,8)</td>
+<td>247</td>
+</tr>
+<tr>
+<td>十六进制 → 十进制</td>
+<td>int(‘FFF’,16)</td>
+<td>4095</td>
+</tr>
+</tbody></table>
+<h3 id="字符串相关（字符型）"><a href="#字符串相关（字符型）" class="headerlink" title="字符串相关（字符型）"></a>字符串相关（字符型）</h3><table>
+<thead>
+<tr>
+<th>需求</th>
+<th>输入</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>str1 &#x3D; ‘aaBBccEEff’ 全部转换为小写字符</td>
+<td>str1.lower()</td>
+<td>‘aabbcceeff’</td>
+</tr>
+<tr>
+<td>全部转换为大写字符</td>
+<td>str1.upper()</td>
+<td>‘AABBCCEEFF’</td>
 </tr>
 <tr>
 <td>将字符串中的字符替换为指定的字符</td>
@@ -201,6 +215,65 @@
 <td>‘bc’</td>
 </tr>
 </tbody></table>
+<h3 id="字符串相关（布尔型）"><a href="#字符串相关（布尔型）" class="headerlink" title="字符串相关（布尔型）"></a>字符串相关（布尔型）</h3><table>
+<thead>
+<tr>
+<th>需求</th>
+<th>输入</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>判断字符串是否以指定字符开头（指定范围）</td>
+<td>str1.startswith(“a”)</td>
+<td>True</td>
+</tr>
+<tr>
+<td>判断字符串是否以指定字符结尾（指定范围）</td>
+<td>str1.endswith(“b”, 0, 2)</td>
+<td>False</td>
+</tr>
+<tr>
+<td>input_str &#x3D; ‘123’ 识别整数</td>
+<td>input_str.isdigit()</td>
+<td>True</td>
+</tr>
+<tr>
+<td>识别字母</td>
+<td>input_str.isalpha()</td>
+<td>False</td>
+</tr>
+<tr>
+<td>识别字母和数字</td>
+<td>input_str.isalnum()</td>
+<td>True</td>
+</tr>
+<tr>
+<td>识别空白字符</td>
+<td>input_str.isspace()</td>
+<td>False</td>
+</tr>
+<tr>
+<td>input_str &#x3D; ‘hello’  识别小写字母</td>
+<td>input_str.islower()</td>
+<td>True</td>
+</tr>
+<tr>
+<td>识别大写字母</td>
+<td>input_str.isupper()</td>
+<td>False</td>
+</tr>
+<tr>
+<td>识别字符串是否以指定前缀开头</td>
+<td>input_str.startswith(‘he’)</td>
+<td>True</td>
+</tr>
+<tr>
+<td>识别字符串是否以指定后缀结尾</td>
+<td>input_str.endswith(‘lo’)</td>
+<td>False</td>
+</tr>
+</tbody></table>
 <h3 id="数字相关"><a href="#数字相关" class="headerlink" title="数字相关"></a>数字相关</h3><table>
 <thead>
 <tr>
@@ -211,48 +284,122 @@
 </thead>
 <tbody><tr>
 <td>绝对值</td>
-<td>abs(-5)</td>
+<td><strong>abs</strong>(-5)</td>
 <td>5</td>
 </tr>
 <tr>
 <td>商和余数</td>
-<td>divmod(13,2)</td>
+<td><strong>divmod</strong>(13,2)</td>
 <td>(6,1)</td>
 </tr>
 <tr>
 <td>四舍六入五看齐,奇进偶不进</td>
-<td>round(3.50)</td>
+<td><strong>round</strong>(3.50)</td>
 <td>4</td>
 </tr>
 <tr>
 <td>求 a 的 b 次幂（取余）</td>
-<td>pow(5,2) , pow(5,2,3)</td>
+<td><strong>pow</strong>(5,2) , <strong>pow</strong>(5,2,3)</td>
 <td>(25, 1)</td>
 </tr>
 <tr>
 <td>求和</td>
-<td>sum([1,2,3,4,5,6,7,8,9,10])</td>
+<td><strong>sum</strong>([1,2,3,4,5,6,7,8,9,10])</td>
 <td>55</td>
 </tr>
 <tr>
 <td>求最小值</td>
-<td>min(3,2,5,19,6,3)</td>
+<td><strong>min</strong>(3,2,5,19,6,3)</td>
 <td>2</td>
 </tr>
 <tr>
 <td>求最大值</td>
-<td>max(3,5,12,8,5,11)</td>
+<td><strong>max</strong>(3,5,12,8,5,11)</td>
 <td>12</td>
 </tr>
 <tr>
 <td>创建不可变的数字序列</td>
-<td>list(range(1, 10, 2)</td>
+<td><strong>list</strong>(range(1, 10, 2)</td>
 <td>[1, 3, 5, 7, 9]</td>
 </tr>
 <tr>
-<td>转化为二进制</td>
-<td>bin(10)</td>
-<td>0b1010</td>
+<td>十进制 → 二进制，八进制，十六进制</td>
+<td><strong>bin</strong>(10), <strong>oct</strong>(10), <strong>hex</strong>(10)</td>
+<td>0b1010, ‘0o12’, ‘0xa’</td>
+</tr>
+<tr>
+<td>返回一个Unicode编码的整数对应的字符</td>
+<td><strong>chr</strong>(65)</td>
+<td>‘A’</td>
+</tr>
+<tr>
+<td>创建一个复数</td>
+<td><strong>complex</strong>(3,4)</td>
+<td>(3+4j)</td>
+</tr>
+<tr>
+<td>保留一位小数</td>
+<td><strong>round</strong>(3.14159, 1)</td>
+<td>3.1</td>
+</tr>
+</tbody></table>
+<h3 id="列表相关"><a href="#列表相关" class="headerlink" title="列表相关"></a>列表相关</h3><table>
+<thead>
+<tr>
+<th>需求</th>
+<th>输入</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>iterable&#x3D;[True, True, False] 可迭代对象中所有元素是否为真</td>
+<td><strong>all</strong>(iterable)</td>
+<td>False</td>
+</tr>
+<tr>
+<td>iterable &#x3D; [False, False, True] 可迭代对象中有元素是否为真</td>
+<td><strong>any</strong>(iterable)</td>
+<td>True</td>
+</tr>
+<tr>
+<td>iterable &#x3D; [1, 2, 3]</td>
+<td><strong>sum</strong>(iterable)</td>
+<td>6</td>
+</tr>
+<tr>
+<td>numbers &#x3D; [1, 2, 3]，letters &#x3D; [‘a’, ‘b’, ‘c’] 打包</td>
+<td><strong>zip</strong>(numbers, letters)</td>
+<td>[(1, ‘a’), (2, ‘b’), (3, ‘c’)]</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 </tbody></table>
 <h2 id="二、单行命令"><a href="#二、单行命令" class="headerlink" title="二、单行命令"></a>二、单行命令</h2><h3 id="生成等差数列"><a href="#生成等差数列" class="headerlink" title="生成等差数列"></a>生成等差数列</h3><p>生成一个从1到10的等差数列，公差为1。放入列表list1中。</p>
@@ -308,9 +455,21 @@
 
 <h3 id="求质数"><a href="#求质数" class="headerlink" title="求质数"></a>求质数</h3><p><a href="https://github.com/Ynjxsjmh/ArticlePickup/blob/master/%E6%B1%82%E8%B4%A8%E6%95%B0%E7%AE%97%E6%B3%95%E7%9A%84N%20%E7%A7%8D%E5%A2%83%E7%95%8C.md">求质数的几种境界</a></p>
 <h3 id="求质因数"><a href="#求质因数" class="headerlink" title="求质因数"></a>求质因数</h3><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">is_prime</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">all</span>(n%i !=<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>,<span class="built_in">int</span>(n**<span class="number">0.5</span>)+<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_primes</span>(<span class="params">n</span>):</span><br><span class="line">    prime_list =[]</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> is_prime(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>,<span class="built_in">int</span>(n**<span class="number">0.5</span>)+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> is_prime(j) <span class="keyword">and</span> n%j ==<span class="number">0</span>:</span><br><span class="line">                prime_list.append(j)</span><br><span class="line">                n = <span class="built_in">int</span>(n/j)</span><br><span class="line">    prime_list.append(n)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> prime_list</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">num = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">prime_list_out = get_primes(num)</span><br><span class="line">prime_list_out.sort()</span><br><span class="line">formatted_output = <span class="string">&#x27; &#x27;</span>.join(<span class="built_in">map</span>(<span class="built_in">str</span>, prime_list_out))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(formatted_output)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="map-对可迭代对象中的每个元素应用一个函数"><a href="#map-对可迭代对象中的每个元素应用一个函数" class="headerlink" title="map 对可迭代对象中的每个元素应用一个函数"></a>map 对可迭代对象中的每个元素应用一个函数</h3><p>int,str等函数都可以作为 map 的函数</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">squared_numbers = <span class="built_in">map</span>(<span class="keyword">lambda</span> x: x ** <span class="number">2</span>, numbers)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(squared_numbers))</span><br></pre></td></tr></table></figure>
+
+<h3 id="filter-函数根据条件筛选"><a href="#filter-函数根据条件筛选" class="headerlink" title="filter 函数根据条件筛选"></a>filter 函数根据条件筛选</h3><figure class="highlight py"><table><tr><td class="code"><pre><span class="line">numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line">filtered_numbers = <span class="built_in">filter</span>(<span class="keyword">lambda</span> x: x % <span class="number">2</span> == <span class="number">0</span>, numbers)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(filtered_numbers))</span><br></pre></td></tr></table></figure>
+
+
+
+
+
 <h2 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h2><ol>
 <li><a href="https://mp.weixin.qq.com/s/1g92Sr3WtB67XEiFrCv8oQ">https://mp.weixin.qq.com/s/1g92Sr3WtB67XEiFrCv8oQ</a></li>
 <li><a href="https://mp.weixin.qq.com/s/IOFMUH5rIfUF0GhNpsenlg">https://mp.weixin.qq.com/s/IOFMUH5rIfUF0GhNpsenlg</a></li>
+<li><a href="https://mp.weixin.qq.com/s/OmTFXbwIOATSHIOJK1CVkQ">https://mp.weixin.qq.com/s/OmTFXbwIOATSHIOJK1CVkQ</a></li>
 </ol>
 ]]></content>
       <categories>
