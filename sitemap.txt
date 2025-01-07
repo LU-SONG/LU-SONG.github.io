@@ -1,4 +1,9 @@
+https://lu-song.github.io/2024/06/03/single-point-energy-of-vasp/
+https://lu-song.github.io/2024/05/14/vmd-esp/
+https://lu-song.github.io/2024/12/29/scripts-of-kgz/
+https://lu-song.github.io/2024/06/03/bader-view-of-vasp/
 https://lu-song.github.io/2024/05/15/notes-of-python/
+https://lu-song.github.io/2024/05/15/notes-of-linux/
 https://lu-song.github.io/2024/08/27/notes-of-datastructure/
 https://lu-song.github.io/2024/07/29/notes-of-ase/
 https://lu-song.github.io/2024/07/29/pearl/
@@ -9,9 +14,7 @@ https://lu-song.github.io/2024/07/07/numpy-module-of-python/
 https://lu-song.github.io/jupyter/numpy.html
 https://lu-song.github.io/jupyter/pandas.html
 https://lu-song.github.io/2024/01/19/hello-world/
-https://lu-song.github.io/2024/06/03/bader-view-of-vasp/
 https://lu-song.github.io/2024/07/05/notes-of-bash/
-https://lu-song.github.io/2024/05/15/notes-of-linux/
 https://lu-song.github.io/2024/05/14/quick-start-of-gaussian/
 https://lu-song.github.io/2024/05/14/quick-start-of-vasp/
 https://lu-song.github.io/2024/06/07/quick-start-of-cp2k/
@@ -33,6 +36,7 @@ https://lu-song.github.io/tags/pandas/
 https://lu-song.github.io/tags/Theory/
 https://lu-song.github.io/tags/Python/
 https://lu-song.github.io/tags/computer-science/
+https://lu-song.github.io/tags/scripts/
 https://lu-song.github.io/categories/Linux/
 https://lu-song.github.io/categories/DFT/
 https://lu-song.github.io/categories/Python/
