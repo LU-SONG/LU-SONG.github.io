@@ -2,9 +2,36 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://lu-song.github.io/2024/06/03/single-point-energy-of-vasp/</loc>
+    <loc>https://lu-song.github.io/2025/01/11/notes-of-ai/</loc>
     
-    <lastmod>2025-01-07</lastmod>
+    <lastmod>2025-01-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://lu-song.github.io/2024/11/30/template/</loc>
+    
+    <lastmod>2025-01-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://lu-song.github.io/2024/05/15/notes-of-linux/</loc>
+    
+    <lastmod>2025-01-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://lu-song.github.io/2024/07/29/notes-of-ase/</loc>
+    
+    <lastmod>2025-01-11</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -13,7 +40,25 @@
   <url>
     <loc>https://lu-song.github.io/2024/05/14/vmd-esp/</loc>
     
-    <lastmod>2024-12-29</lastmod>
+    <lastmod>2025-01-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://lu-song.github.io/2024/10/28/notes-of-datastructure/</loc>
+    
+    <lastmod>2025-01-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://lu-song.github.io/2024/06/03/single-point-energy-of-vasp/</loc>
+    
+    <lastmod>2025-01-07</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -41,33 +86,6 @@
     <loc>https://lu-song.github.io/2024/05/15/notes-of-python/</loc>
     
     <lastmod>2024-09-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://lu-song.github.io/2024/05/15/notes-of-linux/</loc>
-    
-    <lastmod>2024-09-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://lu-song.github.io/2024/08/27/notes-of-datastructure/</loc>
-    
-    <lastmod>2024-08-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://lu-song.github.io/2024/07/29/notes-of-ase/</loc>
-    
-    <lastmod>2024-08-12</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -211,7 +229,7 @@
 
   <url>
     <loc>https://lu-song.github.io/</loc>
-    <lastmod>2025-01-07</lastmod>
+    <lastmod>2025-01-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -219,105 +237,119 @@
   
   <url>
     <loc>https://lu-song.github.io/tags/Linux/</loc>
-    <lastmod>2025-01-07</lastmod>
+    <lastmod>2025-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lu-song.github.io/tags/vasp/</loc>
-    <lastmod>2025-01-07</lastmod>
+    <lastmod>2025-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lu-song.github.io/tags/bader/</loc>
-    <lastmod>2025-01-07</lastmod>
+    <lastmod>2025-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lu-song.github.io/tags/python/</loc>
-    <lastmod>2025-01-07</lastmod>
+    <lastmod>2025-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lu-song.github.io/tags/os/</loc>
-    <lastmod>2025-01-07</lastmod>
+    <lastmod>2025-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lu-song.github.io/tags/gaussian/</loc>
-    <lastmod>2025-01-07</lastmod>
+    <lastmod>2025-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lu-song.github.io/tags/cp2k/</loc>
-    <lastmod>2025-01-07</lastmod>
+    <lastmod>2025-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lu-song.github.io/tags/private/</loc>
-    <lastmod>2025-01-07</lastmod>
+    <lastmod>2025-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lu-song.github.io/tags/Bash/</loc>
-    <lastmod>2025-01-07</lastmod>
+    <lastmod>2025-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lu-song.github.io/tags/numpy/</loc>
-    <lastmod>2025-01-07</lastmod>
+    <lastmod>2025-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lu-song.github.io/tags/pandas/</loc>
-    <lastmod>2025-01-07</lastmod>
+    <lastmod>2025-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lu-song.github.io/tags/Theory/</loc>
-    <lastmod>2025-01-07</lastmod>
+    <lastmod>2025-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lu-song.github.io/tags/Python/</loc>
-    <lastmod>2025-01-07</lastmod>
+    <lastmod>2025-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lu-song.github.io/tags/computer-science/</loc>
-    <lastmod>2025-01-07</lastmod>
+    <lastmod>2025-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lu-song.github.io/tags/scripts/</loc>
-    <lastmod>2025-01-07</lastmod>
+    <lastmod>2025-01-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://lu-song.github.io/tags/Ai/</loc>
+    <lastmod>2025-01-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://lu-song.github.io/tags/xx/</loc>
+    <lastmod>2025-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -326,35 +358,49 @@
   
   <url>
     <loc>https://lu-song.github.io/categories/Linux/</loc>
-    <lastmod>2025-01-07</lastmod>
+    <lastmod>2025-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lu-song.github.io/categories/DFT/</loc>
-    <lastmod>2025-01-07</lastmod>
+    <lastmod>2025-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lu-song.github.io/categories/Python/</loc>
-    <lastmod>2025-01-07</lastmod>
+    <lastmod>2025-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lu-song.github.io/categories/Learn/</loc>
-    <lastmod>2025-01-07</lastmod>
+    <lastmod>2025-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lu-song.github.io/categories/ASE/</loc>
-    <lastmod>2025-01-07</lastmod>
+    <lastmod>2025-01-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://lu-song.github.io/categories/Software/</loc>
+    <lastmod>2025-01-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://lu-song.github.io/categories/xx/</loc>
+    <lastmod>2025-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
