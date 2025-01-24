@@ -1549,13 +1549,113 @@ A-->D[MOTION]
   <entry>
     <title>xx</title>
     <url>/2024/11/30/template/</url>
-    <content><![CDATA[<p>图片存放 .&#x2F;images&#x2F;<br>“新建images文件夹00X; 复制图片至00X .&#x2F;images&#x2F; 替换 images&#x2F;00X&#x2F; 替换结束后删掉此行”</p>
+    <content><![CDATA[<p>图片存放 .&#x2F;images&#x2F;</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">0. 复制文本和原图片路径至此；</span><br><span class="line">1. public中新建images文件夹00X； </span><br><span class="line">2. 复制文章所有图片至00X；</span><br><span class="line">3. 全文 ./images/ 替换为 images/00X/；</span><br><span class="line">4. 修改title, categories, tags, cover;</span><br><span class="line">5. 替换结束后删掉此内容</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>xx</category>
       </categories>
       <tags>
         <tag>xx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Quick Start of KGZ</title>
+    <url>/2024/11/30/quick-start-of-kgz/</url>
+    <content><![CDATA[<p>图片存放 .&#x2F;images&#x2F;</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">0. 复制文本和原图片路径至此；</span><br><span class="line">1. public中新建images文件夹00X； </span><br><span class="line">2. 复制文章所有图片至00X；</span><br><span class="line">3. 全文 ./images/ 替换为 images/00X/；</span><br><span class="line">4. 修改title, categories, tags, cover;</span><br><span class="line">5. 替换结束后删掉此内容</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/Quick-Start-of-KGZ-image.png" alt="Alt text"></p>
+<h2 id="一、服务器使用"><a href="#一、服务器使用" class="headerlink" title="一、服务器使用"></a>一、服务器使用</h2><p>xhell 7 和 xfrp 7</p>
+<h3 id="账号注册"><a href="#账号注册" class="headerlink" title="账号注册"></a>账号注册</h3><ol>
+<li>生成密钥（私钥+公钥）<br><a href="https://blog.csdn.net/l8947943/article/details/111463910">https://blog.csdn.net/l8947943/article/details/111463910</a></li>
+<li>公钥发给管理员，管理员开通账号</li>
+</ol>
+<h3 id="二、登录"><a href="#二、登录" class="headerlink" title="二、登录"></a>二、登录</h3><p><strong>主机名</strong> 10.158.198.162<br><strong>端口</strong> 2205<br>输入用户名，使用密钥登录</p>
+<h3 id="三、基本配置"><a href="#三、基本配置" class="headerlink" title="三、基本配置"></a>三、基本配置</h3><table>
+<thead>
+<tr>
+<th>linux 命令</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cd</td>
+<td>进入目录； cd .. 返回上级目录</td>
+</tr>
+<tr>
+<td>ls</td>
+<td>查看文件</td>
+</tr>
+<tr>
+<td>mkdir</td>
+<td>新建目录</td>
+</tr>
+<tr>
+<td>mv</td>
+<td>移动 ；重命名</td>
+</tr>
+<tr>
+<td>cp</td>
+<td>复制</td>
+</tr>
+<tr>
+<td>sz</td>
+<td>下载</td>
+</tr>
+</tbody></table>
+<ol>
+<li><strong>tab</strong> 自动补全</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 初始化配置环境，只输入一次</span></span><br><span class="line">/public/scripts/path_init.sh</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>vim 编辑器使用</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">编辑模式：在vim编辑器下敲击a, 光标所在位置编辑文字。</span><br><span class="line">删除行：d输入两次。</span><br><span class="line">退出：先按Esc，然后输入<span class="string">&#x27;:&#x27;</span>,输入<span class="string">&#x27;wq&#x27;</span>保存退出。(q!是强制退出)</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、简单计算"><a href="#四、简单计算" class="headerlink" title="四、简单计算"></a>四、简单计算</h2><p><code>INCAR</code>,<code>POSCAR</code>,<code>POTCAR</code>,<code>KPINTS</code></p>
+<ol>
+<li><p>INCAR，文件准备(文献获得)</p>
+</li>
+<li><p>POSCAR，<strong>MS</strong>、<strong>vesta</strong>，先保存成cif文件，再在vesta中保存成 .vasp文件</p>
+</li>
+<li><p>POTCAR，<code>pos2pot</code></p>
+</li>
+<li><p>KPOINTS，<code>kpoints.sh x x x</code>（POSCAR的 20-30 )</p>
+</li>
+</ol>
+<p><strong>检查文件输入</strong></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">checkinput.sh</span><br></pre></td></tr></table></figure>
+
+<p><strong>提交</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">qsub 48kgz.pbs</span><br></pre></td></tr></table></figure>
+
+<p>qstat 查看任务提交情况</p>
+<h4 id="1-结构优化"><a href="#1-结构优化" class="headerlink" title="1. 结构优化"></a>1. 结构优化</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">checkinput.sh</span><br></pre></td></tr></table></figure>
+
+<p>自洽计算（电子计算）+ 离子计算（力收敛）</p>
+<p>提交任务</p>
+<p>查看计算情况</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ta.sh</span><br></pre></td></tr></table></figure>
+
+<p>查看已经计算完成的任务</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat ~/mail</span><br></pre></td></tr></table></figure>
+
+<p>CONTCAR 为已经计算完成的结构</p>
+<h4 id="2-频率计算"><a href="#2-频率计算" class="headerlink" title="2. 频率计算"></a>2. 频率计算</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">IBRION = 5               # 频率计算</span><br><span class="line">NFREE = 2                # 自由度</span><br><span class="line">POTIM = 0.015            # 频率计算模式</span><br><span class="line">EDIFF = 1E-6             # 防止虚频```</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-bader-电荷"><a href="#3-bader-电荷" class="headerlink" title="3. bader 电荷"></a>3. bader 电荷</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 参数修改</span></span><br><span class="line">LAECHG = T</span><br><span class="line">LCHARG = T</span><br><span class="line">LELF = T</span><br><span class="line">NSW = 1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 分析结果</span></span><br><span class="line">/public/scripts/bader.sh</span><br><span class="line">/public/scripts/get_bader.py</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-PDOS"><a href="#4-PDOS" class="headerlink" title="4. PDOS"></a>4. PDOS</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 参数修改</span></span><br><span class="line">LWAVE = T</span><br><span class="line">LORBIT = 11</span><br><span class="line">NSW = 1</span><br><span class="line">ISMEAR = -5</span><br><span class="line"></span><br><span class="line">/public/software/vaspkit.1.4.1/bin/vaspkit	</span><br><span class="line">输入115</span><br><span class="line">输入目标元素 回车</span><br><span class="line">输入目标轨道 回车</span><br><span class="line">得到PDOS_USER.dat</span><br><span class="line"></span><br><span class="line">get_pdosxx.py 目标元素 目标轨道 </span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>DFT</category>
+      </categories>
+      <tags>
+        <tag>learn</tag>
       </tags>
   </entry>
 </search>
