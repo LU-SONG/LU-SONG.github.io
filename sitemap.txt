@@ -1,3 +1,4 @@
+https://lu-song.github.io/2025/04/03/ymtc/
 https://lu-song.github.io/2024/11/30/quick-start-of-kgz/
 https://lu-song.github.io/2024/05/14/quick-start-of-vasp/
 https://lu-song.github.io/2024/11/30/template/
@@ -43,6 +44,7 @@ https://lu-song.github.io/tags/scripts/
 https://lu-song.github.io/tags/Ai/
 https://lu-song.github.io/tags/xx/
 https://lu-song.github.io/tags/learn/
+https://lu-song.github.io/tags/SSD/
 https://lu-song.github.io/categories/Linux/
 https://lu-song.github.io/categories/DFT/
 https://lu-song.github.io/categories/Python/
