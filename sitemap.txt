@@ -1,4 +1,5 @@
 https://lu-song.github.io/2024/11/30/quick-start-of-kgz/
+https://lu-song.github.io/2024/05/14/quick-start-of-vasp/
 https://lu-song.github.io/2024/11/30/template/
 https://lu-song.github.io/2025/01/11/notes-of-ai/
 https://lu-song.github.io/2024/05/15/notes-of-linux/
@@ -19,7 +20,6 @@ https://lu-song.github.io/jupyter/pandas.html
 https://lu-song.github.io/2024/01/19/hello-world/
 https://lu-song.github.io/2024/07/05/notes-of-bash/
 https://lu-song.github.io/2024/05/14/quick-start-of-gaussian/
-https://lu-song.github.io/2024/05/14/quick-start-of-vasp/
 https://lu-song.github.io/2024/06/07/quick-start-of-cp2k/
 https://lu-song.github.io/link/index.html
 https://lu-song.github.io/tags/index.html
