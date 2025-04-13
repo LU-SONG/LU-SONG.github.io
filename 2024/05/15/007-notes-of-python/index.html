@@ -1,0 +1,618 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Notes of Python | 初夏阳光</title><meta name="author" content="Lu Song"><meta name="copyright" content="Lu Song"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Python 常用命令（一） 一、内置函数字符串相关（数）   需求 输入 输出    计算字符串长度 len(“Hello, Python!”) 14   str1 &#x3D; ‘aaBBccEEff’ 统计字符串中指定字符出现的次数（指定范围） str1.count(“a”, 0, 3) 2   查找字符串中指定的字符第一次出现的索引（指定范围），不会触发异常（返回-1） str1.find">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notes of Python">
+<meta property="og:url" content="https://lu-song.github.io/2024/05/15/007-notes-of-python/index.html">
+<meta property="og:site_name" content="初夏阳光">
+<meta property="og:description" content="Python 常用命令（一） 一、内置函数字符串相关（数）   需求 输入 输出    计算字符串长度 len(“Hello, Python!”) 14   str1 &#x3D; ‘aaBBccEEff’ 统计字符串中指定字符出现的次数（指定范围） str1.count(“a”, 0, 3) 2   查找字符串中指定的字符第一次出现的索引（指定范围），不会触发异常（返回-1） str1.find">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lu-song.github.io/img/python.png">
+<meta property="article:published_time" content="2024-05-15T09:20:00.000Z">
+<meta property="article:modified_time" content="2025-04-13T13:08:43.377Z">
+<meta property="article:author" content="Lu Song">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lu-song.github.io/img/python.png"><link rel="shortcut icon" href="/img/bike.jpg"><link rel="canonical" href="https://lu-song.github.io/2024/05/15/007-notes-of-python/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Notes of Python',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-04-13 21:08:43'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom@1.0.0.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/bike.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 分类</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/science/"><i class="fa-fw fas fa-science"></i><span> 科研学习</span></a></li><li><a class="site-page child" href="/sport/"><i class="fa-fw fas fa-sport"></i><span> 运动记录</span></a></li><li><a class="site-page child" href="/life/"><i class="fa-fw fas fa-life"></i><span> 生活娱乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/python.png')"><nav id="nav"><span id="blog-info"><a href="/" title="初夏阳光"><span class="site-name">初夏阳光</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 分类</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/science/"><i class="fa-fw fas fa-science"></i><span> 科研学习</span></a></li><li><a class="site-page child" href="/sport/"><i class="fa-fw fas fa-sport"></i><span> 运动记录</span></a></li><li><a class="site-page child" href="/life/"><i class="fa-fw fas fa-life"></i><span> 生活娱乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Notes of Python</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-05-15T09:20:00.000Z" title="发表于 2024-05-15 17:20:00">2024-05-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-04-13T13:08:43.377Z" title="更新于 2025-04-13 21:08:43">2025-04-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Python/">Python</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Notes of Python"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong><font size=6>Python 常用命令（一）</font></strong></p>
+<h2 id="一、内置函数"><a href="#一、内置函数" class="headerlink" title="一、内置函数"></a>一、内置函数</h2><h3 id="字符串相关（数）"><a href="#字符串相关（数）" class="headerlink" title="字符串相关（数）"></a>字符串相关（数）</h3><table>
+<thead>
+<tr>
+<th>需求</th>
+<th>输入</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>计算字符串长度</td>
+<td>len(“Hello, Python!”)</td>
+<td>14</td>
+</tr>
+<tr>
+<td>str1 &#x3D; ‘aaBBccEEff’ 统计字符串中指定字符出现的次数（指定范围）</td>
+<td>str1.count(“a”, 0, 3)</td>
+<td>2</td>
+</tr>
+<tr>
+<td>查找字符串中指定的字符第一次出现的索引（指定范围），不会触发异常（返回-1）</td>
+<td>str1.find(“d”, 3)</td>
+<td>-1</td>
+</tr>
+<tr>
+<td>查找~，会触发异常</td>
+<td>str1.index(“c”, 3)</td>
+<td>4</td>
+</tr>
+<tr>
+<td>二进制 → 十进制</td>
+<td>int(‘101010’,2)</td>
+<td>42</td>
+</tr>
+<tr>
+<td>八进制 → 十进制</td>
+<td>int(‘367’,8)</td>
+<td>247</td>
+</tr>
+<tr>
+<td>十六进制 → 十进制</td>
+<td>int(‘FFF’,16)</td>
+<td>4095</td>
+</tr>
+</tbody></table>
+<h3 id="字符串相关（字符型）"><a href="#字符串相关（字符型）" class="headerlink" title="字符串相关（字符型）"></a>字符串相关（字符型）</h3><table>
+<thead>
+<tr>
+<th>需求</th>
+<th>输入</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>str1 &#x3D; ‘aaBBccEEff’ 全部转换为小写字符</td>
+<td>str1.lower()</td>
+<td>‘aabbcceeff’</td>
+</tr>
+<tr>
+<td>全部转换为大写字符</td>
+<td>str1.upper()</td>
+<td>‘AABBCCEEFF’</td>
+</tr>
+<tr>
+<td>将字符串中的字符替换为指定的字符</td>
+<td>str1.replace(“a”, “W”, 1)</td>
+<td>‘WaBBccEEff’</td>
+</tr>
+<tr>
+<td>test1 &#x3D; “  abc  “删除字符串两边的所有空白</td>
+<td>test1.strip()</td>
+<td>‘abc’</td>
+</tr>
+<tr>
+<td>删除字符串指定字符</td>
+<td>test1.strip().strip(“a”)</td>
+<td>‘bc’</td>
+</tr>
+</tbody></table>
+<h3 id="字符串相关（布尔型）"><a href="#字符串相关（布尔型）" class="headerlink" title="字符串相关（布尔型）"></a>字符串相关（布尔型）</h3><table>
+<thead>
+<tr>
+<th>需求</th>
+<th>输入</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>判断字符串是否以指定字符开头（指定范围）</td>
+<td>str1.startswith(“a”)</td>
+<td>True</td>
+</tr>
+<tr>
+<td>判断字符串是否以指定字符结尾（指定范围）</td>
+<td>str1.endswith(“b”, 0, 2)</td>
+<td>False</td>
+</tr>
+<tr>
+<td>input_str &#x3D; ‘123’ 识别整数</td>
+<td>input_str.isdigit()</td>
+<td>True</td>
+</tr>
+<tr>
+<td>识别字母</td>
+<td>input_str.isalpha()</td>
+<td>False</td>
+</tr>
+<tr>
+<td>识别字母和数字</td>
+<td>input_str.isalnum()</td>
+<td>True</td>
+</tr>
+<tr>
+<td>识别空白字符</td>
+<td>input_str.isspace()</td>
+<td>False</td>
+</tr>
+<tr>
+<td>input_str &#x3D; ‘hello’  识别小写字母</td>
+<td>input_str.islower()</td>
+<td>True</td>
+</tr>
+<tr>
+<td>识别大写字母</td>
+<td>input_str.isupper()</td>
+<td>False</td>
+</tr>
+<tr>
+<td>识别字符串是否以指定前缀开头</td>
+<td>input_str.startswith(‘he’)</td>
+<td>True</td>
+</tr>
+<tr>
+<td>识别字符串是否以指定后缀结尾</td>
+<td>input_str.endswith(‘lo’)</td>
+<td>False</td>
+</tr>
+</tbody></table>
+<h3 id="数字相关"><a href="#数字相关" class="headerlink" title="数字相关"></a>数字相关</h3><table>
+<thead>
+<tr>
+<th>需求</th>
+<th>输入</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>绝对值</td>
+<td><strong>abs</strong>(-5)</td>
+<td>5</td>
+</tr>
+<tr>
+<td>商和余数</td>
+<td><strong>divmod</strong>(13,2)</td>
+<td>(6,1)</td>
+</tr>
+<tr>
+<td>四舍六入五看齐,奇进偶不进</td>
+<td><strong>round</strong>(3.50)</td>
+<td>4</td>
+</tr>
+<tr>
+<td>求 a 的 b 次幂（取余）</td>
+<td><strong>pow</strong>(5,2) , <strong>pow</strong>(5,2,3)</td>
+<td>(25, 1)</td>
+</tr>
+<tr>
+<td>求和</td>
+<td><strong>sum</strong>([1,2,3,4,5,6,7,8,9,10])</td>
+<td>55</td>
+</tr>
+<tr>
+<td>求最小值</td>
+<td><strong>min</strong>(3,2,5,19,6,3)</td>
+<td>2</td>
+</tr>
+<tr>
+<td>求最大值</td>
+<td><strong>max</strong>(3,5,12,8,5,11)</td>
+<td>12</td>
+</tr>
+<tr>
+<td>创建不可变的数字序列</td>
+<td><strong>list</strong>(range(1, 10, 2)</td>
+<td>[1, 3, 5, 7, 9]</td>
+</tr>
+<tr>
+<td>十进制 → 二进制，八进制，十六进制</td>
+<td><strong>bin</strong>(10), <strong>oct</strong>(10), <strong>hex</strong>(10)</td>
+<td>0b1010, ‘0o12’, ‘0xa’</td>
+</tr>
+<tr>
+<td>返回一个Unicode编码的整数对应的字符</td>
+<td><strong>chr</strong>(65)</td>
+<td>‘A’</td>
+</tr>
+<tr>
+<td>创建一个复数</td>
+<td><strong>complex</strong>(3,4)</td>
+<td>(3+4j)</td>
+</tr>
+<tr>
+<td>保留一位小数</td>
+<td><strong>round</strong>(3.14159, 1)</td>
+<td>3.1</td>
+</tr>
+</tbody></table>
+<h3 id="列表相关"><a href="#列表相关" class="headerlink" title="列表相关"></a>列表相关</h3><table>
+<thead>
+<tr>
+<th>需求</th>
+<th>输入</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>i &#x3D; [1, 2, 3]  末尾增加元素</td>
+<td>i.<strong>append</strong>(4)</td>
+<td>[1, 2, 3, 4]</td>
+</tr>
+<tr>
+<td>将另一个可迭代对象中的元素添加到列表末尾</td>
+<td>i.<strong>extend</strong>([4, 5])</td>
+<td>[1, 2, 3, 4, 5]</td>
+</tr>
+<tr>
+<td>在指定位置插入一个元素</td>
+<td>i.<strong>insert</strong>(1, ‘a’)</td>
+<td>[1, ‘a’, 2, 3]</td>
+</tr>
+<tr>
+<td>移除列表中第一个匹配的元素</td>
+<td>i.<strong>remove</strong>(2)</td>
+<td>[1, 3]</td>
+</tr>
+<tr>
+<td>返回列表的浅拷贝，生成一个独立的副本</td>
+<td>i.<strong>copy</strong>()</td>
+<td>[1, 2, 3]</td>
+</tr>
+<tr>
+<td>列表（集合，字典）清空</td>
+<td>i.<strong>clear</strong>()</td>
+<td>[]</td>
+</tr>
+<tr>
+<td>统计元素出现的次数</td>
+<td>i.<strong>count</strong>(1)</td>
+<td>1</td>
+</tr>
+<tr>
+<td>反向存放</td>
+<td>i.<strong>reverse</strong>()</td>
+<td>[3, 2, 1]</td>
+</tr>
+<tr>
+<td>排序（反向）</td>
+<td>i.<strong>sort</strong>(reverse&#x3D;False)</td>
+<td>[3, 2, 1]</td>
+</tr>
+<tr>
+<td>iterable&#x3D;[True, True, False] 可迭代对象中所有元素是否为真</td>
+<td><strong>all</strong>(iterable)</td>
+<td>False</td>
+</tr>
+<tr>
+<td>iterable &#x3D; [False, False, True] 可迭代对象中有元素是否为真</td>
+<td><strong>any</strong>(iterable)</td>
+<td>True</td>
+</tr>
+<tr>
+<td>iterable &#x3D; [1, 2, 3]</td>
+<td><strong>sum</strong>(iterable)</td>
+<td>6</td>
+</tr>
+<tr>
+<td>numbers &#x3D; [1, 2, 3]，letters &#x3D; [‘a’, ‘b’, ‘c’] 打包</td>
+<td><strong>zip</strong>(numbers, letters)</td>
+<td>[(1, ‘a’), (2, ‘b’), (3, ‘c’)]</td>
+</tr>
+</tbody></table>
+<h3 id="字典相关"><a href="#字典相关" class="headerlink" title="字典相关"></a>字典相关</h3><table>
+<thead>
+<tr>
+<th>需求</th>
+<th>输入</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>i &#x3D; {‘a’: 1, ‘b’: 2}  字典清空</td>
+<td>i.<strong>clear</strong>()</td>
+<td>{}</td>
+</tr>
+<tr>
+<td>如果键存在于字典中，则返回该键的值，否则返回None或指定默认值</td>
+<td>i.<strong>get</strong>(‘a’)；i.get(‘c’)</td>
+<td>1；None</td>
+</tr>
+<tr>
+<td>返回字典中的键值对列表,可以配合list使用，list(i.items())</td>
+<td>list(i.<strong>items</strong>())</td>
+<td>[(‘a’, 1), (‘b’, 2)]</td>
+</tr>
+<tr>
+<td>获得键列表   list(i.keys())</td>
+<td>list(i.<strong>keys</strong>())</td>
+<td>[‘a’, ‘b’]</td>
+</tr>
+<tr>
+<td>获得值列表   list(i.value())</td>
+<td>list(i.<strong>value</strong>())</td>
+<td>[1,2]</td>
+</tr>
+<tr>
+<td>合并d1 &#x3D; {‘a’: 10, ‘b’: 20, ‘c’: 30} d2 &#x3D; {‘b’: 200, ‘d’: 400}</td>
+<td>d1.<strong>update</strong>(d2)</td>
+<td>{‘a’: 10, ‘b’: 200, ‘c’: 30, ‘d’: 400}</td>
+</tr>
+</tbody></table>
+<h2 id="二、单行命令"><a href="#二、单行命令" class="headerlink" title="二、单行命令"></a>二、单行命令</h2><h3 id="生成等差数列"><a href="#生成等差数列" class="headerlink" title="生成等差数列"></a>生成等差数列</h3><p>生成一个从1到10的等差数列，公差为1。放入列表list1中。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list1 = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">11</span>, <span class="number">1</span>)]</span><br><span class="line"><span class="built_in">print</span>(list1)</span><br></pre></td></tr></table></figure>
+<p>输出结果<code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</code></p>
+<h3 id="反转字符串"><a href="#反转字符串" class="headerlink" title="反转字符串"></a>反转字符串</h3><p>切片操作符[::-1]。从后向前取值，步长为-1，即实现字符串反转。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str1 = <span class="string">&quot;Hello, World!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(str1[::-<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<p>输出结果<code>!dlroW ,olleH</code></p>
+<h3 id="列表去重"><a href="#列表去重" class="headerlink" title="列表去重"></a>列表去重</h3><p>使用set()函数将列表转换为集合，自动去除重复元素，再将其转换回列表。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">list2 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">unique_list = <span class="built_in">list</span>(<span class="built_in">set</span>(list2))</span><br><span class="line"><span class="built_in">print</span>(unique_list)</span><br></pre></td></tr></table></figure>
+<p>输出结果<code>[1, 2, 3, 4, 5]</code></p>
+<h3 id="简洁计算阶乘"><a href="#简洁计算阶乘" class="headerlink" title="简洁计算阶乘"></a>简洁计算阶乘</h3><p>当n等于0时，阶乘为1；否则，阶乘等于n乘以n-1的阶乘。此处递归未定义函数，实际应用中需确保递归深度可控。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">factorial = <span class="keyword">lambda</span> n:<span class="number">1</span> <span class="keyword">if</span> n == <span class="number">0</span> <span class="keyword">else</span> n * factorial(n - <span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(factorial(<span class="number">5</span>))</span><br></pre></td></tr></table></figure>
+<p>输出结果<code>120</code></p>
+<h3 id="统计字符串中单词出现次数"><a href="#统计字符串中单词出现次数" class="headerlink" title="统计字符串中单词出现次数"></a>统计字符串中单词出现次数</h3><p>str.count()方法用于统计字符串中指定子串（在此例中为’hello’）出现的次数</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">text = <span class="string">&quot;hello world hello python&quot;</span></span><br><span class="line">word_count = text.count(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(word_count)</span><br></pre></td></tr></table></figure>
+<p>输出结果<code>2</code></p>
+<h3 id="生成斐波那契数列"><a href="#生成斐波那契数列" class="headerlink" title="生成斐波那契数列"></a>生成斐波那契数列</h3><p>使用列表推导式结合append()函数生成斐波那契数列。fibonacci初始为[0, 1]，接着逐次计算前两项之和，不断扩展列表。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fibonacci = [<span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">[fibonacci.append(fibonacci[i] + fibonacci[i+<span class="number">1</span>]) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]</span><br><span class="line"><span class="built_in">print</span>(fibonacci)</span><br></pre></td></tr></table></figure>
+<p>输出结果<code>[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]</code></p>
+<h3 id="快速交换两个变量值"><a href="#快速交换两个变量值" class="headerlink" title="快速交换两个变量值"></a>快速交换两个变量值</h3><p>Python允许同时赋值多个变量</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a, b = <span class="number">10</span>, <span class="number">20</span></span><br><span class="line">a, b = b, a</span><br><span class="line"><span class="built_in">print</span>(a, b) </span><br></pre></td></tr></table></figure>
+<p>输出结果<code>20 10</code></p>
+<h3 id="求最大公约数（GCD）"><a href="#求最大公约数（GCD）" class="headerlink" title="求最大公约数（GCD）"></a>求最大公约数（GCD）</h3><p>Python内置math模块中的gcd()函数，直接计算两个数的最大公约数。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line">gcd = math.gcd(<span class="number">48</span>, <span class="number">18</span>)</span><br><span class="line"><span class="built_in">print</span>(gcd)</span><br></pre></td></tr></table></figure>
+<p>输出结果<code>6</code></p>
+<h3 id="列表元素排序并保持原索引"><a href="#列表元素排序并保持原索引" class="headerlink" title="列表元素排序并保持原索引"></a>列表元素排序并保持原索引</h3><p>使用sorted()函数对列表索引进行排序，key参数指定按照my_list对应位置的元素值进行排序。这样，原列表的元素顺序不变，但索引已按元素值排序。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">my_list = [ <span class="string">&#x27;elderberry&#x27;</span>,<span class="string">&#x27;apple&#x27;</span>, <span class="string">&#x27;banana&#x27;</span>, <span class="string">&#x27;cherry&#x27;</span>, <span class="string">&#x27;date&#x27;</span>,]</span><br><span class="line">sorted_list = <span class="built_in">sorted</span>(<span class="built_in">range</span>(<span class="built_in">len</span>(my_list)), key=<span class="keyword">lambda</span> i: my_list[i])</span><br><span class="line"><span class="built_in">print</span>(sorted_list)</span><br></pre></td></tr></table></figure>
+<p>输出结果<code>[1, 2, 3, 4, 0]</code></p>
+<h3 id="使用列表推导式高效生成新列表"><a href="#使用列表推导式高效生成新列表" class="headerlink" title="使用列表推导式高效生成新列表"></a>使用列表推导式高效生成新列表</h3><p>列表推导式可以简洁地根据现有列表numbers生成一个新的列表squared</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">squared = [num **<span class="number">2</span> <span class="keyword">for</span> num <span class="keyword">in</span> numbers]</span><br><span class="line"><span class="built_in">print</span>(squared)</span><br></pre></td></tr></table></figure>
+<p>输出结果<code>[1, 4, 9, 16, 25]</code></p>
+<h3 id="矩阵转置"><a href="#矩阵转置" class="headerlink" title="矩阵转置"></a>矩阵转置</h3><p>zip()函数将矩阵的行转为列，再使用map()和list()将结果转换为列表形式</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">matrix = [[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>], [<span class="number">5</span>, <span class="number">6</span>]]</span><br><span class="line">transposed = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">list</span>, <span class="built_in">zip</span>(*matrix)))</span><br><span class="line"><span class="built_in">print</span>(transposed)</span><br></pre></td></tr></table></figure>
+<p>输出结果<code>[[1, 3, 5], [2, 4, 6]]</code></p>
+<h3 id="快速判断素数"><a href="#快速判断素数" class="headerlink" title="快速判断素数"></a>快速判断素数</h3><p>检查n是否能被2到其平方根之间的任何数整除。如果都不能整除，则返回True，表示n是素数。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">is_prime</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">all</span>(n % i != <span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="built_in">int</span>(n**<span class="number">0.5</span>)+<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(is_prime(<span class="number">17</span>)) </span><br></pre></td></tr></table></figure>
+<p>输出结果<code>True</code></p>
+<h3 id="itertools-快速组合"><a href="#itertools-快速组合" class="headerlink" title="itertools 快速组合"></a>itertools 快速组合</h3><p>使用itertools.product()函数生成多个列表的笛卡尔积，结果为一个包含所有组合的列表。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line">cartesian_product = <span class="built_in">list</span>(itertools.product([<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&quot;C&quot;</span>], [<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>,<span class="string">&quot;c&quot;</span>],[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]))</span><br><span class="line"><span class="built_in">print</span>(cartesian_product)</span><br></pre></td></tr></table></figure>
+<p>输出结果<code>[(&#39;A&#39;, &#39;a&#39;, 1), (&#39;A&#39;, &#39;a&#39;, 2), (&#39;A&#39;, &#39;a&#39;, 3), (&#39;A&#39;, &#39;b&#39;, 1), (&#39;A&#39;, &#39;b&#39;, 2), (&#39;A&#39;, &#39;b&#39;, 3), (&#39;A&#39;, &#39;c&#39;, 1), (&#39;A&#39;, &#39;c&#39;, 2), (&#39;A&#39;, &#39;c&#39;, 3), (&#39;B&#39;, &#39;a&#39;, 1), (&#39;B&#39;, &#39;a&#39;, 2), (&#39;B&#39;, &#39;a&#39;, 3), (&#39;B&#39;, &#39;b&#39;, 1), (&#39;B&#39;, &#39;b&#39;, 2), (&#39;B&#39;, &#39;b&#39;, 3), (&#39;B&#39;, &#39;c&#39;, 1), (&#39;B&#39;, &#39;c&#39;, 2), (&#39;B&#39;, &#39;c&#39;, 3), (&#39;C&#39;, &#39;a&#39;, 1), (&#39;C&#39;, &#39;a&#39;, 2), (&#39;C&#39;, &#39;a&#39;, 3), (&#39;C&#39;, &#39;b&#39;, 1), (&#39;C&#39;, &#39;b&#39;, 2), (&#39;C&#39;, &#39;b&#39;, 3), (&#39;C&#39;, &#39;c&#39;, 1), (&#39;C&#39;, &#39;c&#39;, 2), (&#39;C&#39;, &#39;c&#39;, 3)]</code></p>
+<h3 id="遍历列表并打印索引和对应的值"><a href="#遍历列表并打印索引和对应的值" class="headerlink" title="遍历列表并打印索引和对应的值"></a>遍历列表并打印索引和对应的值</h3><p>使用 enumerate() 函数遍历列表并打印索引和对应的值, 创建生成器对象</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">generator = ((i, j) <span class="keyword">for</span> i, j <span class="keyword">in</span> <span class="built_in">enumerate</span>([<span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;C&#x27;</span>]))</span><br><span class="line"><span class="comment"># 方法一</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> generator:</span><br><span class="line">    <span class="built_in">print</span>(item)</span><br><span class="line"><span class="comment"># 方法二</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(((i, j) <span class="keyword">for</span> i, j <span class="keyword">in</span> <span class="built_in">enumerate</span>([<span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;C&#x27;</span>]))))</span><br></pre></td></tr></table></figure>
+<p>输出结果<code>(0, &#39;A&#39;) (1, &#39;B&#39;) (2, &#39;C&#39;)</code> or <code>[(0, &#39;A&#39;), (1, &#39;B&#39;), (2, &#39;C&#39;)]</code></p>
+<h3 id="对列表中元素排序"><a href="#对列表中元素排序" class="headerlink" title="对列表中元素排序"></a>对列表中元素排序</h3><p>对可迭代对象做排序操作</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法一</span></span><br><span class="line">lst = [<span class="number">5</span>,<span class="number">7</span>,<span class="number">6</span>,<span class="number">12</span>,<span class="number">1</span>,<span class="number">13</span>,<span class="number">9</span>,<span class="number">18</span>,<span class="number">5</span>]</span><br><span class="line">lst.sort()  </span><br><span class="line"><span class="built_in">print</span>(lst) </span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法二</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">sorted</span>(lst))</span><br><span class="line"></span><br><span class="line"><span class="comment">#倒序</span></span><br><span class="line"><span class="built_in">sorted</span>(lst,reverse=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<p>输出结果<code>[1, 5, 5, 6, 7, 9, 12, 13, 18]</code></p>
+<h3 id="将对象中对应的元素打包成一个元组"><a href="#将对象中对应的元素打包成一个元组" class="headerlink" title="将对象中对应的元素打包成一个元组"></a>将对象中对应的元素打包成一个元组</h3><p>将可迭代的对象作为参数，将对象中对应的元素打包成一个元组，然后返回由这些元组组成的列表。如果各个迭代器的元素个数不一致，则返回的列表长度与最短的对象相同。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">lst1 = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;e&#x27;</span>, <span class="string">&#x27;f&#x27;</span>]</span><br><span class="line">lst2 = [<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;5&#x27;</span>, <span class="string">&#x27;6&#x27;</span>]</span><br><span class="line">lst3 = [<span class="string">&#x27;one&#x27;</span>, <span class="string">&#x27;two&#x27;</span>, <span class="string">&#x27;three&#x27;</span>, <span class="string">&#x27;four&#x27;</span>, <span class="string">&#x27;five&#x27;</span>, <span class="string">&#x27;six&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> el <span class="keyword">in</span> <span class="built_in">zip</span>(lst1, lst2, lst3):</span><br><span class="line">    <span class="built_in">print</span>(el)</span><br></pre></td></tr></table></figure>
+<p>输出结果<code>(&#39;a&#39;, &#39;1&#39;, &#39;one&#39;) (&#39;b&#39;, &#39;2&#39;, &#39;two&#39;) (&#39;c&#39;, &#39;3&#39;, &#39;three&#39;) (&#39;d&#39;, &#39;4&#39;, &#39;four&#39;) (&#39;e&#39;, &#39;5&#39;, &#39;five&#39;) (&#39;f&#39;, &#39;6&#39;, &#39;six&#39;)</code></p>
+<h3 id="python内置进制转换"><a href="#python内置进制转换" class="headerlink" title="python内置进制转换"></a>python内置进制转换</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">dec = <span class="built_in">input</span>(<span class="string">&#x27;10进制数为：&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;转换为二进制为：&quot;</span>, <span class="built_in">bin</span>(dec))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;转换为八进制为：&quot;</span>, <span class="built_in">oct</span>(dec))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;转换为十六进制为：&quot;</span>, <span class="built_in">hex</span>(dec))</span><br><span class="line"> </span><br><span class="line">string1 = <span class="string">&#x27;101010&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;二进制字符串转换成十进制数为：&#x27;</span>，<span class="built_in">int</span>(string1,<span class="number">2</span>))</span><br><span class="line">string1 = <span class="string">&#x27;367&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;八进制字符串转换成十进制数为：&#x27;</span>，<span class="built_in">int</span>(string1,<span class="number">8</span>))</span><br><span class="line">string3 = <span class="string">&#x27;FFF&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;十六进制字符串转换成十进制数为：&#x27;</span>，<span class="built_in">int</span>(string1,<span class="number">16</span>))</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="求质数"><a href="#求质数" class="headerlink" title="求质数"></a>求质数</h3><p><a target="_blank" rel="noopener" href="https://github.com/Ynjxsjmh/ArticlePickup/blob/master/%E6%B1%82%E8%B4%A8%E6%95%B0%E7%AE%97%E6%B3%95%E7%9A%84N%20%E7%A7%8D%E5%A2%83%E7%95%8C.md">求质数的几种境界</a></p>
+<h3 id="求质因数"><a href="#求质因数" class="headerlink" title="求质因数"></a>求质因数</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">is_prime</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">all</span>(n%i !=<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>,<span class="built_in">int</span>(n**<span class="number">0.5</span>)+<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_primes</span>(<span class="params">n</span>):</span><br><span class="line">    prime_list =[]</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> is_prime(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>,<span class="built_in">int</span>(n**<span class="number">0.5</span>)+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> is_prime(j) <span class="keyword">and</span> n%j ==<span class="number">0</span>:</span><br><span class="line">                prime_list.append(j)</span><br><span class="line">                n = <span class="built_in">int</span>(n/j)</span><br><span class="line">    prime_list.append(n)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> prime_list</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">num = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">prime_list_out = get_primes(num)</span><br><span class="line">prime_list_out.sort()</span><br><span class="line">formatted_output = <span class="string">&#x27; &#x27;</span>.join(<span class="built_in">map</span>(<span class="built_in">str</span>, prime_list_out))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(formatted_output)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="map-对可迭代对象中的每个元素应用一个函数"><a href="#map-对可迭代对象中的每个元素应用一个函数" class="headerlink" title="map 对可迭代对象中的每个元素应用一个函数"></a>map 对可迭代对象中的每个元素应用一个函数</h3><p>int,str等函数都可以作为 map 的函数</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">squared_numbers = <span class="built_in">map</span>(<span class="keyword">lambda</span> x: x ** <span class="number">2</span>, numbers)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(squared_numbers))</span><br></pre></td></tr></table></figure>
+
+<h3 id="filter-函数根据条件筛选"><a href="#filter-函数根据条件筛选" class="headerlink" title="filter 函数根据条件筛选"></a>filter 函数根据条件筛选</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line">filtered_numbers = <span class="built_in">filter</span>(<span class="keyword">lambda</span> x: x % <span class="number">2</span> == <span class="number">0</span>, numbers)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(filtered_numbers))</span><br></pre></td></tr></table></figure>
+
+<h3 id="打乱列表元素，得到全排列"><a href="#打乱列表元素，得到全排列" class="headerlink" title="打乱列表元素，得到全排列"></a>打乱列表元素，得到全排列</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_permutate</span>(<span class="params">lst</span>):</span><br><span class="line">    per = <span class="built_in">list</span>(itertools.permutations(lst))</span><br><span class="line">    <span class="keyword">return</span> per</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/1g92Sr3WtB67XEiFrCv8oQ">https://mp.weixin.qq.com/s/1g92Sr3WtB67XEiFrCv8oQ</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/IOFMUH5rIfUF0GhNpsenlg">https://mp.weixin.qq.com/s/IOFMUH5rIfUF0GhNpsenlg</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/OmTFXbwIOATSHIOJK1CVkQ">https://mp.weixin.qq.com/s/OmTFXbwIOATSHIOJK1CVkQ</a></li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://lu-song.github.io">Lu Song</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://lu-song.github.io/2024/05/15/007-notes-of-python/">https://lu-song.github.io/2024/05/15/007-notes-of-python/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://lu-song.github.io" target="_blank">初夏阳光</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/python/">python</a></div><div class="post_share"><div class="social-share" data-image="/img/python.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/05/15/015-os-module-of-python/" title="OS Module of Python"><img class="cover" src="/img/os.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">OS Module of Python</div></div></a></div><div class="next-post pull-right"><a href="/2024/05/14/011-quick-start-of-gaussian/" title="Quick Start of Gaussian"><img class="cover" src="/img/g16.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Quick Start of Gaussian</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/bike.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Lu Song</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/LU-SONG"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/LU-SONG" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="/22213010008@m.fudan.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎光临初夏阳光的博客，这里是我日常学习和生活的记录总结，希望能对你有所帮助：<br/><br/>本站的内容经过个人加工而来，也参考了资料，如有侵权，请第一时间联系我，我将及时进行修改和删除😊</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">一、内置函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%85%B3%EF%BC%88%E6%95%B0%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">字符串相关（数）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%85%B3%EF%BC%88%E5%AD%97%E7%AC%A6%E5%9E%8B%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">字符串相关（字符型）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%85%B3%EF%BC%88%E5%B8%83%E5%B0%94%E5%9E%8B%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">字符串相关（布尔型）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E7%9B%B8%E5%85%B3"><span class="toc-number">1.4.</span> <span class="toc-text">数字相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E7%9B%B8%E5%85%B3"><span class="toc-number">1.5.</span> <span class="toc-text">列表相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E5%85%B8%E7%9B%B8%E5%85%B3"><span class="toc-number">1.6.</span> <span class="toc-text">字典相关</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%8D%95%E8%A1%8C%E5%91%BD%E4%BB%A4"><span class="toc-number">2.</span> <span class="toc-text">二、单行命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E7%AD%89%E5%B7%AE%E6%95%B0%E5%88%97"><span class="toc-number">2.1.</span> <span class="toc-text">生成等差数列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">2.2.</span> <span class="toc-text">反转字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E5%8E%BB%E9%87%8D"><span class="toc-number">2.3.</span> <span class="toc-text">列表去重</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E6%B4%81%E8%AE%A1%E7%AE%97%E9%98%B6%E4%B9%98"><span class="toc-number">2.4.</span> <span class="toc-text">简洁计算阶乘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%9F%E8%AE%A1%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%8D%95%E8%AF%8D%E5%87%BA%E7%8E%B0%E6%AC%A1%E6%95%B0"><span class="toc-number">2.5.</span> <span class="toc-text">统计字符串中单词出现次数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97"><span class="toc-number">2.6.</span> <span class="toc-text">生成斐波那契数列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E4%BA%A4%E6%8D%A2%E4%B8%A4%E4%B8%AA%E5%8F%98%E9%87%8F%E5%80%BC"><span class="toc-number">2.7.</span> <span class="toc-text">快速交换两个变量值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B1%82%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0%EF%BC%88GCD%EF%BC%89"><span class="toc-number">2.8.</span> <span class="toc-text">求最大公约数（GCD）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E5%85%83%E7%B4%A0%E6%8E%92%E5%BA%8F%E5%B9%B6%E4%BF%9D%E6%8C%81%E5%8E%9F%E7%B4%A2%E5%BC%95"><span class="toc-number">2.9.</span> <span class="toc-text">列表元素排序并保持原索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E5%BC%8F%E9%AB%98%E6%95%88%E7%94%9F%E6%88%90%E6%96%B0%E5%88%97%E8%A1%A8"><span class="toc-number">2.10.</span> <span class="toc-text">使用列表推导式高效生成新列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E8%BD%AC%E7%BD%AE"><span class="toc-number">2.11.</span> <span class="toc-text">矩阵转置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%88%A4%E6%96%AD%E7%B4%A0%E6%95%B0"><span class="toc-number">2.12.</span> <span class="toc-text">快速判断素数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#itertools-%E5%BF%AB%E9%80%9F%E7%BB%84%E5%90%88"><span class="toc-number">2.13.</span> <span class="toc-text">itertools 快速组合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%8D%E5%8E%86%E5%88%97%E8%A1%A8%E5%B9%B6%E6%89%93%E5%8D%B0%E7%B4%A2%E5%BC%95%E5%92%8C%E5%AF%B9%E5%BA%94%E7%9A%84%E5%80%BC"><span class="toc-number">2.14.</span> <span class="toc-text">遍历列表并打印索引和对应的值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E5%88%97%E8%A1%A8%E4%B8%AD%E5%85%83%E7%B4%A0%E6%8E%92%E5%BA%8F"><span class="toc-number">2.15.</span> <span class="toc-text">对列表中元素排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%86%E5%AF%B9%E8%B1%A1%E4%B8%AD%E5%AF%B9%E5%BA%94%E7%9A%84%E5%85%83%E7%B4%A0%E6%89%93%E5%8C%85%E6%88%90%E4%B8%80%E4%B8%AA%E5%85%83%E7%BB%84"><span class="toc-number">2.16.</span> <span class="toc-text">将对象中对应的元素打包成一个元组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#python%E5%86%85%E7%BD%AE%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2"><span class="toc-number">2.17.</span> <span class="toc-text">python内置进制转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B1%82%E8%B4%A8%E6%95%B0"><span class="toc-number">2.18.</span> <span class="toc-text">求质数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B1%82%E8%B4%A8%E5%9B%A0%E6%95%B0"><span class="toc-number">2.19.</span> <span class="toc-text">求质因数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#map-%E5%AF%B9%E5%8F%AF%E8%BF%AD%E4%BB%A3%E5%AF%B9%E8%B1%A1%E4%B8%AD%E7%9A%84%E6%AF%8F%E4%B8%AA%E5%85%83%E7%B4%A0%E5%BA%94%E7%94%A8%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0"><span class="toc-number">2.20.</span> <span class="toc-text">map 对可迭代对象中的每个元素应用一个函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#filter-%E5%87%BD%E6%95%B0%E6%A0%B9%E6%8D%AE%E6%9D%A1%E4%BB%B6%E7%AD%9B%E9%80%89"><span class="toc-number">2.21.</span> <span class="toc-text">filter 函数根据条件筛选</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E4%B9%B1%E5%88%97%E8%A1%A8%E5%85%83%E7%B4%A0%EF%BC%8C%E5%BE%97%E5%88%B0%E5%85%A8%E6%8E%92%E5%88%97"><span class="toc-number">2.22.</span> <span class="toc-text">打乱列表元素，得到全排列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">参考资料：</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/03/021-ymtc/" title="Learn SSD the hard way">Learn SSD the hard way</a><time datetime="2025-04-03T04:20:54.000Z" title="发表于 2025-04-03 12:20:54">2025-04-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/11/002-notes-of-ai/" title="Notes-of-Ai">Notes-of-Ai</a><time datetime="2025-01-11T04:00:00.000Z" title="发表于 2025-01-11 12:00:00">2025-01-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/29/017-scripts-of-kgz/" title="Scripts of KGZ">Scripts of KGZ</a><time datetime="2024-12-29T13:20:00.000Z" title="发表于 2024-12-29 21:20:00">2024-12-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/30/009-quick-start-of-kgz/" title="Quick Start of KGZ">Quick Start of KGZ</a><time datetime="2024-11-29T16:00:00.000Z" title="发表于 2024-11-30 00:00:00">2024-11-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/30/000-template/" title="Template">Template</a><time datetime="2024-11-29T16:00:00.000Z" title="发表于 2024-11-30 00:00:00">2024-11-30</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Lu Song</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"></div><div id="rightside-config-show"><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.12.0"></script></div></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '100ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>

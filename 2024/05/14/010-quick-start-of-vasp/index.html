@@ -1,0 +1,297 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Quick Start of VASP | 初夏阳光</title><meta name="author" content="Lu Song"><meta name="copyright" content="Lu Song"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Quick Start of VASP 本教程基于 HPC of zhenggroup 集群环境 一、VASP简介关于 VASPhttps:&#x2F;&#x2F;www.vasp.at&#x2F;info&#x2F;about&#x2F;The Vienna Ab initio Simulation Package (VASP) is a computer program for atomic scale materials modelling">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Quick Start of VASP">
+<meta property="og:url" content="https://lu-song.github.io/2024/05/14/010-quick-start-of-vasp/index.html">
+<meta property="og:site_name" content="初夏阳光">
+<meta property="og:description" content="Quick Start of VASP 本教程基于 HPC of zhenggroup 集群环境 一、VASP简介关于 VASPhttps:&#x2F;&#x2F;www.vasp.at&#x2F;info&#x2F;about&#x2F;The Vienna Ab initio Simulation Package (VASP) is a computer program for atomic scale materials modelling">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lu-song.github.io/img/vasp.png">
+<meta property="article:published_time" content="2024-05-14T11:20:00.000Z">
+<meta property="article:modified_time" content="2025-01-25T09:12:38.140Z">
+<meta property="article:author" content="Lu Song">
+<meta property="article:tag" content="vasp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lu-song.github.io/img/vasp.png"><link rel="shortcut icon" href="/img/bike.jpg"><link rel="canonical" href="https://lu-song.github.io/2024/05/14/010-quick-start-of-vasp/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Quick Start of VASP',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-01-25 17:12:38'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom@1.0.0.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/bike.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 分类</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/science/"><i class="fa-fw fas fa-science"></i><span> 科研学习</span></a></li><li><a class="site-page child" href="/sport/"><i class="fa-fw fas fa-sport"></i><span> 运动记录</span></a></li><li><a class="site-page child" href="/life/"><i class="fa-fw fas fa-life"></i><span> 生活娱乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/vasp.png')"><nav id="nav"><span id="blog-info"><a href="/" title="初夏阳光"><span class="site-name">初夏阳光</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 分类</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/science/"><i class="fa-fw fas fa-science"></i><span> 科研学习</span></a></li><li><a class="site-page child" href="/sport/"><i class="fa-fw fas fa-sport"></i><span> 运动记录</span></a></li><li><a class="site-page child" href="/life/"><i class="fa-fw fas fa-life"></i><span> 生活娱乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Quick Start of VASP</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-05-14T11:20:00.000Z" title="发表于 2024-05-14 19:20:00">2024-05-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-01-25T09:12:38.140Z" title="更新于 2025-01-25 17:12:38">2025-01-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/DFT/">DFT</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Quick Start of VASP"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong><font size=6>Quick Start of VASP</font></strong></p>
+<p>本教程基于 HPC of zhenggroup 集群环境</p>
+<h2 id="一、VASP简介"><a href="#一、VASP简介" class="headerlink" title="一、VASP简介"></a>一、VASP简介</h2><h3 id="关于-VASP"><a href="#关于-VASP" class="headerlink" title="关于 VASP"></a>关于 VASP</h3><p><a target="_blank" rel="noopener" href="https://www.vasp.at/info/about/">https://www.vasp.at/info/about/</a><br>The Vienna Ab initio Simulation Package (VASP) is a computer program for atomic scale materials modelling, e.g. electronic structure calculations and quantum-mechanical molecular dynamics, from first principles.</p>
+<p>VASP是用于原子尺度材料模拟的计算程序，基于第一性原理</p>
+<ol>
+<li>计算电子结构性质</li>
+<li>计算量子力学分子动力学</li>
+</ol>
+<p>VASP <strong>computes an approximate solution</strong> to <strong>the many-body Schrödinger equation</strong>, either within density functional theory (DFT), solving the Kohn-Sham equations, or within the Hartree-Fock (HF) approximation, solving the Roothaan equations. Hybrid functionals that mix the Hartree-Fock approach with density functional theory are implemented as well.Furthermore, Green’s functions methods (GW quasiparticles, and ACFDT-RPA) and many-body perturbation theory (2nd-order Møller-Plesset) are available in VASP.</p>
+<p>VASP计算多体薛定谔方程近似解。</p>
+<ol>
+<li>DFT求解Kohn-Sham方程</li>
+<li>HF求解Roothaan方程</li>
+<li>杂化泛函</li>
+<li>格林函数方法(GW准粒子和ACFDT-RPA)和多体微扰理论(二阶Møller-Plesset)</li>
+</ol>
+<p>In VASP, central quantities, like the one-electron orbitals, the electronic charge density, and the local potential are expressed in <strong>plane wave basis sets</strong>. The interactions between the electrons and ions are described using norm-conserving or ultrasoft pseudopotentials, or the projector-augmented-wave method.</p>
+<ol>
+<li>中心量，如单电子轨道、电子电荷密度和局域势都以平面波基组表示。</li>
+<li>电子和离子之间的相互作用以模守恒赝势、超软赝势或缀加投影缀加波(PAW)方法来描述。</li>
+</ol>
+<p>To determine the electronic groundstate, VASP makes use of <strong>efficient iterative matrix diagonalisation techniques</strong>, like the residual minimisation method with direct inversion of the iterative subspace (RMM-DIIS) or blocked Davidson algorithms. These are coupled to highly efficient Broyden and Pulay density mixing schemes to speed up the self-consistency cycle.</p>
+<p>为确定电子基态，VASP使用高效迭代的矩阵对角化技术，如带有迭代子空间直接反演的残差极小化方法(RMM-DIIS)或阻塞Davidson算法。这些算法与高效Broyden和Pulay密度混合方案相耦合，用以加快自洽循环。</p>
+<p>VASP 算法<br>结构优化算法：conjugate gradient, Quasi-Newton or damped molecular dynamics<br>过渡态搜索：Nudged elastic band methods</p>
+<h3 id="VASP-应用和局限"><a href="#VASP-应用和局限" class="headerlink" title="VASP 应用和局限"></a>VASP 应用和局限</h3><p>VASP 侧重表面、体相材料计算<br><strong>PBE泛函 + PAW赝势 + PW基组</strong><br><code>Perdew-Burke- Ernzerhof</code>+<code>projector-augmented-wave</code>+<code>plane wave</code><br>PBE泛函：Phys. Rev. Lett. 78, 1396 (1997)<br>关于PAW算法的介绍：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/575479762">https://zhuanlan.zhihu.com/p/575479762</a><br>PW基组</p>
+<ol>
+<li>计算周期性的体系</li>
+<li>体系不能过大，200原子以内</li>
+</ol>
+<h2 id="二、VASP使用"><a href="#二、VASP使用" class="headerlink" title="二、VASP使用"></a>二、VASP使用</h2><h3 id="输入文件"><a href="#输入文件" class="headerlink" title="输入文件"></a>输入文件</h3><p><code>INCAR</code>,<code>POSCAR</code>,<code>POTCAR</code>,<code>KPINTS</code>,<code>(OPTCELL)</code>,<code>vasp.pbs</code></p>
+<h4 id="表面建模"><a href="#表面建模" class="headerlink" title="表面建模"></a>表面建模</h4><ol>
+<li>真空层<br>R. Hoffmann, Angew. Chem. Int. Ed., 2013, 52, 93-103<br>MS建模：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1b54y1672a/?spm_id_from=333.999.0.0">https://www.bilibili.com/video/BV1b54y1672a/?spm_id_from=333.999.0.0</a><br>Modules-Amorphous Cell模块添加溶剂化层*</li>
+<li>Wood表面标记<br>fcc(100)-c(2×2)  &lt;&#x3D;&gt;   fcc(100)-($\sqrt{2}$ × $\sqrt{2}$)R45°</li>
+<li>结构，VASP仅识别文件名为<code>POSCAR</code>的结构，其他结构可以转换成<code>*.vasp</code>文件后重命名为<code>POSCAR</code><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> O  H                                                                   <span class="comment"># system</span></span><br><span class="line">   1.00000000000000                                                     <span class="comment"># 比例系数，压力</span></span><br><span class="line">    11.0000000000000000    0.0000000000000000    0.0000000000000000     <span class="comment"># 晶胞基矢a</span></span><br><span class="line">     0.0000000000000000   12.0000000000000000    0.0000000000000000     <span class="comment"># 晶胞基矢b</span></span><br><span class="line">     0.0000000000000000    0.0000000000000000   13.0000000000000000     <span class="comment"># 晶胞基矢c</span></span><br><span class="line">   O    H                                                               <span class="comment"># 元素识别</span></span><br><span class="line">     1     2                                                            <span class="comment"># 元素数量识别</span></span><br><span class="line">Selective                                                               <span class="comment"># 原子固定</span></span><br><span class="line">Cartesian                                                               <span class="comment"># 笛卡尔坐标、分数坐标</span></span><br><span class="line">        +10.7708483093   +11.6761039758   +0.0000000000  T T T          <span class="comment"># 原子1坐标         </span></span><br><span class="line">        +0.7421507349   +11.7181789381   +0.0000000000  T T T           <span class="comment"># 原子2坐标</span></span><br><span class="line">        +10.4870009558   +0.6057170861   +0.0000000000  T T T           <span class="comment"># 原子3坐标</span></span><br></pre></td></tr></table></figure></li>
+<li>画图：MS，vesta，VMD，origin，illustrator</li>
+</ol>
+<h4 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h4><p>在提交脚本<code>vasp.pbs</code>内添加以下内容</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法一：镜像</span></span><br><span class="line">module load singularity/3.8.7   <span class="comment"># 加载容器</span></span><br><span class="line">singularity run  /public/software/images/ase.sif  mpirun -np 48  vasp_std  1&gt;<span class="built_in">log</span> 2&gt;err   执行计算</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法二：本地软件</span></span><br><span class="line">module load hdf5    <span class="comment"># 存储数据/并行I/O</span></span><br><span class="line">module load gcc/9.3.0   <span class="comment"># GNU 编译器套件</span></span><br><span class="line"><span class="built_in">source</span> /public/software/intel2020u2/intel2020u2_env.sh  <span class="comment"># intel 环境</span></span><br><span class="line">mpirun -np 48 /public/software/vasp.6.3.2/bin/vasp_std 1&gt;<span class="built_in">log</span> 2&gt;err   <span class="comment"># 执行计算</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="INCAR-常用参数说明"><a href="#INCAR-常用参数说明" class="headerlink" title="INCAR 常用参数说明"></a>INCAR 常用参数说明</h4><ol>
+<li><p>输入输出</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">SYSTEM = string          <span class="comment"># 注释行</span></span><br><span class="line"></span><br><span class="line">ISTART = 0|1             <span class="comment"># 存在WAVECAR，1; 否则，0初猜</span></span><br><span class="line">ICHAGE = 1|2             <span class="comment"># ISTART为0，取2用原子电荷密度组装|1：从CHGCAR文件读入</span></span><br><span class="line"></span><br><span class="line">NWRITE = 2               <span class="comment"># 控制输出信息的详细程度</span></span><br><span class="line">LCHARG = .T.             <span class="comment"># 输出电荷密度CHG/CHGCAR </span></span><br><span class="line">LWAVE = .T.              <span class="comment"># 输出波函数文件WAVECAR</span></span><br><span class="line">LVTOT = .T.              <span class="comment"># 输出总局域势LOCPOT</span></span><br><span class="line">LELF = .T.               <span class="comment"># 输出电子局域密度函数ELFCAR文件</span></span><br></pre></td></tr></table></figure></li>
+<li><p>结构优化</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 泛函选择</span></span><br><span class="line">GGA = PE                 <span class="comment"># PBE泛函</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 电子步</span></span><br><span class="line">ALGO = N                 <span class="comment"># 电子优化算法;IALGO                 </span></span><br><span class="line">NELM = 200               <span class="comment"># 最大电子步数</span></span><br><span class="line">ISMEAR = 0|-5            <span class="comment"># 决定如何确定电子部分占据数，0,高斯展开|-5,布洛赫校正四面体方法，DOS|金属建议用正整数</span></span><br><span class="line">SIGMA = 0.05             <span class="comment"># 展宽越小，计算越精确，一般设置0.02 ~ 0.06</span></span><br><span class="line">ENCUT = 400              <span class="comment"># 平面波基的截断能</span></span><br><span class="line">PREC = N|A               <span class="comment"># 网格精度，建议一般优化取N|单点和频率取A </span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 离子步</span></span><br><span class="line">IBRION = -1|0|1|2|3      <span class="comment"># 离子优化算法;-1离子不运动|0分子动力学模拟|1准牛顿法离子弛豫|2共轭梯度CG算法的离子弛豫</span></span><br><span class="line">POTIM = 0.1              <span class="comment"># 作用在力上的比例系数</span></span><br><span class="line">NSW = 500                <span class="comment"># 离子步长</span></span><br><span class="line">ISIF = 2|3               <span class="comment"># 控制离子运动，2晶胞不优化|3优化</span></span><br><span class="line">ISYM = 0|1               <span class="comment"># 对称性是否开启，算吸附态时建议为0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 电子自旋、磁矩</span></span><br><span class="line">ISPIN = 1|2              <span class="comment"># 电子总自旋。1无自旋|2有自旋</span></span><br><span class="line">MAGMOM = N*M ...         <span class="comment"># 指定特定原子的磁矩</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 表面计算</span></span><br><span class="line">LDIPOL = .T.             <span class="comment"># 偶极矩校正开</span></span><br><span class="line">IDIPOL = 3               <span class="comment"># 偶极矩校正方向</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>频率计算</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">IBRION = 5               <span class="comment"># 频率计算</span></span><br><span class="line">NFREE = 2                <span class="comment"># 自由度</span></span><br><span class="line">POTIM = 0.015            <span class="comment"># 频率计算模式</span></span><br><span class="line">EDIFF = 1E-6             <span class="comment"># 防止虚频</span></span><br></pre></td></tr></table></figure></li>
+<li><p>单点计算&#x2F;bader&#x2F;pdos</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NSW = 1</span><br><span class="line"><span class="comment"># Bader</span></span><br><span class="line">LAECHG = .T.</span><br><span class="line">LCHARG = .T.</span><br><span class="line"><span class="comment"># Pdos 需要提高K点网格，有真空层的情况下扩大XY方向的K点</span></span><br><span class="line">ISMEAR = -5</span><br><span class="line">LORBIT = 11</span><br></pre></td></tr></table></figure>
+<p>POTCAR</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /public/scripts/Pseudopotentials-VASP/potpaw_PBE/Cu/POTCAR  &gt;&gt; POTCAR</span><br></pre></td></tr></table></figure>
+<p>KPOINTS<br><a target="_blank" rel="noopener" href="https://www.bigbrosci.com/2017/12/10/ex18/">https://www.bigbrosci.com/2017/12/10/ex18/</a><br><a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/KPOINTS">https://www.vasp.at/wiki/index.php/KPOINTS</a></p>
+</li>
+</ol>
+<h2 id="三、数据处理"><a href="#三、数据处理" class="headerlink" title="三、数据处理"></a>三、数据处理</h2><ol>
+<li>检查输入文件<code>/public/scripts/checkinput.sh</code></li>
+<li>查看优化结果<code>/public/scripts/ta.sh</code> </li>
+<li>快速固定坐标<code>/public/scripts/dtoc.py</code></li>
+</ol>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://www.vasp.org/howto">VASP 官网</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bigbrosci.com/">Learn VASP The Hard Way</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/571694885">https://zhuanlan.zhihu.com/p/571694885</a></li>
+<li><a target="_blank" rel="noopener" href="https://nwchemgit.github.io/pw-lecture.pdf">平面波基组和赝势理论</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.tcm.phy.cam.ac.uk/castep/documentation/WebHelp/content/modules/castep/thcastepplanebasis.htm">https://www.tcm.phy.cam.ac.uk/castep/documentation/WebHelp/content/modules/castep/thcastepplanebasis.htm</a></li>
+<li><a target="_blank" rel="noopener" href="http://staff.ustc.edu.cn/~zyli/teaching.html">http://staff.ustc.edu.cn/~zyli/teaching.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/575479762">https://zhuanlan.zhihu.com/p/575479762</a></li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://lu-song.github.io">Lu Song</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://lu-song.github.io/2024/05/14/010-quick-start-of-vasp/">https://lu-song.github.io/2024/05/14/010-quick-start-of-vasp/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://lu-song.github.io" target="_blank">初夏阳光</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/vasp/">vasp</a></div><div class="post_share"><div class="social-share" data-image="/img/vasp.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2024/05/14/020-vmd-esp/" title="ESP of Gaussian"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">ESP of Gaussian</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/06/03/013-bader-view-of-vasp/" title="Bader View of VASP"><img class="cover" src="/img/bader.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-03</div><div class="title">Bader View of VASP</div></div></a></div><div><a href="/2024/12/29/017-scripts-of-kgz/" title="Scripts of KGZ"><img class="cover" src="/img/scripts.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-29</div><div class="title">Scripts of KGZ</div></div></a></div><div><a href="/2024/06/03/019-single-point-energy-of-vasp/" title="Single-point-energy-of-VASP"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-03</div><div class="title">Single-point-energy-of-VASP</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/bike.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Lu Song</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/LU-SONG"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/LU-SONG" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="/22213010008@m.fudan.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎光临初夏阳光的博客，这里是我日常学习和生活的记录总结，希望能对你有所帮助：<br/><br/>本站的内容经过个人加工而来，也参考了资料，如有侵权，请第一时间联系我，我将及时进行修改和删除😊</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81VASP%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">一、VASP简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-VASP"><span class="toc-number">1.1.</span> <span class="toc-text">关于 VASP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VASP-%E5%BA%94%E7%94%A8%E5%92%8C%E5%B1%80%E9%99%90"><span class="toc-number">1.2.</span> <span class="toc-text">VASP 应用和局限</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81VASP%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">二、VASP使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%96%87%E4%BB%B6"><span class="toc-number">2.1.</span> <span class="toc-text">输入文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A8%E9%9D%A2%E5%BB%BA%E6%A8%A1"><span class="toc-number">2.1.1.</span> <span class="toc-text">表面建模</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-number">2.1.2.</span> <span class="toc-text">环境准备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#INCAR-%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="toc-number">2.1.3.</span> <span class="toc-text">INCAR 常用参数说明</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">三、数据处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">3.1.</span> <span class="toc-text">参考资料</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/03/021-ymtc/" title="Learn SSD the hard way">Learn SSD the hard way</a><time datetime="2025-04-03T04:20:54.000Z" title="发表于 2025-04-03 12:20:54">2025-04-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/11/002-notes-of-ai/" title="Notes-of-Ai">Notes-of-Ai</a><time datetime="2025-01-11T04:00:00.000Z" title="发表于 2025-01-11 12:00:00">2025-01-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/29/017-scripts-of-kgz/" title="Scripts of KGZ">Scripts of KGZ</a><time datetime="2024-12-29T13:20:00.000Z" title="发表于 2024-12-29 21:20:00">2024-12-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/30/009-quick-start-of-kgz/" title="Quick Start of KGZ">Quick Start of KGZ</a><time datetime="2024-11-29T16:00:00.000Z" title="发表于 2024-11-30 00:00:00">2024-11-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/30/000-template/" title="Template">Template</a><time datetime="2024-11-29T16:00:00.000Z" title="发表于 2024-11-30 00:00:00">2024-11-30</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Lu Song</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"></div><div id="rightside-config-show"><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.12.0"></script></div></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '100ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>

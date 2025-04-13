@@ -1,0 +1,382 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Quick Start of CP2K | 初夏阳光</title><meta name="author" content="Lu Song"><meta name="copyright" content="Lu Song"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Quick Start of CP2K 本教程基于 HPC of zhenggroup 集群环境 一、CP2K介绍关于CP2K CP2K是一种量子化学和固态物理第一性原理计算软件包，可以执行固态，液态，分子，和生物系统的计算模拟。 CP2K是开源免费程序，使用混合高斯和平面波基组GPW和GAPW的DFT方法比平面波基组计算更快。 CP2K用到好多非常新和前沿的算法OT(Orbital Transf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Quick Start of CP2K">
+<meta property="og:url" content="https://lu-song.github.io/2024/06/07/012-quick-start-of-cp2k/index.html">
+<meta property="og:site_name" content="初夏阳光">
+<meta property="og:description" content="Quick Start of CP2K 本教程基于 HPC of zhenggroup 集群环境 一、CP2K介绍关于CP2K CP2K是一种量子化学和固态物理第一性原理计算软件包，可以执行固态，液态，分子，和生物系统的计算模拟。 CP2K是开源免费程序，使用混合高斯和平面波基组GPW和GAPW的DFT方法比平面波基组计算更快。 CP2K用到好多非常新和前沿的算法OT(Orbital Transf">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lu-song.github.io/img/cp2k.png">
+<meta property="article:published_time" content="2024-06-07T03:20:00.000Z">
+<meta property="article:modified_time" content="2024-07-05T11:25:29.436Z">
+<meta property="article:author" content="Lu Song">
+<meta property="article:tag" content="cp2k">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lu-song.github.io/img/cp2k.png"><link rel="shortcut icon" href="/img/bike.jpg"><link rel="canonical" href="https://lu-song.github.io/2024/06/07/012-quick-start-of-cp2k/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Quick Start of CP2K',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-07-05 19:25:29'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom@1.0.0.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/bike.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 分类</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/science/"><i class="fa-fw fas fa-science"></i><span> 科研学习</span></a></li><li><a class="site-page child" href="/sport/"><i class="fa-fw fas fa-sport"></i><span> 运动记录</span></a></li><li><a class="site-page child" href="/life/"><i class="fa-fw fas fa-life"></i><span> 生活娱乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/cp2k.png')"><nav id="nav"><span id="blog-info"><a href="/" title="初夏阳光"><span class="site-name">初夏阳光</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 分类</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/science/"><i class="fa-fw fas fa-science"></i><span> 科研学习</span></a></li><li><a class="site-page child" href="/sport/"><i class="fa-fw fas fa-sport"></i><span> 运动记录</span></a></li><li><a class="site-page child" href="/life/"><i class="fa-fw fas fa-life"></i><span> 生活娱乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Quick Start of CP2K</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-06-07T03:20:00.000Z" title="发表于 2024-06-07 11:20:00">2024-06-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-05T11:25:29.436Z" title="更新于 2024-07-05 19:25:29">2024-07-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/DFT/">DFT</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Quick Start of CP2K"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong><font size=6>Quick Start of CP2K</font></strong></p>
+<p>本教程基于 HPC of zhenggroup 集群环境</p>
+<h1 id="一、CP2K介绍"><a href="#一、CP2K介绍" class="headerlink" title="一、CP2K介绍"></a>一、CP2K介绍</h1><h2 id="关于CP2K"><a href="#关于CP2K" class="headerlink" title="关于CP2K"></a>关于CP2K</h2><ol>
+<li>CP2K是一种量子化学和固态物理第一性原理计算软件包，可以执行固态，液态，分子，和生物系统的计算模拟。</li>
+<li>CP2K是开源免费程序，使用混合高斯和平面波基组GPW和GAPW的DFT方法比平面波基组计算更<strong>快</strong>。</li>
+<li>CP2K用到好多非常新和前沿的算法<br><strong>OT(Orbital Transformation)，</strong><br>ASPC(Always stable predictor corrector)，<br>ADMM(Auxiliary Density Matrix Methods)，<br>PIMD(pathintegral Molecular Dynamics)，<br>adaptive buffered QM&#x2F;MM</li>
+<li>相关文章 <a target="_blank" rel="noopener" href="https://www.cp2k.org/science">https://www.cp2k.org/science</a></li>
+<li>催化：ACS Catal. 2019, 9 (9), 7876-7887</li>
+</ol>
+<h2 id="CP2K的应用和局限"><a href="#CP2K的应用和局限" class="headerlink" title="CP2K的应用和局限"></a>CP2K的应用和局限</h2><p><strong>应用:</strong> DFT,AIMD,(QM&#x2F;MM),NEB,MD    <a target="_blank" rel="noopener" href="https://www.cp2k.org/features">https://www.cp2k.org/features</a><br><strong>局限:</strong> 1. 对导体计算较慢，OT算法算有带隙的材料可以很快收敛。导体一般用较慢的对角化方法。<br>         2. 磁性体系提前指定自旋多重度。<br>         3. 高斯基组带来的基组重叠误差（Basis Set Superposition Error, BSSE），不适合计算结合能。VASP使用平面波基组不存在此问题。<br>         4. 能量计算使用VASP更准确</p>
+<h1 id="二、CP2K使用"><a href="#二、CP2K使用" class="headerlink" title="二、CP2K使用"></a>二、CP2K使用</h1><h2 id="输入文件-环境准备"><a href="#输入文件-环境准备" class="headerlink" title="输入文件+环境准备"></a>输入文件+环境准备</h2><p><code>*.inp</code>,<code>(coord.inc/xyz)</code>,<code>CP2K.pbs</code></p>
+<p>在提交脚本<code>cp2k.pbs</code>内添加以下内容</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /public/software/gcc-9.3.0/gcc-9.3.0_env.sh</span><br><span class="line"><span class="built_in">source</span> /public/software/intel2020u2//intel2020u2_env.sh</span><br><span class="line"><span class="built_in">export</span> OMP_NUM_THREADS=1</span><br><span class="line">mpirun  -n 48 /public/software/cp2k-8.1/exe/local/cp2k.popt  -i cp2k.inp &gt; cp2k.out</span><br></pre></td></tr></table></figure>
+<h2 id="cp2k-inp-常用参数说明"><a href="#cp2k-inp-常用参数说明" class="headerlink" title="cp2k.inp 常用参数说明"></a><code>cp2k.inp</code> 常用参数说明</h2><p>CP2K手册<a target="_blank" rel="noopener" href="https://manual.cp2k.org/trunk/index.html">https://manual.cp2k.org/trunk/index.html</a><br>关键词以section和subsection的形式套娃，每一个section都是以【&amp;section_name】开头的，以【&amp;END section_name 】结尾的。(顺序随意，嵌套不能乱)每一行只写一个关键词，关键词后面写参数，大小写和空格不敏感。</p>
+<h3 id="通用参数GLOBAL"><a href="#通用参数GLOBAL" class="headerlink" title="通用参数GLOBAL"></a>通用参数<code>GLOBAL</code></h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&amp;GLOBAL</span><br><span class="line">  PROJECT cp2k                              <span class="comment"># 任务名称</span></span><br><span class="line">  RUN_TYPE GEO_OPT                          <span class="comment"># 计算类型 ENERGY,ENERGY_FORCE,GEO_OPT,CELL_OPT,VIBRATIONAL_ANALYSIS,BAND,MD,PINT</span></span><br><span class="line">  PRINT_LEVEL LOW                           <span class="comment"># 输出等级</span></span><br><span class="line">&amp;END GLOBAL</span><br></pre></td></tr></table></figure>
+<h3 id="体系的力和能量FORCE-EVAL"><a href="#体系的力和能量FORCE-EVAL" class="headerlink" title="体系的力和能量FORCE_EVAL"></a>体系的力和能量<code>FORCE_EVAL</code></h3><ol>
+<li><strong><code>SUBSYS</code>(subsystem): coordinates, topology, molecules and cell</strong><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&amp;FORCE_EVAL</span><br><span class="line">  METHOD Quickstep                          <span class="comment"># 使用DFT的GPW方法进行计算原子受力</span></span><br><span class="line">  &amp;SUBSYS</span><br><span class="line"><span class="comment"># --------------- Structure --------------- #</span></span><br><span class="line">    &amp;TOPOLOGY</span><br><span class="line">      &amp;CENTER_COORDINATES                   <span class="comment"># 结构放在盒子中间</span></span><br><span class="line">      &amp;END CENTER_COORDINATES</span><br><span class="line">      COORD_FILE_FORMAT xyz</span><br><span class="line">      COORD_FILE_NAME  ./coord.xyz</span><br><span class="line">    &amp;END TOPOLOGY</span><br><span class="line"><span class="comment"># ------------ Lattice vectors ------------ #</span></span><br><span class="line">    &amp;CELL                                   <span class="comment"># 也可输入 `ABC 10 11 13` 代表正交晶系，单位埃</span></span><br><span class="line">      A    8.42    0.00    0.00</span><br><span class="line">      B    4.21    7.29    0.00</span><br><span class="line">      C    0.00    0.00   19.32</span><br><span class="line">      PERIODIC XYZ                          <span class="comment"># NONE,X,XY,XYZ,XZ,Y,YZ,Z  XYZ代表三个方向周期性计算</span></span><br><span class="line">    &amp;END CELL</span><br><span class="line"><span class="comment"># ------------ Basis, Potential ----------- #</span></span><br><span class="line">    &amp;KIND Au                                <span class="comment"># 元素种类</span></span><br><span class="line">      ELEMENT Au                            </span><br><span class="line">      BASIS_SET DZVP-MOLOPT-SR-GTH-q11      <span class="comment"># 基组设置(对应文件里存在的条目)</span></span><br><span class="line">      POTENTIAL GTH-PBE                     <span class="comment"># 赝势设置</span></span><br><span class="line">    &amp;END KIND</span><br><span class="line"><span class="comment"># ----------------------------------------- #</span></span><br><span class="line">  &amp;END SUBSYS</span><br><span class="line">  ...</span><br><span class="line">&amp;END FORCE_EVAL</span><br></pre></td></tr></table></figure>
+其他输入原子坐标方式<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Method 1：inc --------------------------- #</span></span><br><span class="line">&amp;COORD  </span><br><span class="line">    @INCLUDE <span class="string">&#x27;coord.inc&#x27;</span>  <span class="comment">#xyz文件去掉前两行</span></span><br><span class="line">&amp;END COORD</span><br><span class="line"></span><br><span class="line"><span class="comment"># Method 2：Cartesian coordinates --------- #</span></span><br><span class="line">&amp;COORD </span><br><span class="line">C          -3.36178719   11.43419295    1.72360000</span><br><span class="line">H           3.11299203   11.00326708    1.72360000</span><br><span class="line">...</span><br><span class="line">&amp;END COORD </span><br></pre></td></tr></table></figure></li>
+<li><strong>DFT: Parameter needed by LCAO DFT programs <strong>(Quickstep)</strong> 关于自洽循环(电子步)的计算参数</strong><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&amp;FORCE_EVAL</span><br><span class="line">  &amp;DFT</span><br><span class="line">    BASIS_SET_FILE_NAME  BASIS_MOLOPT       <span class="comment"># 基组文件路径</span></span><br><span class="line">    POTENTIAL_FILE_NAME  POTENTIAL          <span class="comment"># 赝势文件路径</span></span><br><span class="line"><span class="comment"># --------------- Quickstep --------------- #</span></span><br><span class="line">    &amp;QS                                     <span class="comment"># </span></span><br><span class="line">      EPS_DEFAULT 1.0E-12                   <span class="comment"># 高精度计算时，EPS_DEFAULT 1.0E-14</span></span><br><span class="line">    &amp;END QS                                 </span><br><span class="line"><span class="comment"># ----------------- Grid ------------------ #</span></span><br><span class="line">    &amp;MGRID                                  <span class="comment"># </span></span><br><span class="line">      NGRIDS 4                              <span class="comment"># 多重网格叠加做FFT, 值越大，算得越快，越不精确</span></span><br><span class="line">      CUTOFF 500                            <span class="comment"># 整体网格精度的最高值 https://manual.cp2k.org/trunk/methods/dft/cutoff.html，尽量&gt;800</span></span><br><span class="line">      REL_CUTOFF 50                         <span class="comment"># 控制有多少网格点落到最精细的级别</span></span><br><span class="line">    &amp;END MGRID </span><br><span class="line"><span class="comment"># ----------------- SCF ------------------- #</span></span><br><span class="line">    &amp;SCF                                    </span><br><span class="line">      SCF_GUESS ATOMIC                      <span class="comment"># 初猜/可以改成RESTART</span></span><br><span class="line">      EPS_SCF 1.0E-6                        <span class="comment"># 能量收敛精度</span></span><br><span class="line">      MAX_SCF 100                           <span class="comment"># SCF循环圈数</span></span><br><span class="line">      <span class="comment"># ------ OT, DIAGONALIZATION -------- #</span></span><br><span class="line">      &amp;OT T                                 <span class="comment"># 使用OT(Orbital Transformation)优化波函数</span></span><br><span class="line">      MINIMIZER CG                          <span class="comment"># 共轭梯度法(最可靠)(CG)/迭代子空间直接反演法(速度快)(DIIS)/布罗伊登法(BROYDEN)  </span></span><br><span class="line">      LINESEARCH 3PNT                       <span class="comment"># 搜索算法</span></span><br><span class="line">      PRECONDITIONER FULL_SINGLE_INVERSE    <span class="comment"># 适用于大型系统；难收敛改Full All</span></span><br><span class="line">      &amp;END OT </span><br><span class="line">      <span class="comment"># &amp;DIAGONALIZATION ON                 # 对角化方法，不如OT快</span></span><br><span class="line">      <span class="comment">#   ALGORITHM STANDARD </span></span><br><span class="line">      <span class="comment"># &amp;END DIAGONALIZATION </span></span><br><span class="line">      <span class="comment"># ----------------------------------- #</span></span><br><span class="line">    &amp;END SCF                                </span><br><span class="line"><span class="comment"># --- eXchange and Correlation potential -- #</span></span><br><span class="line">    &amp;XC                                     <span class="comment"># 交换-关联密度泛函，要与基组和赝势的选择一致。</span></span><br><span class="line">      &amp;XC_FUNCTIONAL PBE </span><br><span class="line">      &amp;END XC_FUNCTIONAL </span><br><span class="line">    &amp;END XC</span><br><span class="line"><span class="comment"># ----------------- Print ----------------- #</span></span><br><span class="line">    &amp;PRINT                                  <span class="comment"># 输出参数 https://manual.cp2k.org/trunk/CP2K_INPUT/FORCE_EVAL/DFT/PRINT.html </span></span><br><span class="line">      &amp;FORCES ON                            <span class="comment"># 输出力</span></span><br><span class="line">      &amp;END FORCES</span><br><span class="line">    &amp;END PRINT</span><br><span class="line"><span class="comment"># ----------------------------------------- #</span></span><br><span class="line">  &amp;END DFT</span><br><span class="line">  ...</span><br><span class="line">&amp;END FORCE_EVAL</span><br></pre></td></tr></table></figure></li>
+<li><strong>其他常用<code>&amp;DFT</code>参数</strong></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="center">&amp;DFT 参数</th>
+<th align="center">设置</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">BASIS_SET_FILE_NAME</td>
+<td align="center">BASIS_MOLOPT, BASIS_MOLOPT_UCL</td>
+<td align="center">基组文件，前面可加路径${DATAPATH} 需要@SET DATAPATH ….</td>
+</tr>
+<tr>
+<td align="center">POTENTIAL_FILE_NAME</td>
+<td align="center">GTH_POTENTIALS</td>
+<td align="center">赝势文件</td>
+</tr>
+<tr>
+<td align="center">UKS</td>
+<td align="center">T</td>
+<td align="center">开壳层</td>
+</tr>
+<tr>
+<td align="center">ROK</td>
+<td align="center">T</td>
+<td align="center">限制性开壳层</td>
+</tr>
+<tr>
+<td align="center">MULTIPLICITY</td>
+<td align="center">整数</td>
+<td align="center">闭壳层1，开壳层双重态2，三重态3</td>
+</tr>
+<tr>
+<td align="center">WFN_RESTART_FILE_NAME</td>
+<td align="center">.&#x2F;RESTART.wfn（波函数路径）</td>
+<td align="center">需要同时开启<code>&amp;DFT/&amp;SCF</code>中的<code>SCF_GUESS RESTART</code></td>
+</tr>
+<tr>
+<td align="center">PLUS_U_METHOD</td>
+<td align="center">见手册</td>
+<td align="center">DFT+U （U值在 &amp;KIND 里控制）</td>
+</tr>
+<tr>
+<td align="center">SURFACE_DIPOLE_CORRECTION</td>
+<td align="center">T</td>
+<td align="center">表面，偶极校正 &lt;&#x3D;&gt; IDIPOL &#x3D; T</td>
+</tr>
+<tr>
+<td align="center">SURF_DIP_DIR</td>
+<td align="center">Z</td>
+<td align="center">Z方向 &lt;&#x3D;&gt; IDIPOL &#x3D; 3</td>
+</tr>
+</tbody></table>
+<ol start="4">
+<li><p><strong>OT和Diagonalization比较</strong><br>OT：速度快，没有高斯展宽，对于金属系统收敛性差，不支持DFT+U，以及KPOINTS<br>Dia：计算量大，要设置高斯展宽，支持DFT+U和KPOINTS</p>
+</li>
+<li><p><strong>PIRNT</strong><br><code>&amp;FORCE_EVAL/</code> 中添加<code>&amp;PRINT/&amp;FORCES ON/&amp;END FORCES</code>，输出力。<br><code>&amp;FORCE_EVAL/&amp;DFT/&amp;SCF</code> 中添加<code>&amp;PRINT/&amp;RESTART FILENAME =RESTART.wfn/&amp;END RESTART</code>，输出波函数。</p>
+</li>
+<li><p><strong>基组</strong><br>计算精度，SZV &lt; DZVP &lt; TZVP &lt; TZV2P &lt; TZV2PX<br><strong>VP(Valence Polarized同时添加极化函数)</strong><br>VASP平面波基组(PW)，不同的体系设定相同的平面波截断能（ENCUT），那么用到的基组都是一样的。<br>高斯基组计算AB体系和A体系使用的基组不一样，AB中B的部分基组也贡献于描述A原子。(基组重叠误差，基组越大，误差越小，SR相比与普通的基组，速度略有提升，BSSE误差增大)<br>AB体系算出来的能量被低估。(<strong>计算吸附能、结合能等都会偏负</strong>，E(AB) – E(A) – E(B))</p>
+</li>
+<li><p><strong>对角化K点设置</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&amp;FORCE_EVAL</span><br><span class="line">  &amp;DFT</span><br><span class="line"><span class="comment"># ----------------KPOINTS------------------ #</span></span><br><span class="line">    &amp;KPOINTS</span><br><span class="line">      SCHEME MONKHORST-PACK 3 3 3           </span><br><span class="line">      SYMMETRY T                            <span class="comment"># 识别晶胞对称性</span></span><br><span class="line">      VERBOSE T                             <span class="comment"># 输出</span></span><br><span class="line">      FULL_GRID T</span><br><span class="line">    &amp;END KPOINTS</span><br><span class="line"><span class="comment"># ----------------------------------------- #</span></span><br><span class="line">  &amp;END DFT</span><br><span class="line">&amp;END FORCE_EVAL</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="原子运动参数MOTION"><a href="#原子运动参数MOTION" class="headerlink" title="原子运动参数MOTION"></a>原子运动参数<code>MOTION</code></h3><h4 id="结构和晶胞优化"><a href="#结构和晶胞优化" class="headerlink" title="结构和晶胞优化"></a>结构和晶胞优化</h4><ol>
+<li><p><strong>几何结构优化：<code>GEO_OPT</code></strong><br><a target="_blank" rel="noopener" href="https://manual.cp2k.org/trunk/methods/optimization/geometry.html">cp2k manual - geometry optimization</a><br><a target="_blank" rel="noopener" href="https://manual.cp2k.org/trunk/methods/optimization/geometry.html#">ex:H2O</a><br><code>&amp;GLOBAL</code>中<code>RUN_TYPE</code>设置<code>GEO_OPT</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&amp;MOTION</span><br><span class="line"><span class="comment"># ------------ Geometry Optimizer --------- #</span></span><br><span class="line">  &amp;GEO_OPT</span><br><span class="line">    MAX_ITER 400</span><br><span class="line">    OPTIMIZER BFGS                          <span class="comment"># LBFGS大体系，BFGS针中小体系，CG更为Robust</span></span><br><span class="line">    MAX_FORCE 6.0E-4</span><br><span class="line">  &amp;END GEO_OPT</span><br><span class="line"><span class="comment"># ----------------------------------------- #</span></span><br><span class="line">&amp;END MOTION</span><br></pre></td></tr></table></figure>
+<p>输出文件：(以H2O为例) <code>H2O.out</code>, <code>H2O-pos-1.xyz</code>, <code>H2O-1.restart</code>, <code>H2O-1.restart.bak-1,2,3</code><br><code>H2O-1.restart.bak-*</code>代表计算结束前<code>*</code>次迭代结果，<code>..bak-1</code>和<code>H2O-1.restart</code>相同<br>终止后续算：使用<code>H2O-1.restart</code>作为input文件重新提交任务</p>
+</li>
+<li><p><strong>晶胞优化：<code>CELL_OPT</code></strong><br><a target="_blank" rel="noopener" href="https://manual.cp2k.org/trunk/CP2K_INPUT/MOTION/CELL_OPT.html#cell-opt">cp2k manual - cell optimization</a><br><code>&amp;GLOBAL</code>中<code>RUN_TYPE</code>设置<code>CELL_OPT</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&amp;MOTION</span><br><span class="line"><span class="comment"># -------------- Cell Optimizer ----------- #</span></span><br><span class="line">  &amp;CELL_OPT</span><br><span class="line">    MAX_ITER 400</span><br><span class="line">    OPTIMIZER CG                            <span class="comment"># LBFGS大体系，BFGS针中小体系，CG更为Robust</span></span><br><span class="line">    KEEP_ANGLES                             <span class="comment"># 固定角度</span></span><br><span class="line">    KEEP_SYMMETRY T                         <span class="comment"># 固定对称性   </span></span><br><span class="line">    <span class="comment"># CONSTRAINT Z                          # 固定Z方向</span></span><br><span class="line">    TYPE DIRECT_CELL_OPT                    <span class="comment"># 同时优化晶胞和里面的位置(默认)</span></span><br><span class="line">    MAX_FORCE 6.0E-4</span><br><span class="line">  &amp;END GEO_OPT</span><br><span class="line"><span class="comment"># ----------------------------------------- #</span></span><br><span class="line">&amp;END MOTION</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>坐标固定：<code>CONSTRAINT</code></strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&amp;MOTION</span><br><span class="line"><span class="comment"># ------------- Constraints --------------- #</span></span><br><span class="line">  &amp;CONSTRAINT</span><br><span class="line">    <span class="comment"># ---------- Fixed atoms -------------- #</span></span><br><span class="line">    &amp;FIXED_ATOMS</span><br><span class="line">      COMPONENTS_TO_FIX XYZ                 <span class="comment"># 限制固定的方向，也可以设置X,XY等  </span></span><br><span class="line">      LIST 1..54</span><br><span class="line">      LIST 289..324</span><br><span class="line">    &amp;END FIXED_ATOMS</span><br><span class="line">  &amp;END CONSTRAINT</span><br><span class="line"><span class="comment"># ----------------------------------------- #  </span></span><br><span class="line">&amp;MOTION</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="频率计算"><a href="#频率计算" class="headerlink" title="频率计算"></a>频率计算</h4><ol>
+<li><strong><code>&amp;GLOBAL</code>中<code>RUN_TYPE</code>设置<code>VIBRATIONAL_ANALYSIS</code>，输出信息精度调高</strong></li>
+<li><strong>SCF优化精度不变，同时添加<code>&amp;VIBRATIONAL_ANALYSIS</code></strong><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&amp;VIBRATIONAL_ANALYSIS</span><br><span class="line">  NPROC_REP 48                              <span class="comment"># 总核数=节点数*核数</span></span><br><span class="line">  DX 0.01                                   <span class="comment"># 步长</span></span><br><span class="line">  FULLY_PERIODIC F                          <span class="comment"># 是否周期性</span></span><br><span class="line"><span class="comment"># ----------------- Print ----------------- #</span></span><br><span class="line">  &amp;PRINT</span><br><span class="line">    &amp;MOLDEN_VIB                             <span class="comment"># 生成振动模式的 MOLDEN 文件</span></span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;CARTESIAN_EIGS                         <span class="comment"># 输出输出频率计算中笛卡尔坐标系下的本征值和本征向量</span></span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;PROGRAM_RUN_INFO                       <span class="comment"># 记录程序运行的详细信息</span></span><br><span class="line">      &amp;EACH</span><br><span class="line">        REPLICA_EVAL 1</span><br><span class="line">      &amp;END</span><br><span class="line">    &amp;END</span><br><span class="line">  &amp;END PRINT</span><br><span class="line"><span class="comment"># ----------------------------------------- #</span></span><br><span class="line">&amp;END VIBRATIONAL_ANALYSIS</span><br></pre></td></tr></table></figure></li>
+<li><strong>自由能计算</strong><br><a target="_blank" rel="noopener" href="http://sobereva.com/552">http://sobereva.com/552</a><br> 使用卢天的<code>~/software/Shermo_2.6/Shermo</code>计算<code>ZPE</code>，需要引用<br><code>10.1016/j.comptc.2021.113249</code></li>
+</ol>
+<h4 id="过渡态计算"><a href="#过渡态计算" class="headerlink" title="过渡态计算"></a>过渡态计算</h4><p><a target="_blank" rel="noopener" href="http://sobereva.com/44">http://sobereva.com/44</a></p>
+<ol>
+<li><strong>DIMER</strong><br>在势能放置两个相邻的点 Dimer 来寻找 TS，通过不断重复旋转移动dimer，直到找到能量最高点。</li>
+<li><strong>CINEB</strong><br>在 IS 到 FS 之间插入一系列结构，共插入P-1个，反应为0，产物为P。优化不是对每个点孤立地优化，优化过程所有点一起运动。插点结构受到<br>1.来自势能面的力（保留平行分量）；2.chain方向上的弹簧力（保留垂直分量）</li>
+</ol>
+<p><strong>CP2K-CINEB过程</strong><br><strong><code>&amp;GLOBAL</code>中<code>RUN_TYPE</code>设置<code>BAND</code></strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&amp;MOTION</span><br><span class="line"><span class="comment"># ----------------- Band ------------------ #</span></span><br><span class="line">  &amp;BAND</span><br><span class="line">  NPROC_REP 28</span><br><span class="line">  BAND_TYPE CI-NEB</span><br><span class="line">  ALIGN_FRAMES F</span><br><span class="line">  ROTATE_FRAMES F</span><br><span class="line">  NUMBER_OF_REPLICA 6</span><br><span class="line">  K_SPRING 0.08</span><br><span class="line">    <span class="comment"># ---------- Convergence -------------- #</span></span><br><span class="line">    &amp;CONVERGENCE_CONTROL</span><br><span class="line">      MAX_DR 0.01</span><br><span class="line">      MAX_FORCE 0.001</span><br><span class="line">      RMS_DR 0.02</span><br><span class="line">      RMS_FORCE 0.001</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;CI_NEB</span><br><span class="line">      NSTEPS_IT 5</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;OPTIMIZE_BAND</span><br><span class="line">      OPT_TYPE DIIS</span><br><span class="line">      OPTIMIZE_END_POINTS F</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;REPLICA</span><br><span class="line">      COORD_FILE_NAME ./1.xyz</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;REPLICA</span><br><span class="line">      COORD_FILE_NAME ./2.xyz</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;REPLICA</span><br><span class="line">      COORD_FILE_NAME ./3.xyz</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;REPLICA</span><br><span class="line">      COORD_FILE_NAME ./4.xyz</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;REPLICA</span><br><span class="line">      COORD_FILE_NAME ./5.xyz</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;PROGRAM_RUN_INFO</span><br><span class="line">    &amp;END</span><br><span class="line">    &amp;CONVERGENCE_INFO</span><br><span class="line">    &amp;END</span><br><span class="line">  &amp;END BAND</span><br><span class="line"><span class="comment"># ----------------------------------------- #</span></span><br><span class="line">&amp;END MOTION</span><br></pre></td></tr></table></figure>
+
+<p><strong>CP2K-DIMER过程</strong><br><a target="_blank" rel="noopener" href="http://bbs.keinsci.com/thread-23516-1-1.html">http://bbs.keinsci.com/thread-23516-1-1.html</a></p>
+<ol>
+<li>初猜选取dimer结构，得到coord.inc文件</li>
+<li>设置优化方向 <code>sed -i &#39;1,2d&#39; coord.inc</code></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">METHOD DIMER</span><br><span class="line">&amp;DIMER</span><br><span class="line">  DR 0.01</span><br><span class="line">  ANGLE_TOLERANCE [deg] 4.0</span><br><span class="line">  INTERPOLATE_GRADIENT</span><br><span class="line">  &amp;DIMER_VECTOR</span><br><span class="line">     @INCLUDE &#x27;DIMER_VECTOR&#x27;</span><br><span class="line">  &amp;END DIMER_VECTOR</span><br><span class="line">  &amp;ROT_OPT</span><br><span class="line">    OPTIMIZER CG</span><br><span class="line">    MAX_ITER 10</span><br><span class="line"></span><br><span class="line">    MAX_DR 3.0E-3</span><br><span class="line">    MAX_FORCE 6.0E-4</span><br><span class="line">    &amp;CG</span><br><span class="line">      # MAX_STEEP_STEPS 15</span><br><span class="line">      &amp;LINE_SEARCH</span><br><span class="line">        TYPE 2PNT</span><br><span class="line">      &amp;END LINE_SEARCH</span><br><span class="line">    &amp;END CG</span><br><span class="line">  &amp;END ROT_OPT</span><br><span class="line">&amp;END DIMER</span><br></pre></td></tr></table></figure>
+<h4 id="杂化泛函（待更新）"><a href="#杂化泛函（待更新）" class="headerlink" title="杂化泛函（待更新）"></a>杂化泛函（待更新）</h4><h4 id="单点计算（待更新）"><a href="#单点计算（待更新）" class="headerlink" title="单点计算（待更新）"></a>单点计算（待更新）</h4><h4 id="AIMD"><a href="#AIMD" class="headerlink" title="AIMD"></a>AIMD</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&amp;QS</span><br><span class="line">  EPS_DEFAULT 1.0E-14</span><br><span class="line">  EXTRAPOLATION ASPC</span><br><span class="line">  EXTRAPOLATION_ORDER 3</span><br><span class="line">&amp;END QS</span><br></pre></td></tr></table></figure>
+<ol>
+<li>EXTRAPOLATION 控制波函数外推，在做结构优化&#x2F;MD的时候，下一离子步的波函数用前几个离子步的波函数组合可以得到非常快的SCF收敛。建议用ASPC(Always stable predictor corrector)，注：不能和K点设置同时使用。</li>
+<li>EXTRAPOLATION_ORDER是ASPC extrapolation order。一般用默认值3。</li>
+</ol>
+<p>这两个参数可以促进AIMD的时候的每一离子步的SCF收敛，默认打开。这也是cp2k算AIMD比较快的一个原因。</p>
+<h2 id="输出文件"><a href="#输出文件" class="headerlink" title="输出文件"></a>输出文件</h2><p>(mermaid 模块还在测试)</p>
+<pre class="mermaid">graph TD
+A[cp2k输入文件]-->B[GLOBAL]
+A-->C[FORCE_EVAL]
+A-->D[MOTION]
+    C-->E[SUBSYS]
+    C-->H[PRINT]
+    C-->F[DFT]
+        E-->G[CELL]
+        E-->I[COORD]
+        E-->J[TOPOLOGY]
+        E-->K[KIND]
+        F-->O[QS]
+        F-->L[SCF]
+        F-->N[MGRID]
+        F-->P[XC]
+        F-->T[PRINT]
+            L-->M[OT]
+            L-->Q[DIAGONALIZATION]</pre>
+
+
+<h1 id="三、数据处理"><a href="#三、数据处理" class="headerlink" title="三、数据处理"></a>三、数据处理</h1><h3 id="脚本使用"><a href="#脚本使用" class="headerlink" title="脚本使用"></a>脚本使用</h3><p><code>*.out</code>,<code>(*.wfn.bak-*)</code>wfn会不断覆盖，记录最后三步的波函数</p>
+<h1 id="四、学习资料"><a href="#四、学习资料" class="headerlink" title="四、学习资料"></a>四、学习资料</h1><ol>
+<li>CP2K的tutorials：<br><a target="_blank" rel="noopener" href="https://www.cp2k.org/exercises">https://www.cp2k.org/exercises</a><br><a target="_blank" rel="noopener" href="https://www.cp2k.org/howto">https://www.cp2k.org/howto</a></li>
+<li>CP2K手册：<a target="_blank" rel="noopener" href="http://manual.cp2k.org/trunk/">http://manual.cp2k.org/trunk/</a></li>
+<li>CP2K的google group：<a target="_blank" rel="noopener" href="https://groups.google.com/group/cp2k">https://groups.google.com/group/cp2k</a></li>
+<li>Zevan的博客：<a target="_blank" rel="noopener" href="http://kenshin325.lofter.com/tag/cp2k">http://kenshin325.lofter.com/tag/cp2k</a></li>
+<li>兰一的知乎专栏：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/cp2k-tutorial">https://zhuanlan.zhihu.com/cp2k-tutorial</a></li>
+<li>CP2K有用的工具： <a target="_blank" rel="noopener" href="https://www.cp2k.org/tools">https://www.cp2k.org/tools</a></li>
+<li>python编写的cp2k输入文件生成器(最高支持5.1)：<br><a target="_blank" rel="noopener" href="https://github.com/avishart/CP2K_Editor">https://github.com/avishart/CP2K_Editor</a></li>
+<li>难收敛<a target="_blank" rel="noopener" href="http://sobereva.com/665">http://sobereva.com/665</a></li>
+<li><a target="_blank" rel="noopener" href="http://wiki.cheng-group.net/wiki/software_usage/cp2k/cp2k/">http://wiki.cheng-group.net/wiki/software_usage/cp2k/cp2k/</a></li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://lu-song.github.io">Lu Song</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://lu-song.github.io/2024/06/07/012-quick-start-of-cp2k/">https://lu-song.github.io/2024/06/07/012-quick-start-of-cp2k/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://lu-song.github.io" target="_blank">初夏阳光</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/cp2k/">cp2k</a></div><div class="post_share"><div class="social-share" data-image="/img/cp2k.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/07/05/004-notes-of-bash/" title="Notes of Bash"><img class="cover" src="/img/bash.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Notes of Bash</div></div></a></div><div class="next-post pull-right"><a href="/2024/06/03/013-bader-view-of-vasp/" title="Bader View of VASP"><img class="cover" src="/img/bader.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Bader View of VASP</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/bike.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Lu Song</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/LU-SONG"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/LU-SONG" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="/22213010008@m.fudan.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎光临初夏阳光的博客，这里是我日常学习和生活的记录总结，希望能对你有所帮助：<br/><br/>本站的内容经过个人加工而来，也参考了资料，如有侵权，请第一时间联系我，我将及时进行修改和删除😊</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81CP2K%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">一、CP2K介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8ECP2K"><span class="toc-number">1.1.</span> <span class="toc-text">关于CP2K</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CP2K%E7%9A%84%E5%BA%94%E7%94%A8%E5%92%8C%E5%B1%80%E9%99%90"><span class="toc-number">1.2.</span> <span class="toc-text">CP2K的应用和局限</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81CP2K%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">二、CP2K使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%96%87%E4%BB%B6-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-number">2.1.</span> <span class="toc-text">输入文件+环境准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cp2k-inp-%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="toc-number">2.2.</span> <span class="toc-text">cp2k.inp 常用参数说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E5%8F%82%E6%95%B0GLOBAL"><span class="toc-number">2.2.1.</span> <span class="toc-text">通用参数GLOBAL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%93%E7%B3%BB%E7%9A%84%E5%8A%9B%E5%92%8C%E8%83%BD%E9%87%8FFORCE-EVAL"><span class="toc-number">2.2.2.</span> <span class="toc-text">体系的力和能量FORCE_EVAL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%AD%90%E8%BF%90%E5%8A%A8%E5%8F%82%E6%95%B0MOTION"><span class="toc-number">2.2.3.</span> <span class="toc-text">原子运动参数MOTION</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E5%92%8C%E6%99%B6%E8%83%9E%E4%BC%98%E5%8C%96"><span class="toc-number">2.2.3.1.</span> <span class="toc-text">结构和晶胞优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%91%E7%8E%87%E8%AE%A1%E7%AE%97"><span class="toc-number">2.2.3.2.</span> <span class="toc-text">频率计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%87%E6%B8%A1%E6%80%81%E8%AE%A1%E7%AE%97"><span class="toc-number">2.2.3.3.</span> <span class="toc-text">过渡态计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9D%82%E5%8C%96%E6%B3%9B%E5%87%BD%EF%BC%88%E5%BE%85%E6%9B%B4%E6%96%B0%EF%BC%89"><span class="toc-number">2.2.3.4.</span> <span class="toc-text">杂化泛函（待更新）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E7%82%B9%E8%AE%A1%E7%AE%97%EF%BC%88%E5%BE%85%E6%9B%B4%E6%96%B0%EF%BC%89"><span class="toc-number">2.2.3.5.</span> <span class="toc-text">单点计算（待更新）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AIMD"><span class="toc-number">2.2.3.6.</span> <span class="toc-text">AIMD</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%96%87%E4%BB%B6"><span class="toc-number">2.3.</span> <span class="toc-text">输出文件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">三、数据处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%84%9A%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">3.0.1.</span> <span class="toc-text">脚本使用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99"><span class="toc-number">4.</span> <span class="toc-text">四、学习资料</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/03/021-ymtc/" title="Learn SSD the hard way">Learn SSD the hard way</a><time datetime="2025-04-03T04:20:54.000Z" title="发表于 2025-04-03 12:20:54">2025-04-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/11/002-notes-of-ai/" title="Notes-of-Ai">Notes-of-Ai</a><time datetime="2025-01-11T04:00:00.000Z" title="发表于 2025-01-11 12:00:00">2025-01-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/29/017-scripts-of-kgz/" title="Scripts of KGZ">Scripts of KGZ</a><time datetime="2024-12-29T13:20:00.000Z" title="发表于 2024-12-29 21:20:00">2024-12-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/30/009-quick-start-of-kgz/" title="Quick Start of KGZ">Quick Start of KGZ</a><time datetime="2024-11-29T16:00:00.000Z" title="发表于 2024-11-30 00:00:00">2024-11-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/30/000-template/" title="Template">Template</a><time datetime="2024-11-29T16:00:00.000Z" title="发表于 2024-11-30 00:00:00">2024-11-30</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Lu Song</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"></div><div id="rightside-config-show"><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.12.0"></script></div></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '100ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>
