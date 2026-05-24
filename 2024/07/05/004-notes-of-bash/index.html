@@ -1,0 +1,263 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Notes of Bash | 初夏阳光</title><meta name="author" content="Lu Song"><meta name="copyright" content="Lu Song"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Shell 笔记 一、Bash 基础变量与字符串123456789101112131415# 定义变量（等号两边不能有空格）name&#x3D;&quot;LuSong&quot;echo $nameecho $&amp;#123;name&amp;#125;# 字符串操作str&#x3D;&quot;Hello, VASP!&quot;echo $&amp;#123;#str&amp;#125;          # 字符串长度echo $&amp;#1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notes of Bash">
+<meta property="og:url" content="https://lu-song.github.io/2024/07/05/004-notes-of-bash/index.html">
+<meta property="og:site_name" content="初夏阳光">
+<meta property="og:description" content="Shell 笔记 一、Bash 基础变量与字符串123456789101112131415# 定义变量（等号两边不能有空格）name&#x3D;&quot;LuSong&quot;echo $nameecho $&amp;#123;name&amp;#125;# 字符串操作str&#x3D;&quot;Hello, VASP!&quot;echo $&amp;#123;#str&amp;#125;          # 字符串长度echo $&amp;#1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lu-song.github.io/img/bash.png">
+<meta property="article:published_time" content="2024-07-05T11:20:00.000Z">
+<meta property="article:modified_time" content="2026-05-24T06:03:59.661Z">
+<meta property="article:author" content="Lu Song">
+<meta property="article:tag" content="Bash">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lu-song.github.io/img/bash.png"><link rel="shortcut icon" href="/img/bike.jpg"><link rel="canonical" href="https://lu-song.github.io/2024/07/05/004-notes-of-bash/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Notes of Bash',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-05-24 14:03:59'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom@1.0.0.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/bike.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 分类</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/science/"><i class="fa-fw fas fa-science"></i><span> 科研学习</span></a></li><li><a class="site-page child" href="/sport/"><i class="fa-fw fas fa-sport"></i><span> 运动记录</span></a></li><li><a class="site-page child" href="/life/"><i class="fa-fw fas fa-life"></i><span> 生活娱乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/bash.png')"><nav id="nav"><span id="blog-info"><a href="/" title="初夏阳光"><span class="site-name">初夏阳光</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 分类</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/science/"><i class="fa-fw fas fa-science"></i><span> 科研学习</span></a></li><li><a class="site-page child" href="/sport/"><i class="fa-fw fas fa-sport"></i><span> 运动记录</span></a></li><li><a class="site-page child" href="/life/"><i class="fa-fw fas fa-life"></i><span> 生活娱乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Notes of Bash</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-05T11:20:00.000Z" title="发表于 2024-07-05 19:20:00">2024-07-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-05-24T06:03:59.661Z" title="更新于 2026-05-24 14:03:59">2026-05-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/">Linux</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Notes of Bash"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong><font size=6>Shell 笔记</font></strong></p>
+<h2 id="一、Bash-基础"><a href="#一、Bash-基础" class="headerlink" title="一、Bash 基础"></a>一、Bash 基础</h2><h3 id="变量与字符串"><a href="#变量与字符串" class="headerlink" title="变量与字符串"></a>变量与字符串</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义变量（等号两边不能有空格）</span></span><br><span class="line">name=<span class="string">&quot;LuSong&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$name</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;name&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 字符串操作</span></span><br><span class="line">str=<span class="string">&quot;Hello, VASP!&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;#str&#125;</span>          <span class="comment"># 字符串长度</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;str:0:5&#125;</span>       <span class="comment"># 截取子串</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;str/VASP/CP2K&#125;</span> <span class="comment"># 替换</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 命令替换</span></span><br><span class="line">current_dir=$(<span class="built_in">pwd</span>)</span><br><span class="line">file_count=$(<span class="built_in">ls</span> -1 | <span class="built_in">wc</span> -l)</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;当前目录: <span class="variable">$current_dir</span>, 文件数: <span class="variable">$file_count</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义数组</span></span><br><span class="line">metals=(Cu Ag Au Pt Pd Ni)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 访问数组</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;metals[0]&#125;</span>      <span class="comment"># 第一个元素</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;metals[@]&#125;</span>      <span class="comment"># 所有元素</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;#metals[@]&#125;</span>     <span class="comment"># 数组长度</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 遍历数组</span></span><br><span class="line"><span class="keyword">for</span> metal <span class="keyword">in</span> <span class="string">&quot;<span class="variable">$&#123;metals[@]&#125;</span>&quot;</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Processing <span class="variable">$metal</span>&quot;</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数值比较: -eq, -ne, -gt, -lt, -ge, -le</span></span><br><span class="line"><span class="comment"># 字符串比较: =, !=, -z(为空), -n(非空)</span></span><br><span class="line"><span class="comment"># 文件判断: -f(文件存在), -d(目录存在), -r(可读), -w(可写), -x(可执行)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ -f <span class="string">&quot;INCAR&quot;</span> ] &amp;&amp; [ -f <span class="string">&quot;POSCAR&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;VASP input files ready&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ $(grep -c <span class="string">&quot;IBRION&quot;</span> INCAR) -gt 0 ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;IBRION found in INCAR&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># for 循环</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> &#123;1..10&#125;; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">mkdir</span> <span class="string">&quot;dir_<span class="variable">$i</span>&quot;</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># while 循环</span></span><br><span class="line">count=0</span><br><span class="line"><span class="keyword">while</span> [ <span class="variable">$count</span> -lt 5 ]; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Step <span class="variable">$count</span>&quot;</span></span><br><span class="line">    ((count++))</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 遍历文件</span></span><br><span class="line"><span class="keyword">for</span> poscar <span class="keyword">in</span> */POSCAR; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">dir</span>=$(<span class="built_in">dirname</span> <span class="string">&quot;<span class="variable">$poscar</span>&quot;</span>)</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Found POSCAR in <span class="variable">$dir</span>&quot;</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="二、计算化学常用脚本"><a href="#二、计算化学常用脚本" class="headerlink" title="二、计算化学常用脚本"></a>二、计算化学常用脚本</h2><h3 id="批量修改-INCAR"><a href="#批量修改-INCAR" class="headerlink" title="批量修改 INCAR"></a>批量修改 INCAR</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 批量修改所有子目录的 INCAR 参数</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">dir</span> <span class="keyword">in</span> */; <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">if</span> [ -f <span class="string">&quot;<span class="variable">$&#123;dir&#125;</span>INCAR&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">        sed -i <span class="string">&#x27;s/ENCUT =.*/ENCUT = 500/&#x27;</span> <span class="variable">$&#123;dir&#125;</span>INCAR</span><br><span class="line">        sed -i <span class="string">&#x27;s/ISIF =.*/ISIF = 3/&#x27;</span> <span class="variable">$&#123;dir&#125;</span>INCAR</span><br><span class="line">        sed -i <span class="string">&#x27;s/NSW =.*/NSW = 200/&#x27;</span> <span class="variable">$&#123;dir&#125;</span>INCAR</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;Modified <span class="variable">$&#123;dir&#125;</span>INCAR&quot;</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="批量提交-VASP-任务"><a href="#批量提交-VASP-任务" class="headerlink" title="批量提交 VASP 任务"></a>批量提交 VASP 任务</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 遍历所有子目录并提交作业</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">dir</span> <span class="keyword">in</span> */; <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">if</span> [ -f <span class="string">&quot;<span class="variable">$&#123;dir&#125;</span>vasp.pbs&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">cd</span> <span class="string">&quot;<span class="variable">$dir</span>&quot;</span></span><br><span class="line">        qsub vasp.pbs</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;Submitted job in <span class="variable">$dir</span>&quot;</span></span><br><span class="line">        <span class="built_in">cd</span> ..</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="检查计算结果"><a href="#检查计算结果" class="headerlink" title="检查计算结果"></a>检查计算结果</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 检查所有目录的 VASP 计算是否正常结束</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;目录    | 离子步 | 能量(eV)&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;--------|--------|----------&quot;</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">dir</span> <span class="keyword">in</span> */; <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">if</span> [ -f <span class="string">&quot;<span class="variable">$&#123;dir&#125;</span>OUTCAR&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">        ion_step=$(grep <span class="string">&quot;reached required accuracy&quot;</span> <span class="variable">$&#123;dir&#125;</span>OUTCAR | <span class="built_in">wc</span> -l)</span><br><span class="line">        energy=$(grep <span class="string">&quot;F=&quot;</span> <span class="variable">$&#123;dir&#125;</span>OUTCAR | <span class="built_in">tail</span> -1 | awk <span class="string">&#x27;&#123;print $NF&#125;&#x27;</span>)</span><br><span class="line">        <span class="built_in">printf</span> <span class="string">&quot;%-8s| %-6s | %s\n&quot;</span> <span class="string">&quot;<span class="variable">$dir</span>&quot;</span> <span class="string">&quot;<span class="variable">$ion_step</span>&quot;</span> <span class="string">&quot;<span class="variable">$energy</span>&quot;</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="提取-OSZICAR-信息"><a href="#提取-OSZICAR-信息" class="headerlink" title="提取 OSZICAR 信息"></a>提取 OSZICAR 信息</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 提取每一步的能量</span></span><br><span class="line">grep <span class="string">&quot;E0&quot;</span> OSZICAR | awk <span class="string">&#x27;&#123;print NR, $5&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提取最后一个离子步的能量</span></span><br><span class="line">grep <span class="string">&quot;F=&quot;</span> OSZICAR | <span class="built_in">tail</span> -1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提取收敛情况</span></span><br><span class="line">grep <span class="string">&quot;DAV&quot;</span> OUTCAR | <span class="built_in">tail</span> -5</span><br></pre></td></tr></table></figure>
+
+<h3 id="批量创建目录结构"><a href="#批量创建目录结构" class="headerlink" title="批量创建目录结构"></a>批量创建目录结构</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 为多个金属表面批量创建计算目录</span></span><br><span class="line">metals=(Cu Ag Au Pt Pd Ni Rh)</span><br><span class="line">facets=(100 110 111)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> metal <span class="keyword">in</span> <span class="string">&quot;<span class="variable">$&#123;metals[@]&#125;</span>&quot;</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">for</span> facet <span class="keyword">in</span> <span class="string">&quot;<span class="variable">$&#123;facets[@]&#125;</span>&quot;</span>; <span class="keyword">do</span></span><br><span class="line">        <span class="built_in">dir</span>=<span class="string">&quot;<span class="variable">$&#123;metal&#125;</span>_<span class="variable">$&#123;facet&#125;</span>&quot;</span></span><br><span class="line">        <span class="built_in">mkdir</span> -p <span class="string">&quot;<span class="variable">$dir</span>&quot;</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;Created <span class="variable">$dir</span>&quot;</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="处理-POTCAR"><a href="#处理-POTCAR" class="headerlink" title="处理 POTCAR"></a>处理 POTCAR</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 自动生成 POTCAR</span></span><br><span class="line">potcar_dir=<span class="string">&quot;/public/scripts/Pseudopotentials-VASP/potpaw_PBE&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 从 POSCAR 读取元素</span></span><br><span class="line">elements=$(sed -n <span class="string">&#x27;6p&#x27;</span> POSCAR)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并 POTCAR</span></span><br><span class="line"><span class="built_in">rm</span> -f POTCAR</span><br><span class="line"><span class="keyword">for</span> elem <span class="keyword">in</span> <span class="variable">$elements</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">cat</span> <span class="variable">$&#123;potcar_dir&#125;</span>/<span class="variable">$&#123;elem&#125;</span>/POTCAR &gt;&gt; POTCAR</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;POTCAR generated for: <span class="variable">$elements</span>&quot;</span></span><br><span class="line">grep <span class="string">&quot;TITEL&quot;</span> POTCAR</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据处理与绘图准备"><a href="#数据处理与绘图准备" class="headerlink" title="数据处理与绘图准备"></a>数据处理与绘图准备</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 提取总能用于绘图</span></span><br><span class="line">grep <span class="string">&quot;F=&quot;</span> OSZICAR | awk <span class="string">&#x27;&#123;print NR, $5&#125;&#x27;</span> &gt; energy_vs_step.dat</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从 OUTCAR 提取力信息</span></span><br><span class="line">grep <span class="string">&quot;TOTAL-FORCE&quot;</span> OUTCAR -A 100 | grep -v <span class="string">&quot;TOTAL-FORCE&quot;</span> &gt; forces.dat</span><br><span class="line"></span><br><span class="line"><span class="comment"># 统计计算时间</span></span><br><span class="line">grep <span class="string">&quot;LOOP+&quot;</span> OUTCAR | <span class="built_in">tail</span> -1</span><br><span class="line">grep <span class="string">&quot;Elapsed time&quot;</span> OUTCAR</span><br></pre></td></tr></table></figure>
+
+<h3 id="常用文本处理"><a href="#常用文本处理" class="headerlink" title="常用文本处理"></a>常用文本处理</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># awk 提取指定列</span></span><br><span class="line">awk <span class="string">&#x27;&#123;print $1, $3&#125;&#x27;</span> data.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># awk 条件筛选</span></span><br><span class="line">awk <span class="string">&#x27;$3 &gt; 0.5 &#123;print $0&#125;&#x27;</span> energy.dat</span><br><span class="line"></span><br><span class="line"><span class="comment"># sed 批量替换</span></span><br><span class="line">sed -i <span class="string">&#x27;s/old_text/new_text/g&#x27;</span> *.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 管道组合</span></span><br><span class="line">grep <span class="string">&quot;F=&quot;</span> OSZICAR | awk <span class="string">&#x27;&#123;print $5&#125;&#x27;</span> | <span class="built_in">sort</span> -n | <span class="built_in">head</span> -1  <span class="comment"># 最低能量</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="三、脚本参数与函数"><a href="#三、脚本参数与函数" class="headerlink" title="三、脚本参数与函数"></a>三、脚本参数与函数</h2><h3 id="带参数的脚本"><a href="#带参数的脚本" class="headerlink" title="带参数的脚本"></a>带参数的脚本</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 用法: ./run_vasp.sh ENCUT KPOINTS</span></span><br><span class="line">ENCUT=<span class="variable">$&#123;1:-400&#125;</span></span><br><span class="line">KPOINTS_VALUE=<span class="variable">$&#123;2:-3&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Running VASP with ENCUT=<span class="variable">$ENCUT</span>, KPOINTS=<span class="variable">$KPOINTS_VALUE</span>&quot;</span></span><br><span class="line">sed -i <span class="string">&quot;s/ENCUT =.*/ENCUT = <span class="variable">$ENCUT</span>/&quot;</span> INCAR</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义函数</span></span><br><span class="line"><span class="function"><span class="title">check_convergence</span></span>() &#123;</span><br><span class="line">    <span class="built_in">local</span> <span class="built_in">dir</span>=<span class="variable">$1</span></span><br><span class="line">    <span class="keyword">if</span> grep -q <span class="string">&quot;reached required accuracy&quot;</span> <span class="string">&quot;<span class="variable">$&#123;dir&#125;</span>/OUTCAR&quot;</span>; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$dir</span>: converged&quot;</span></span><br><span class="line">        <span class="built_in">return</span> 0</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$dir</span>: NOT converged&quot;</span></span><br><span class="line">        <span class="built_in">return</span> 1</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用函数</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">dir</span> <span class="keyword">in</span> */; <span class="keyword">do</span></span><br><span class="line">    check_convergence <span class="string">&quot;<span class="variable">$dir</span>&quot;</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-shell.html">https://www.runoob.com/linux/linux-shell.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://wangdoc.com/bash/">https://wangdoc.com/bash/</a></li>
+<li><a target="_blank" rel="noopener" href="https://tldp.org/LDP/abs/html/">https://tldp.org/LDP/abs/html/</a></li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://lu-song.github.io">Lu Song</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://lu-song.github.io/2024/07/05/004-notes-of-bash/">https://lu-song.github.io/2024/07/05/004-notes-of-bash/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://lu-song.github.io" target="_blank">初夏阳光</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Bash/">Bash</a></div><div class="post_share"><div class="social-share" data-image="/img/bash.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/07/07/016-pandas-module-of-python/" title="Pandas Module of Python"><img class="cover" src="/img/pandas.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Pandas Module of Python</div></div></a></div><div class="next-post pull-right"><a href="/2024/06/07/012-quick-start-of-cp2k/" title="Quick Start of CP2K"><img class="cover" src="/img/cp2k.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Quick Start of CP2K</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/bike.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Lu Song</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/LU-SONG"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/LU-SONG" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="/22213010008@m.fudan.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎光临初夏阳光的博客，这里是我日常学习和生活的记录总结，希望能对你有所帮助：<br/><br/>本站的内容经过个人加工而来，也参考了资料，如有侵权，请第一时间联系我，我将及时进行修改和删除😊</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81Bash-%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">一、Bash 基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E4%B8%8E%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.1.</span> <span class="toc-text">变量与字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84"><span class="toc-number">1.2.</span> <span class="toc-text">数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD"><span class="toc-number">1.3.</span> <span class="toc-text">条件判断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF"><span class="toc-number">1.4.</span> <span class="toc-text">循环</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%AE%A1%E7%AE%97%E5%8C%96%E5%AD%A6%E5%B8%B8%E7%94%A8%E8%84%9A%E6%9C%AC"><span class="toc-number">2.</span> <span class="toc-text">二、计算化学常用脚本</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%B9%E9%87%8F%E4%BF%AE%E6%94%B9-INCAR"><span class="toc-number">2.1.</span> <span class="toc-text">批量修改 INCAR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%B9%E9%87%8F%E6%8F%90%E4%BA%A4-VASP-%E4%BB%BB%E5%8A%A1"><span class="toc-number">2.2.</span> <span class="toc-text">批量提交 VASP 任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E8%AE%A1%E7%AE%97%E7%BB%93%E6%9E%9C"><span class="toc-number">2.3.</span> <span class="toc-text">检查计算结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E5%8F%96-OSZICAR-%E4%BF%A1%E6%81%AF"><span class="toc-number">2.4.</span> <span class="toc-text">提取 OSZICAR 信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%B9%E9%87%8F%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-number">2.5.</span> <span class="toc-text">批量创建目录结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%84%E7%90%86-POTCAR"><span class="toc-number">2.6.</span> <span class="toc-text">处理 POTCAR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E7%BB%98%E5%9B%BE%E5%87%86%E5%A4%87"><span class="toc-number">2.7.</span> <span class="toc-text">数据处理与绘图准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86"><span class="toc-number">2.8.</span> <span class="toc-text">常用文本处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E8%84%9A%E6%9C%AC%E5%8F%82%E6%95%B0%E4%B8%8E%E5%87%BD%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">三、脚本参数与函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%A6%E5%8F%82%E6%95%B0%E7%9A%84%E8%84%9A%E6%9C%AC"><span class="toc-number">3.1.</span> <span class="toc-text">带参数的脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89"><span class="toc-number">3.2.</span> <span class="toc-text">函数定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/13/009-quick-start-of-kgz/" title="Quick Start of KGZ">Quick Start of KGZ</a><time datetime="2025-04-12T16:00:00.000Z" title="发表于 2025-04-13 00:00:00">2025-04-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/03/021-ymtc/" title="Learn SSD the hard way">Learn SSD the hard way</a><time datetime="2025-04-03T04:20:54.000Z" title="发表于 2025-04-03 12:20:54">2025-04-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/11/002-notes-of-ai/" title="Notes-of-Ai">Notes-of-Ai</a><time datetime="2025-01-11T04:00:00.000Z" title="发表于 2025-01-11 12:00:00">2025-01-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/29/017-scripts-of-kgz/" title="Scripts of KGZ">Scripts of KGZ</a><time datetime="2024-12-29T13:20:00.000Z" title="发表于 2024-12-29 21:20:00">2024-12-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/30/000-template/" title="Template">Template</a><time datetime="2024-11-29T16:00:00.000Z" title="发表于 2024-11-30 00:00:00">2024-11-30</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2026 By Lu Song</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"></div><div id="rightside-config-show"><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.12.0"></script></div></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '100ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>
