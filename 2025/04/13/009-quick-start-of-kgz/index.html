@@ -1,0 +1,306 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Quick Start of KGZ | 初夏阳光</title><meta name="author" content="Lu Song"><meta name="copyright" content="Lu Song"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="图片存放 .&#x2F;images&#x2F; 1234560. 复制文本和原图片路径至此；1. public中新建images文件夹00X； 2. 复制文章所有图片至00X；3. 全文 .&#x2F;images&#x2F; 替换为 images&#x2F;00X&#x2F;；4. 修改title, categories, tags, cover;5. 替换结束后删掉此内容   零、DFT计算流程建模   建模方式：b 站啦啦黑还黑">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Quick Start of KGZ">
+<meta property="og:url" content="https://lu-song.github.io/2025/04/13/009-quick-start-of-kgz/index.html">
+<meta property="og:site_name" content="初夏阳光">
+<meta property="og:description" content="图片存放 .&#x2F;images&#x2F; 1234560. 复制文本和原图片路径至此；1. public中新建images文件夹00X； 2. 复制文章所有图片至00X；3. 全文 .&#x2F;images&#x2F; 替换为 images&#x2F;00X&#x2F;；4. 修改title, categories, tags, cover;5. 替换结束后删掉此内容   零、DFT计算流程建模   建模方式：b 站啦啦黑还黑">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lu-song.github.io/img/KGZ.png">
+<meta property="article:published_time" content="2025-04-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-24T05:48:06.770Z">
+<meta property="article:author" content="Lu Song">
+<meta property="article:tag" content="learn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lu-song.github.io/img/KGZ.png"><link rel="shortcut icon" href="/img/bike.jpg"><link rel="canonical" href="https://lu-song.github.io/2025/04/13/009-quick-start-of-kgz/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Quick Start of KGZ',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-04-24 13:48:06'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom@1.0.0.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/bike.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 分类</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/science/"><i class="fa-fw fas fa-science"></i><span> 科研学习</span></a></li><li><a class="site-page child" href="/sport/"><i class="fa-fw fas fa-sport"></i><span> 运动记录</span></a></li><li><a class="site-page child" href="/life/"><i class="fa-fw fas fa-life"></i><span> 生活娱乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/KGZ.png')"><nav id="nav"><span id="blog-info"><a href="/" title="初夏阳光"><span class="site-name">初夏阳光</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 分类</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/science/"><i class="fa-fw fas fa-science"></i><span> 科研学习</span></a></li><li><a class="site-page child" href="/sport/"><i class="fa-fw fas fa-sport"></i><span> 运动记录</span></a></li><li><a class="site-page child" href="/life/"><i class="fa-fw fas fa-life"></i><span> 生活娱乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Quick Start of KGZ</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-04-12T16:00:00.000Z" title="发表于 2025-04-13 00:00:00">2025-04-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-04-24T05:48:06.770Z" title="更新于 2025-04-24 13:48:06">2025-04-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/DFT/">DFT</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Quick Start of KGZ"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>图片存放 .&#x2F;images&#x2F;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">0. 复制文本和原图片路径至此；</span><br><span class="line">1. public中新建images文件夹00X； </span><br><span class="line">2. 复制文章所有图片至00X；</span><br><span class="line">3. 全文 ./images/ 替换为 images/00X/；</span><br><span class="line">4. 修改title, categories, tags, cover;</span><br><span class="line">5. 替换结束后删掉此内容</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/KGZ.png" alt="Alt text"></p>
+<h2 id="零、DFT计算流程"><a href="#零、DFT计算流程" class="headerlink" title="零、DFT计算流程"></a>零、DFT计算流程</h2><h3 id="建模"><a href="#建模" class="headerlink" title="建模"></a>建模</h3><p>   建模方式：<a target="_blank" rel="noopener" href="https://space.bilibili.com/45550176/search?keyword=%E5%BB%BA%E6%A8%A1">b 站啦啦黑还黑</a><br>   软件：Materials Studio, [VESTA](<a target="_blank" rel="noopener" href="https://jp-minerals.org/vesta/en/download.html">Download - VESTA (jp-minerals.org)</a>), ASE</p>
+<h3 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h3><p>   （<a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/Category:INCAR_tag">VASP</a>,<a target="_blank" rel="noopener" href="http://manual.cp2k.org/trunk/">CP2K</a>）<br>   文献SI查询</p>
+<h3 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h3><p>能量计算：	</p>
+<ol>
+<li>自由能<br>$$G &#x3D; E_{DFT} +  E_{ZPE} – T*S$$</li>
+<li>吸附能<br>$$E_{ads} &#x3D; E_{DFT} -  E_{slab} – E_{molecule}$$<br>电子结构分析：Bader charge，d&#x2F;p带中心，pdos分析，COHP分析等</li>
+</ol>
+<h2 id="一、服务器使用"><a href="#一、服务器使用" class="headerlink" title="一、服务器使用"></a>一、服务器使用</h2><h3 id="服务器介绍"><a href="#服务器介绍" class="headerlink" title="服务器介绍"></a>服务器介绍</h3><p>计算平台：HPC of zheng<br>操作系统：CentOS Linux 7<br>   远程连接：ssh，密钥连接<br>   win：xhell个人版 和 xftp <a target="_blank" rel="noopener" href="https://www.xshell.com/zh/free-for-home-school/">xshell下载</a><br>   mac：vscode，finalshell</p>
+<h3 id="登录及基本命令"><a href="#登录及基本命令" class="headerlink" title="登录及基本命令"></a>登录及基本命令</h3><ol>
+<li>生成密钥（私钥+公钥）<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/l8947943/article/details/111463910">https://blog.csdn.net/l8947943/article/details/111463910</a></li>
+<li>公钥发给网站管理员，管理员开通账号后可以用私钥登录</li>
+</ol>
+<p><strong>主机名</strong> 10.158.198.162<br><strong>端口</strong> 2205<br>输入用户名，导入密钥登录</p>
+<h4 id="linux基本命令"><a href="#linux基本命令" class="headerlink" title="linux基本命令"></a>linux基本命令</h4><p>   linux 系统中使用命令可以便捷地操作文件</p>
+<table>
+<thead>
+<tr>
+<th>linux 命令</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cd</td>
+<td>进入目录；cd .. 返回上级目录</td>
+</tr>
+<tr>
+<td>ls</td>
+<td>查看文件</td>
+</tr>
+<tr>
+<td>mkdir</td>
+<td>新建目录：mkdir test 创建test目录</td>
+</tr>
+<tr>
+<td>mv</td>
+<td>移动；重命名：mv A ..&#x2F;B  将当前目录的A移动到上级目录，重命名为B</td>
+</tr>
+<tr>
+<td>cp</td>
+<td>复制：cp A B</td>
+</tr>
+<tr>
+<td>sz</td>
+<td>下载</td>
+</tr>
+</tbody></table>
+<ol>
+<li><strong>tab</strong> 自动补全</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 初始化配置环境，只输入一次</span></span><br><span class="line">/public/scripts/path_init.sh</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>vim 编辑器使用</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">编辑模式：在vim编辑器下敲击a, 光标所在位置编辑文字。</span><br><span class="line">删除行：d输入两次。</span><br><span class="line">退出：先按Esc，然后输入<span class="string">&#x27;:&#x27;</span>,输入<span class="string">&#x27;wq&#x27;</span>保存退出。(q!是强制退出)</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、开始计算"><a href="#二、开始计算" class="headerlink" title="二、开始计算"></a>二、开始计算</h2><p>VASP: <code>INCAR</code>,<code>POSCAR</code>,<code>POTCAR</code>,<code>KPINTS</code></p>
+<ol>
+<li>INCAR：计算参数；文件准备(经验、文献获得)</li>
+<li>POSCAR：结构信息；<strong>MS</strong>、<strong>VESTA</strong>，先保存成cif文件，再在<strong>VESTA</strong>中保存成 .vasp文件</li>
+<li>POTCAR：赝势信息；<code>pos2pot</code>脚本</li>
+<li>KPOINTS：网格信息：<code>kpoints.sh x x x</code>（POSCAR的 20-30 )</li>
+</ol>
+<h4 id="1-结构优化常用命令"><a href="#1-结构优化常用命令" class="headerlink" title="1. 结构优化常用命令"></a>1. 结构优化常用命令</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">checkinput.sh                <span class="comment"># 检查文件输入</span></span><br><span class="line">qsub 48kgz.pbs               <span class="comment"># 提交任务</span></span><br><span class="line">qstat                        <span class="comment"># 查看任务提交情况</span></span><br><span class="line">ta.sh                        <span class="comment"># 查看计算情况，收敛后读取能量</span></span><br><span class="line"><span class="built_in">cat</span> ~/mail                   <span class="comment"># 查看已经计算完成的任务</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-频率计算"><a href="#2-频率计算" class="headerlink" title="2. 频率计算"></a>2. 频率计算</h4><p>以结构优化的结果CONTCAR作为初始结构，并且将除吸附分子外的所有原子固定</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># INCAR 中参数修改</span></span><br><span class="line">IBRION = 5                   <span class="comment"># 频率计算</span></span><br><span class="line">NFREE = 2                    <span class="comment"># 自由度(XYZ每个方向的正和负)</span></span><br><span class="line">POTIM = 0.015                <span class="comment"># 频率计算模式</span></span><br><span class="line">EDIFF = 1E-6                 <span class="comment"># 防止虚频</span></span><br><span class="line">NCORE = 1                    <span class="comment"># 软件兼容</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-巴德电荷"><a href="#3-巴德电荷" class="headerlink" title="3. 巴德电荷"></a>3. 巴德电荷</h4><p>以结构优化的结果CONTCAR作为初始结构</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># INCAR 中参数修改</span></span><br><span class="line">LAECHG = T                   <span class="comment"># 输出全电子电荷密度</span></span><br><span class="line">LCHARG = T                   <span class="comment"># 输出CHGCAR</span></span><br><span class="line">LELF = T                     <span class="comment"># 非必须，输出电子局域函数</span></span><br><span class="line">NSW = 1                      <span class="comment"># 单点计算</span></span><br><span class="line"><span class="comment"># 分析结果</span></span><br><span class="line">bader.sh                     <span class="comment"># 得到bader电荷的原始数据</span></span><br><span class="line">get_bader.py                 <span class="comment"># 数据后处理，得到每个原子对应的电子转移数据</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-PDOS"><a href="#4-PDOS" class="headerlink" title="4. PDOS"></a>4. PDOS</h4><p>以结构优化的结果CONTCAR作为初始结构，并且将K点扩大到两倍，如果有真空层，Z方向不变</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># INCAR 中参数修改</span></span><br><span class="line">LWAVE = T</span><br><span class="line">LORBIT = 11</span><br><span class="line">NSW = 1</span><br><span class="line">ISMEAR = -5</span><br><span class="line"><span class="comment"># 分析结果</span></span><br><span class="line">/public/software/vaspkit.1.4.1/bin/vaspkit	</span><br><span class="line">输入115</span><br><span class="line">输入目标元素 回车</span><br><span class="line">输入目标轨道 回车</span><br><span class="line">得到PDOS_USER.dat原始数据</span><br></pre></td></tr></table></figure>
+<h4 id="5-COHP"><a href="#5-COHP" class="headerlink" title="5. COHP"></a>5. COHP</h4><p>以 pdos 计算目录为基础，使用 lobster 软件</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://lu-song.github.io">Lu Song</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://lu-song.github.io/2025/04/13/009-quick-start-of-kgz/">https://lu-song.github.io/2025/04/13/009-quick-start-of-kgz/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://lu-song.github.io" target="_blank">初夏阳光</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/learn/">learn</a></div><div class="post_share"><div class="social-share" data-image="/img/KGZ.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2025/04/03/021-ymtc/" title="Learn SSD the hard way"><img class="cover" src="/img/SSD.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Learn SSD the hard way</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/bike.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Lu Song</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/LU-SONG"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/LU-SONG" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="/22213010008@m.fudan.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎光临初夏阳光的博客，这里是我日常学习和生活的记录总结，希望能对你有所帮助：<br/><br/>本站的内容经过个人加工而来，也参考了资料，如有侵权，请第一时间联系我，我将及时进行修改和删除😊</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%B6%E3%80%81DFT%E8%AE%A1%E7%AE%97%E6%B5%81%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">零、DFT计算流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%BA%E6%A8%A1"><span class="toc-number">1.1.</span> <span class="toc-text">建模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.2.</span> <span class="toc-text">参数设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90"><span class="toc-number">1.3.</span> <span class="toc-text">结果分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">一、服务器使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.1.</span> <span class="toc-text">服务器介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E5%8F%8A%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="toc-number">2.2.</span> <span class="toc-text">登录及基本命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#linux%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="toc-number">2.2.1.</span> <span class="toc-text">linux基本命令</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%BC%80%E5%A7%8B%E8%AE%A1%E7%AE%97"><span class="toc-number">3.</span> <span class="toc-text">二、开始计算</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%BB%93%E6%9E%84%E4%BC%98%E5%8C%96%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">3.0.1.</span> <span class="toc-text">1. 结构优化常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E9%A2%91%E7%8E%87%E8%AE%A1%E7%AE%97"><span class="toc-number">3.0.2.</span> <span class="toc-text">2. 频率计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%B7%B4%E5%BE%B7%E7%94%B5%E8%8D%B7"><span class="toc-number">3.0.3.</span> <span class="toc-text">3. 巴德电荷</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-PDOS"><span class="toc-number">3.0.4.</span> <span class="toc-text">4. PDOS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-COHP"><span class="toc-number">3.0.5.</span> <span class="toc-text">5. COHP</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/13/009-quick-start-of-kgz/" title="Quick Start of KGZ">Quick Start of KGZ</a><time datetime="2025-04-12T16:00:00.000Z" title="发表于 2025-04-13 00:00:00">2025-04-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/03/021-ymtc/" title="Learn SSD the hard way">Learn SSD the hard way</a><time datetime="2025-04-03T04:20:54.000Z" title="发表于 2025-04-03 12:20:54">2025-04-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/11/002-notes-of-ai/" title="Notes-of-Ai">Notes-of-Ai</a><time datetime="2025-01-11T04:00:00.000Z" title="发表于 2025-01-11 12:00:00">2025-01-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/29/017-scripts-of-kgz/" title="Scripts of KGZ">Scripts of KGZ</a><time datetime="2024-12-29T13:20:00.000Z" title="发表于 2024-12-29 21:20:00">2024-12-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/30/000-template/" title="Template">Template</a><time datetime="2024-11-29T16:00:00.000Z" title="发表于 2024-11-30 00:00:00">2024-11-30</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2026 By Lu Song</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"></div><div id="rightside-config-show"><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.12.0"></script></div></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '100ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>
